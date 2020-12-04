@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{950AC85D-0716-4536-B0E4-F94DECDD2E4B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{09B9115D-B68E-4366-B42E-74A671FBF0C8}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{7B02C252-99EC-4488-BCD9-07F4C5FF7808}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservices", "{1F53D536-D156-4DF2-BD4D-7676C49E7FFE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Global", "Global", "{9A42AE29-8CEA-4C88-BA3E-80E6CF25293A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gateway.WebApi", "src\Global\Gateway.WebApi\Gateway.WebApi.csproj", "{EE8B3239-C179-4865-B60E-2BB6D2BCD0BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelephoneDirectory.Guide", "src\Microservices\TelephoneDirectory.Guide\TelephoneDirectory.Guide.csproj", "{EA3CC8CB-8AED-45EC-A4BA-A91A43923AA7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelephoneDirectory.Report", "src\Microservices\TelephoneDirectory.Report\TelephoneDirectory.Report.csproj", "{379A3120-DC09-4763-AE0C-500A423DEA33}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE8B3239-C179-4865-B60E-2BB6D2BCD0BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE8B3239-C179-4865-B60E-2BB6D2BCD0BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE8B3239-C179-4865-B60E-2BB6D2BCD0BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE8B3239-C179-4865-B60E-2BB6D2BCD0BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA3CC8CB-8AED-45EC-A4BA-A91A43923AA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA3CC8CB-8AED-45EC-A4BA-A91A43923AA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA3CC8CB-8AED-45EC-A4BA-A91A43923AA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA3CC8CB-8AED-45EC-A4BA-A91A43923AA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{379A3120-DC09-4763-AE0C-500A423DEA33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{379A3120-DC09-4763-AE0C-500A423DEA33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{379A3120-DC09-4763-AE0C-500A423DEA33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{379A3120-DC09-4763-AE0C-500A423DEA33}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1F53D536-D156-4DF2-BD4D-7676C49E7FFE} = {950AC85D-0716-4536-B0E4-F94DECDD2E4B}
+		{9A42AE29-8CEA-4C88-BA3E-80E6CF25293A} = {950AC85D-0716-4536-B0E4-F94DECDD2E4B}
+		{EE8B3239-C179-4865-B60E-2BB6D2BCD0BB} = {9A42AE29-8CEA-4C88-BA3E-80E6CF25293A}
+		{EA3CC8CB-8AED-45EC-A4BA-A91A43923AA7} = {1F53D536-D156-4DF2-BD4D-7676C49E7FFE}
+		{379A3120-DC09-4763-AE0C-500A423DEA33} = {1F53D536-D156-4DF2-BD4D-7676C49E7FFE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E6515D2-E14F-4453-8213-7CD04030BCA2}
+	EndGlobalSection
+EndGlobal
