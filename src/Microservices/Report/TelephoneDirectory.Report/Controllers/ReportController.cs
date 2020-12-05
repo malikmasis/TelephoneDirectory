@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TelephoneDirectory.Report.Data;
 
 namespace TelephoneDirectory.Report.Controllers
 {
@@ -10,42 +11,14 @@ namespace TelephoneDirectory.Report.Controllers
     [Route("api/[controller]")]
     public class ReportController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        private readonly ILogger<ReportController> _logger;
+        private readonly IReportDbContext _context;
 
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public ReportController(ILogger<WeatherForecastController> logger)
+        public ReportController(IReportDbContext context, ILogger<ReportController> logger)
         {
             _logger = logger;
+            _context = context;
         }
 
-        [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
-        {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }
-
-        [HttpGet("Gett/{id}")]
-        public IEnumerable<WeatherForecast> GetById(int id)
-        {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }
     }
 }

@@ -7,6 +7,6 @@ namespace TelephoneDirectory.Report.Data
     public interface IReportDbContext
     {
         DbSet<ReportOutput> Reports { get; set; }
-        Task<int> SaveChanges();
+        Task<int> SaveChangesAsync();
     }
 }

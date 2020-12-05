@@ -14,7 +14,7 @@ namespace TelephoneDirectory.Report.Data
 
         public DbSet<ReportOutput> Reports { get; set; }
 
-        public async Task<int> SaveChanges()
+        public async Task<int> SaveChangesAsync()
         {
             return await base.SaveChangesAsync();
         }

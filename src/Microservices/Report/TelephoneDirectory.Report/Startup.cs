@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using TelephoneDirectory.Report.Data;
 
 namespace TelephoneDirectory.Report
@@ -26,6 +27,16 @@ namespace TelephoneDirectory.Report
                    b => b.MigrationsAssembly(typeof(ReportDbContext).Assembly.FullName)));
 
             services.AddScoped<IReportDbContext>(provider => provider.GetService<ReportDbContext>());
+
+            services.AddSwaggerGen(c =>
+            {
+                c.IncludeXmlComments(string.Format(@"{0}\Report.Microservice.xml", System.AppDomain.CurrentDomain.BaseDirectory));
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Guide Microservice API",
+                });
+            });
 
             services.AddControllers();
         }
