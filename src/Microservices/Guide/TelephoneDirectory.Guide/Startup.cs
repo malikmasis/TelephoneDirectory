@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using TelephoneDirectory.Guide.Data;
 
 namespace TelephoneDirectory.Guide
@@ -26,6 +27,16 @@ namespace TelephoneDirectory.Guide
                    b => b.MigrationsAssembly(typeof(GuideDbContext).Assembly.FullName)));
 
             services.AddScoped<IGuideDbContext>(provider => provider.GetService<GuideDbContext>());
+
+            services.AddSwaggerGen(c =>
+            {
+                c.IncludeXmlComments(string.Format(@"{0}\Guide.Microservice.xml", System.AppDomain.CurrentDomain.BaseDirectory));
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Guide Microservice API",
+                });
+            });
 
             services.AddControllers();
         }
