@@ -10,7 +10,7 @@ using TelephoneDirectory.Guide.Data;
 namespace TelephoneDirectory.Guide.Migrations
 {
     [DbContext(typeof(GuideDbContext))]
-    [Migration("20201205102948_Initialize")]
+    [Migration("20201205164003_Initialize")]
     partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,7 +43,7 @@ namespace TelephoneDirectory.Guide.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<long?>("PersonId")
+                    b.Property<long>("PersonId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -87,7 +87,9 @@ namespace TelephoneDirectory.Guide.Migrations
                 {
                     b.HasOne("TelephoneDirectory.Guide.Entities.Person", null)
                         .WithMany("Contacts")
-                        .HasForeignKey("PersonId");
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

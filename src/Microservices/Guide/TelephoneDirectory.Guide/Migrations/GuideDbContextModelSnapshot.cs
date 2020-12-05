@@ -41,7 +41,7 @@ namespace TelephoneDirectory.Guide.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<long?>("PersonId")
+                    b.Property<long>("PersonId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -85,7 +85,9 @@ namespace TelephoneDirectory.Guide.Migrations
                 {
                     b.HasOne("TelephoneDirectory.Guide.Entities.Person", null)
                         .WithMany("Contacts")
-                        .HasForeignKey("PersonId");
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

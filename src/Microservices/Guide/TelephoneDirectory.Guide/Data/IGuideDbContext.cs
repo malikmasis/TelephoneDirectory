@@ -8,6 +8,6 @@ namespace TelephoneDirectory.Guide.Data
     {
         DbSet<Person> Persons { get; set; }
         DbSet<Contact> Contacts { get; set; }
-        Task<int> SaveChanges();
+        Task<int> SaveChangesAsync();
     }
 }

@@ -15,7 +15,7 @@ namespace TelephoneDirectory.Guide.Data
         public DbSet<Person> Persons { get; set; }
         public DbSet<Contact> Contacts { get; set; }
 
-        public async Task<int> SaveChanges()
+        public async Task<int> SaveChangesAsync()
         {
             return await base.SaveChangesAsync();
         }

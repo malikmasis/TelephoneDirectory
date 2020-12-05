@@ -12,3 +12,7 @@ Burada her servise ait farklı bir veri tabanı bulunmaktadır. Bu şekilde sade
 * add-migration Initial -> .net core console için : dotnet ef migrations add Initial
 * update-database -> .net core console için : dotnet ef database update
 ```
+
+1 genel (ocelot) 2 de iş odaklı servisimiz bulunmaktadır.
+-  Ocelot api gateway işlemini üstleniş olacaktır.
+- Guide servisimizde rehber ve iletişim(1-N) bilgileriyle ilgili her türlü CRUD işlemini yapabilmekteyiz.

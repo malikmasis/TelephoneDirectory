@@ -26,7 +26,7 @@ namespace TelephoneDirectory.Guide.Controllers
         {
             try
             {
-                var persons = await _context.Persons.ToListAsync();
+                var persons = await _context.Persons.Include(p => p.Contacts).ToListAsync();
                 if (persons == null)
                 {
                     return NotFound();
@@ -45,7 +45,7 @@ namespace TelephoneDirectory.Guide.Controllers
         {
             try
             {
-                var person = await _context.Persons.FindAsync(new object[] { id });
+                var person = await _context.Persons.Include(p => p.Contacts).FirstOrDefaultAsync(p => p.Id == id);
 
                 if (person == null)
                 {
@@ -72,7 +72,7 @@ namespace TelephoneDirectory.Guide.Controllers
                     return NotFound();
                 }
                 _context.Persons.Remove(person);
-                await _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
                 return Ok(person.Id);
             }
@@ -83,12 +83,17 @@ namespace TelephoneDirectory.Guide.Controllers
             }
         }
 
-        [HttpPut("update/{id}")]
-        public async Task<IActionResult> Update(long id, Person personData)
+        [HttpPut]
+        public async Task<IActionResult> Update(Person personData)
         {
             try
             {
-                var person = await _context.Persons.FindAsync(new object[] { id });
+                if (personData == null)
+                {
+                    throw new ArgumentException(nameof(personData));
+                }
+
+                var person = await _context.Persons.Include(p => p.Contacts).FirstOrDefaultAsync(p => p.Id == personData.Id);
 
                 if (person == null)
                 {
@@ -100,9 +105,15 @@ namespace TelephoneDirectory.Guide.Controllers
                     person.Surname = personData.Surname;
                     person.Company = personData.Company;
                     person.Contacts = personData.Contacts;
-                    await _context.SaveChanges();
 
-                    return Ok(person.Id);
+                    int result = await _context.SaveChangesAsync();
+
+                    if (result > 0)
+                    {
+                        return Ok(person.Id);
+                    }
+
+                    return BadRequest("Cannot update properly");
                 }
             }
             catch (Exception ex)
@@ -112,15 +123,23 @@ namespace TelephoneDirectory.Guide.Controllers
             }
         }
 
-        [HttpPost("create")]
-        public async Task<IActionResult> Create(Person person)
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] Person person)
         {
             try
             {
+                if (person == null)
+                {
+                    throw new ArgumentException(nameof(person));
+                }
                 _context.Persons.Add(person);
-                await _context.SaveChanges();
+                int result = await _context.SaveChangesAsync();
 
-                return Ok(person.Id);
+                if (result > 0)
+                {
+                    return Ok(person.Id);
+                }
+                return BadRequest("Cannot save properly");
             }
             catch (Exception ex)
             {
@@ -128,5 +147,6 @@ namespace TelephoneDirectory.Guide.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
     }
 }

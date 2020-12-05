@@ -3,11 +3,11 @@ using TelephoneDirectory.Global.Entities;
 
 namespace TelephoneDirectory.Guide.Entities
 {
-    public class Person: BaseEntity
+    public class Person : BaseEntity
     {
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Company { get; set; }
-        public List<Contact> Contacts { get; set; }
+        public List<Contact> Contacts { get; set; } = new List<Contact>();
     }
 }

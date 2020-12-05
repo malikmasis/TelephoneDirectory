@@ -35,9 +35,9 @@ namespace TelephoneDirectory.Guide.Migrations
                     CreatedDate = table.Column<DateTime>(nullable: true),
                     CreatedUser = table.Column<long>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
+                    PersonId = table.Column<long>(nullable: false),
                     InfoType = table.Column<int>(nullable: false),
-                    Info = table.Column<string>(nullable: true),
-                    PersonId = table.Column<long>(nullable: true)
+                    Info = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -47,7 +47,7 @@ namespace TelephoneDirectory.Guide.Migrations
                         column: x => x.PersonId,
                         principalTable: "Persons",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
