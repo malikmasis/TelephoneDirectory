@@ -20,3 +20,16 @@ Not: Her iki servis için de bu işlemleri yapmak gerekmektedir.
 - Report servisimizde ise rehberdeki kişiler ve bunların bulunduğu yerlerle ilgili bazı rapor verilmektedir.
 
 Rabbitmq ile oluşan event'leri diğer servislere bildiriyoruz.
+Rabbitmq için aşağıdaki 2 dosyayı kurup gerek ayarlamaları yapmak gerekecektir. (windwos)
+https://www.erlang.org/downloads 
+https://www.rabbitmq.com/install-windows.html#installer
+
+Not: docs başlığı altında postman dosyasına erişebilirsiniz.
+
+Unit test ve Integration testleri de ekliyor olacağız. Aşağıdaki linkler bize bu konuda yardımcı olacaktır.
+
+- Unit Test:
+https://medium.com/software-development-turkey/birim-unit-test-ile-veri-k%C3%BCmeleri-xunit-inline-member-class-data-601b3fb4e723
+
+- Integration Test:
+https://medium.com/software-development-turkey/integration-test-net-core-xunit-web-application-factory-600ca6a52223

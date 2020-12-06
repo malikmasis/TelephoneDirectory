@@ -1,0 +1,188 @@
+{
+	"info": {
+		"_postman_id": "92dec154-a7ba-451c-b1e4-4e1504989a33",
+		"name": "TelephoneDirectory",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Guide",
+			"item": [
+				{
+					"name": "https://localhost:44382/gateway/guide/get/1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44382/gateway/guide/get/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44382",
+							"path": [
+								"gateway",
+								"guide",
+								"get",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:44382/gateway/guide/delete/1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44382/gateway/guide/delete/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44382",
+							"path": [
+								"gateway",
+								"guide",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:44382/gateway/guide/getall",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44382/gateway/guide/getall",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44382",
+							"path": [
+								"gateway",
+								"guide",
+								"getall"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:44382/gateway/guide/create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\":\"Malik\",\r\n    \"Surname\":\"Masis\",\r\n    \"Company\":\"abc\",\r\n    \"Latitude\":\"34.00\",\r\n    \"Longitude\":\"35.00\",\r\n    \"Contacts\":[\r\n        {\"InfoType\":1, \"Info\": \"5557398665\" },\r\n        {\"InfoType\":2, \"Info\": \"malik.masis@gmail.com\"}\r\n    ]\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44382/gateway/guide",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44382",
+							"path": [
+								"gateway",
+								"guide"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:44382/gateway/guide/update/1",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\":\"Malik\",\r\n    \"Surname\":\"Masis\",\r\n    \"Company\":\"abc\",\r\n    \"Contacts\":[\r\n        {\"InfoType\":1, \"Info\": \"5557398665\" },\r\n        {\"InfoType\":2, \"Info\": \"malik.masis@gmail.com\"}\r\n    ]\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44382/gateway/guide",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44382",
+							"path": [
+								"gateway",
+								"guide"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Report",
+			"item": [
+				{
+					"name": "https://localhost:44382/gateway/report",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44382/gateway/report/get/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44382",
+							"path": [
+								"gateway",
+								"report",
+								"get",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:44382/gateway/report/getall",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44382/gateway/report/getall",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44382",
+							"path": [
+								"gateway",
+								"report",
+								"getall"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
