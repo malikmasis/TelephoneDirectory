@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MassTransit;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -13,12 +14,14 @@ namespace TelephoneDirectory.Guide.Controllers
     public class GuideController : ControllerBase
     {
         private readonly ILogger<GuideController> _logger;
+        private readonly IBus _bus;
         private readonly IGuideDbContext _context;
 
-        public GuideController(IGuideDbContext context, ILogger<GuideController> logger)
+        public GuideController(IGuideDbContext context, IBus bus, ILogger<GuideController> logger)
         {
             _logger = logger;
             _context = context;
+            _bus = bus;
         }
 
         [HttpGet("getall")]
@@ -104,6 +107,8 @@ namespace TelephoneDirectory.Guide.Controllers
                     person.Name = personData.Name;
                     person.Surname = personData.Surname;
                     person.Company = personData.Company;
+                    person.Latitude = personData.Latitude;
+                    person.Longitude = personData.Longitude;
                     person.Contacts = personData.Contacts;
 
                     int result = await _context.SaveChangesAsync();
@@ -137,6 +142,10 @@ namespace TelephoneDirectory.Guide.Controllers
 
                 if (result > 0)
                 {
+                    Uri uri = new Uri($"rabbitmq://localhost/ticketQueue");
+                    var endPoint = await _bus.GetSendEndpoint(uri);
+                    await endPoint.Send(person);
+
                     return Ok(person.Id);
                 }
                 return BadRequest("Cannot save properly");

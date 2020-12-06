@@ -10,8 +10,8 @@ using TelephoneDirectory.Guide.Data;
 namespace TelephoneDirectory.Guide.Migrations
 {
     [DbContext(typeof(GuideDbContext))]
-    [Migration("20201205164003_Initialize")]
-    partial class Initialize
+    [Migration("20201206155812_Initiale")]
+    partial class Initiale
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -71,6 +71,12 @@ namespace TelephoneDirectory.Guide.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
+
+                    b.Property<double>("Latitude")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("double precision");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");

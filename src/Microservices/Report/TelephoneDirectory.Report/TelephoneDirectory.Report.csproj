@@ -18,9 +18,13 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.5.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.3" />
+    <PackageReference Include="MassTransit" Version="7.0.3" />
+    <PackageReference Include="MassTransit.AspNetCore" Version="7.0.3" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="7.0.3" />
   </ItemGroup>
   
   <ItemGroup>
+    <ProjectReference Include="..\..\Guide\TelephoneDirectory.Guide.Entities\TelephoneDirectory.Guide.Entities.csproj" />
     <ProjectReference Include="..\TelephoneDirectory.Report.Entities\TelephoneDirectory.Report.Entities.csproj" />
   </ItemGroup>
 

@@ -1,3 +1,5 @@
+using GreenPipes;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -5,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
+using TelephoneDirectory.Report.Consumer;
 using TelephoneDirectory.Report.Data;
 
 namespace TelephoneDirectory.Report
@@ -30,13 +34,34 @@ namespace TelephoneDirectory.Report
 
             services.AddSwaggerGen(c =>
             {
-                c.IncludeXmlComments(string.Format(@"{0}\Report.Microservice.xml", System.AppDomain.CurrentDomain.BaseDirectory));
+                c.IncludeXmlComments(string.Format(@"{0}\Report.Microservice.xml", AppDomain.CurrentDomain.BaseDirectory));
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
                     Title = "Guide Microservice API",
                 });
             });
+
+            services.AddMassTransit(x =>
+            {
+                x.AddConsumer<PersonConsumer>();
+                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+                {
+                    cfg.UseHealthCheck(provider);
+                    cfg.Host(new Uri("rabbitmq://localhost"), h =>
+                    {
+                        h.Username("guest");
+                        h.Password("guest");
+                    });
+                    cfg.ReceiveEndpoint("ticketQueue", ep =>
+                    {
+                        ep.PrefetchCount = 16;
+                        ep.UseMessageRetry(r => r.Interval(2, 10));
+                        ep.ConfigureConsumer<PersonConsumer>(provider);
+                    });
+                }));
+            });
+            services.AddMassTransitHostedService();
 
             services.AddControllers();
         }

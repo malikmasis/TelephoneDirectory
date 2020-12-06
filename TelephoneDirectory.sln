@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelephoneDirectory.Guide.En
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelephoneDirectory.Global.Entities", "src\Global\TelephoneDirectory.Global.Entities\TelephoneDirectory.Global.Entities.csproj", "{E0173AC4-1501-4930-9BCC-C6312351595B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelephoneDirectory.Report.Entities", "src\Microservices\Report\TelephoneDirectory.Report.Entities\TelephoneDirectory.Report.Entities.csproj", "{D6DDE457-A068-4A2B-BFA3-662A915AA722}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelephoneDirectory.Report.Entities", "src\Microservices\Report\TelephoneDirectory.Report.Entities\TelephoneDirectory.Report.Entities.csproj", "{D6DDE457-A068-4A2B-BFA3-662A915AA722}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
