@@ -14,6 +14,7 @@ namespace TelephoneDirectory.Report
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseUrls("https://localhost:44373/");
                     webBuilder.UseStartup<Startup>();
                 });
     }

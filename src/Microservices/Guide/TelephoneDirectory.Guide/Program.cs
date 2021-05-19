@@ -14,6 +14,7 @@ namespace TelephoneDirectory.Guide
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseUrls("https://localhost:44337/");
                     webBuilder.UseStartup<Startup>();
                 });
     }
