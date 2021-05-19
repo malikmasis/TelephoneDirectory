@@ -1,6 +1,5 @@
 ﻿# TelephoneDirectory
-Telephone Directory with micro services and .net core 3.1 
-Ocelot, rabbit mq, mass transit
+microservices-> .net core 3.1 - Ocelot, RabbitMq, MassTransit, mssql, postgresql
 
 ##### Projeyi Ayağa Kaldırmak
 
