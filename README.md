@@ -1,5 +1,6 @@
 ﻿# TelephoneDirectory
 Telephone Directory with micro services and .net core 3.1 
+Ocelot, rabbit mq, mass transit
 
 ##### Projeyi Ayağa Kaldırmak
 
@@ -19,7 +20,7 @@ Not: Her iki servis için de bu işlemleri yapmak gerekmektedir.
 - Guide servisimizde rehber ve iletişim(1-N) bilgileriyle ilgili her türlü CRUD işlemini yapabilmekteyiz.
 - Report servisimizde ise rehberdeki kişiler ve bunların bulunduğu yerlerle ilgili bazı rapor verilmektedir.
 
-Rabbitmq ile oluşan event'leri diğer servislere bildiriyoruz.
+Rabbitmq ve Mass transit ikilisi ile eventleri publish-consume pattern ile haberleştiriyoruz.
 Rabbitmq için aşağıdaki 2 dosyayı kurup gerek ayarlamaları yapmak gerekecektir. (windwos)
 https://www.erlang.org/downloads 
 https://www.rabbitmq.com/install-windows.html#installer

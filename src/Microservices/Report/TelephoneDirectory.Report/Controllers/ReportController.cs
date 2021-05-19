@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using TelephoneDirectory.Report.Consumer;
 using TelephoneDirectory.Report.Data;
 
 namespace TelephoneDirectory.Report.Controllers
