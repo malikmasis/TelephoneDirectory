@@ -10,6 +10,8 @@ using Microsoft.OpenApi.Models;
 using System;
 using TelephoneDirectory.Report.Consumer;
 using TelephoneDirectory.Report.Data;
+using TelephoneDirectory.Report.Interfaces;
+using TelephoneDirectory.Report.Services;
 
 namespace TelephoneDirectory.Report
 {
@@ -31,7 +33,7 @@ namespace TelephoneDirectory.Report
                    b => b.MigrationsAssembly(typeof(ReportDbContext).Assembly.FullName)));
 
             services.AddScoped<IReportDbContext>(provider => provider.GetService<ReportDbContext>());
-
+            services.AddScoped<IReportService, ReportService>();
             services.AddSwaggerGen(c =>
             {
                 c.IncludeXmlComments(string.Format(@"{0}\Report.Microservice.xml", AppDomain.CurrentDomain.BaseDirectory));
