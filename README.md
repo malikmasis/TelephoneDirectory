@@ -1,5 +1,5 @@
 ﻿# TelephoneDirectory
-microservices-> .net core 3.1 - Ocelot, RabbitMq, MassTransit, mssql, postgresql
+microservices-> .net core 3.1 - Ocelot, RabbitMq, MassTransit, postgresql
 
 ##### Projeyi Ayağa Kaldırmak
 
