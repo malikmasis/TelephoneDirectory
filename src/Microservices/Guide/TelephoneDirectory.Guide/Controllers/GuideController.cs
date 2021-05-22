@@ -32,7 +32,7 @@ namespace TelephoneDirectory.Guide.Controllers
                 var persons = await _context.Persons.Include(p => p.Contacts).ToListAsync();
                 if (persons == null)
                 {
-                    return NotFound();
+                    return NoContent();
                 }
                 return Ok(persons);
             }
@@ -52,7 +52,7 @@ namespace TelephoneDirectory.Guide.Controllers
 
                 if (person == null)
                 {
-                    return NotFound();
+                    return NoContent();
                 }
                 return Ok(person);
             }
@@ -72,7 +72,7 @@ namespace TelephoneDirectory.Guide.Controllers
 
                 if (person == null)
                 {
-                    return NotFound();
+                    return NoContent();
                 }
                 _context.Persons.Remove(person);
                 await _context.SaveChangesAsync();
@@ -93,6 +93,7 @@ namespace TelephoneDirectory.Guide.Controllers
             {
                 if (personData == null)
                 {
+                    await Task.CompletedTask;
                     throw new ArgumentException(nameof(personData));
                 }
 
@@ -135,6 +136,7 @@ namespace TelephoneDirectory.Guide.Controllers
             {
                 if (person == null)
                 {
+                    await Task.CompletedTask;
                     throw new ArgumentException(nameof(person));
                 }
                 _context.Persons.Add(person);
