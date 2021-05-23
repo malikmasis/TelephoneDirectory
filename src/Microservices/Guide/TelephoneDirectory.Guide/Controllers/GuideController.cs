@@ -144,10 +144,7 @@ namespace TelephoneDirectory.Guide.Controllers
 
                 if (result > 0)
                 {
-                    Uri uri = new Uri($"rabbitmq://localhost/ticketQueue");
-                    var endPoint = await _bus.GetSendEndpoint(uri);
-                    await endPoint.Send(person);
-
+                    await _bus.Publish(person);
                     return Ok(person.Id);
                 }
                 return BadRequest("Cannot save properly");

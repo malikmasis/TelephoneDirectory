@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
-using TelephoneDirectory.Report.Consumer;
+using TelephoneDirectory.Report.Consumers;
 using TelephoneDirectory.Report.Data;
 using TelephoneDirectory.Report.Interfaces;
 using TelephoneDirectory.Report.Services;

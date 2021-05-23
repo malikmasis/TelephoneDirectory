@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using MassTransit;
 using TelephoneDirectory.Guide.Entities;
 using TelephoneDirectory.Report.Interfaces;
 
-namespace TelephoneDirectory.Report.Consumer
+namespace TelephoneDirectory.Report.Consumers
 {
     public class PersonConsumer : IConsumer<Person>
     {
@@ -15,10 +16,11 @@ namespace TelephoneDirectory.Report.Consumer
         public async Task Consume(ConsumeContext<Person> context)
         {
             Person data = context.Message;
-            if (data != null)
+            if (data == null)
             {
-                await _reportService.Save();
+                throw new InvalidOperationException("The person was not valid");
             }
+            await _reportService.Save();
         }
     }
 }
