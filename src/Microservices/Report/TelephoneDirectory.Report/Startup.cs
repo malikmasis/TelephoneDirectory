@@ -68,6 +68,8 @@ namespace TelephoneDirectory.Report
                         ep.PrefetchCount = 16;
                         ep.UseMessageRetry(r => r.Interval(2, 10));
                         ep.ConfigureConsumer<PersonConsumer>(provider);
+
+                        ep.UseRateLimit(1000,TimeSpan.FromMinutes(1));
                     });
                 }));
             });

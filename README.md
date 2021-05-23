@@ -14,17 +14,20 @@ Burada her servise ait farklı bir veri tabanı bulunmaktadır. Bu şekilde sade
 ```
 Not: Her iki servis için de bu işlemleri yapmak gerekmektedir.
 
-1 genel (ocelot) 2 de iş odaklı servisimiz bulunmaktadır.
--  Ocelot api gateway işlemini üstleniş olacaktır.
+Genel Yapı
+- Api Gateway -> Ocelot
+- Message Broker -> Rabbitmq
+- Service Bus -> Mass Transit
+
+Bulunan Microservisler
 - Guide servisimizde rehber ve iletişim(1-N) bilgileriyle ilgili her türlü CRUD işlemini yapabilmekteyiz.
 - Report servisimizde ise rehberdeki kişiler ve bunların bulunduğu yerlerle ilgili bazı rapor verilmektedir.
 
-Rabbitmq ve Mass transit ikilisi ile eventleri publish-consume pattern ile haberleştiriyoruz.
+Kurulum
 Rabbitmq için aşağıdaki 2 dosyayı kurup gerek ayarlamaları yapmak gerekecektir. (windwos)
 https://www.erlang.org/downloads 
 https://www.rabbitmq.com/install-windows.html#installer
 
-Not: docs başlığı altında postman dosyasına erişebilirsiniz.
 
 Unit test ve Integration testleri de ekliyor olacağız. Aşağıdaki linkler bize bu konuda yardımcı olacaktır.
 
@@ -33,3 +36,5 @@ https://medium.com/software-development-turkey/birim-unit-test-ile-veri-k%C3%BCm
 
 - Integration Test:
 https://medium.com/software-development-turkey/integration-test-net-core-xunit-web-application-factory-600ca6a52223
+
+Not: docs klasörü altında postman koleskiyon dosyasına erişebilirsiniz.
