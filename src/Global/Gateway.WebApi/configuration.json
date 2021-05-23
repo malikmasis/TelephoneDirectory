@@ -24,6 +24,21 @@
       "UpstreamPathTemplate": "/gateway/guide/{id}",
       "UpstreamHttpMethod": [ "GET", "DELETE" ]
     },
+
+    {
+      "DownstreamPathTemplate": "/api/token/{token}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44337
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/token/{token}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+
     {
       "DownstreamPathTemplate": "/api/report",
       "DownstreamScheme": "https",

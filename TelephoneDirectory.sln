@@ -32,6 +32,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelephoneDirectory.Global.E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelephoneDirectory.Report.Entities", "src\Microservices\Report\TelephoneDirectory.Report.Entities\TelephoneDirectory.Report.Entities.csproj", "{D6DDE457-A068-4A2B-BFA3-662A915AA722}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelephoneDirectory.Contracts", "src\Global\TelephoneDirectory.Contracts\TelephoneDirectory.Contracts.csproj", "{26341DDC-F948-4BA1-BB62-C3C45585A379}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{D6DDE457-A068-4A2B-BFA3-662A915AA722}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6DDE457-A068-4A2B-BFA3-662A915AA722}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6DDE457-A068-4A2B-BFA3-662A915AA722}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26341DDC-F948-4BA1-BB62-C3C45585A379}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26341DDC-F948-4BA1-BB62-C3C45585A379}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26341DDC-F948-4BA1-BB62-C3C45585A379}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26341DDC-F948-4BA1-BB62-C3C45585A379}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,6 +83,7 @@ Global
 		{7F75C8E8-922A-4D2C-961E-F076375887B0} = {90E62EFE-805B-4286-8075-9109FC2A67EE}
 		{E0173AC4-1501-4930-9BCC-C6312351595B} = {9A42AE29-8CEA-4C88-BA3E-80E6CF25293A}
 		{D6DDE457-A068-4A2B-BFA3-662A915AA722} = {2A4EB1A6-8983-49C7-87CF-B19B11755080}
+		{26341DDC-F948-4BA1-BB62-C3C45585A379} = {9A42AE29-8CEA-4C88-BA3E-80E6CF25293A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8E6515D2-E14F-4453-8213-7CD04030BCA2}

@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
+using TelephoneDirectory.Contracts;
 using TelephoneDirectory.Guide.Data;
 
 namespace TelephoneDirectory.Guide
@@ -51,6 +52,9 @@ namespace TelephoneDirectory.Guide
                         h.Password("guest");
                     });
                 }));
+
+                x.AddRequestClient<SubmitToken>();
+
             });
             services.AddMassTransitHostedService();
 

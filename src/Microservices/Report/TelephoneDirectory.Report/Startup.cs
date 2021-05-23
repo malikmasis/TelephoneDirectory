@@ -47,6 +47,8 @@ namespace TelephoneDirectory.Report
             services.AddMassTransit(x =>
             {
                 x.AddConsumer<PersonConsumer>();
+                x.AddConsumer<SubmitTokenConsumer>();
+
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
                     cfg.UseHealthCheck(provider);
@@ -67,9 +69,11 @@ namespace TelephoneDirectory.Report
 
                         ep.PrefetchCount = 16;
                         ep.UseMessageRetry(r => r.Interval(2, 10));
-                        ep.ConfigureConsumer<PersonConsumer>(provider);
+                        ep.UseRateLimit(1000, TimeSpan.FromMinutes(1));
 
-                        ep.UseRateLimit(1000,TimeSpan.FromMinutes(1));
+                        ep.ConfigureConsumer<PersonConsumer>(provider);
+                        ep.ConfigureConsumer<SubmitTokenConsumer>(provider);
+
                     });
                 }));
             });
