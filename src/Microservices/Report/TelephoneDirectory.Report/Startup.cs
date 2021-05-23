@@ -57,6 +57,14 @@ namespace TelephoneDirectory.Report
                     });
                     cfg.ReceiveEndpoint("ticketQueue", ep =>
                     {
+                        ep.UseCircuitBreaker(cb =>
+                        {
+                            cb.TrackingPeriod = TimeSpan.FromMinutes(1);
+                            cb.TripThreshold = 15;
+                            cb.ActiveThreshold = 10;
+                            cb.ResetInterval = TimeSpan.FromMinutes(5);
+                        });
+
                         ep.PrefetchCount = 16;
                         ep.UseMessageRetry(r => r.Interval(2, 10));
                         ep.ConfigureConsumer<PersonConsumer>(provider);
