@@ -62,7 +62,23 @@
       ],
       "UpstreamPathTemplate": "/gateway/report/{id}",
       "UpstreamHttpMethod": [ "GET", "DELETE" ]
+    },
+
+    //Auth
+    {
+      "DownstreamPathTemplate": "/api/login",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44001
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/auth",
+      "UpstreamHttpMethod": [ "POST" ]
     }
+
+
   ],
   "GlobalConfiguration": {
     "BaseUrl": "http://localhost:44382"
