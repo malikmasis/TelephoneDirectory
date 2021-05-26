@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using TelephoneDirectory.Auth.Models;
 
 namespace TelephoneDirectory.Auth.Interfaces
 {
     public interface ILoginService
     {
-        Task Save();
+        bool IsAuth(UserModel userModel);
     }
 }

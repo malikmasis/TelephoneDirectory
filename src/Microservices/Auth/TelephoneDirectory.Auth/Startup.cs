@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TelephoneDirectory.Auth.Data;
+using TelephoneDirectory.Auth.Handler;
 using TelephoneDirectory.Auth.Interfaces;
 using TelephoneDirectory.Auth.Services;
 
@@ -27,6 +28,7 @@ namespace TelephoneDirectory.Auth
 
             services.AddScoped<IAuthDbContext>(provider => provider.GetService<AuthDbContext>());
             services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IJwtHandler, JwtHandler>();
 
             services.AddControllers();
         }

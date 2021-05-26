@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using TelephoneDirectory.Auth.Handler;
+using TelephoneDirectory.Auth.Interfaces;
 using TelephoneDirectory.Auth.Models;
 
 namespace TelephoneDirectory.Auth.Controllers
@@ -10,11 +9,13 @@ namespace TelephoneDirectory.Auth.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private readonly IConfiguration _config;
+        private readonly ILoginService _loginService;
+        private readonly IJwtHandler _jwtHandler;
 
-        public LoginController(IConfiguration config)
+        public LoginController(ILoginService loginService, IJwtHandler jwtHandler)
         {
-            _config = config;
+            _loginService = loginService;
+            _jwtHandler = jwtHandler;
         }
 
         [AllowAnonymous]
@@ -22,13 +23,10 @@ namespace TelephoneDirectory.Auth.Controllers
         public IActionResult Login([FromBody] UserModel login)
         {
             IActionResult response = Unauthorized();
-            var jWTHandler = new JwtHandler(_config);
 
-            var user = jWTHandler.AuthenticateUser(login);
-
-            if (user != null)
+            if (_loginService.IsAuth(login))
             {
-                var tokenString = jWTHandler.GenerateJSONWebToken(user);
+                var tokenString = _jwtHandler.GenerateJSONWebToken();
                 response = Ok(new { token = tokenString });
             }
 

@@ -5,11 +5,11 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using TelephoneDirectory.Auth.Models;
+using TelephoneDirectory.Auth.Interfaces;
 
 namespace TelephoneDirectory.Auth.Handler
 {
-    public class JwtHandler
+    public class JwtHandler: IJwtHandler
     {
         private readonly IConfiguration _config;
 
@@ -18,7 +18,7 @@ namespace TelephoneDirectory.Auth.Handler
             _config = config;
         }
 
-        public string GenerateJSONWebToken(UserModel userInfo)
+        public string GenerateJSONWebToken()
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var signCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -31,18 +31,6 @@ namespace TelephoneDirectory.Auth.Handler
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
-        }
-
-        public UserModel AuthenticateUser(UserModel login)
-        {
-            UserModel user = null;
-
-            // Validate the User Credentials using LDAP / Database
-            if (login.Username == "admin")
-            {
-                user = new UserModel { Username = "######", Password = "######" };
-            }
-            return user;
         }
     }
 }

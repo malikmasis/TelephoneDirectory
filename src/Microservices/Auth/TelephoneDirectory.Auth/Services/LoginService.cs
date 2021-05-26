@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using TelephoneDirectory.Auth.Data;
 using TelephoneDirectory.Auth.Interfaces;
+using TelephoneDirectory.Auth.Models;
 
 namespace TelephoneDirectory.Auth.Services
 {
@@ -13,9 +13,9 @@ namespace TelephoneDirectory.Auth.Services
             _reportDbContext = reportDbContext;
         }
 
-        public async Task Save()
+        public bool IsAuth(UserModel userModel)
         {
-            _reportDbContext.UserAccounts.Any(p => p.UserName == "" && p.Password == "");
+            return _reportDbContext.UserAccounts.Any(p => p.UserName == userModel.Username && p.Password == userModel.Password);
         }
     }
 }
