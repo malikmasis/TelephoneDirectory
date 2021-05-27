@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using TelephoneDirectory.Auth.Data;
 using TelephoneDirectory.Auth.Handler;
 using TelephoneDirectory.Auth.Interfaces;
@@ -30,6 +31,15 @@ namespace TelephoneDirectory.Auth
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IJwtHandler, JwtHandler>();
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Auth Microservice API",
+                });
+            });
+
             services.AddControllers();
         }
 
@@ -39,6 +49,8 @@ namespace TelephoneDirectory.Auth
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Auth.API v1"));
             }
 
             app.UseHttpsRedirection();
