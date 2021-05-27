@@ -1,12 +1,9 @@
-using System;
-using System.Text;
 using Gateway.WebApi.Extentions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
@@ -14,36 +11,15 @@ namespace Gateway.WebApi
 {
     public class Startup
     {
-        public IConfiguration _configuration { get; }
+        public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
-            _configuration = configuration;
+            Configuration = configuration;
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //SymmetricSecurityKey signInKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Security"]));
-
-            //string authenticationProviderKey = "TestKey";
-            //services.AddAuthentication()
-            //    .AddJwtBearer(authenticationProviderKey, options =>
-            //    {
-            //        options.RequireHttpsMetadata = false;
-            //        options.TokenValidationParameters = new TokenValidationParameters
-            //        {
-            //            ValidateIssuerSigningKey = true,
-            //            IssuerSigningKey = signInKey,
-            //            ValidateIssuer = true,
-            //            ValidIssuer = _configuration["JWT:Issuer"],
-            //            ValidateAudience = true,
-            //            ValidAudience = _configuration["JWT:Audience"],
-            //            ValidateLifetime = true,
-            //            ClockSkew = TimeSpan.Zero,
-            //            RequireExpirationTime = true
-            //        };
-            //    });
-
-            services.AddJwtAuthentication( _configuration);
+            services.AddJwtAuthentication( Configuration);
             services.AddOcelot();
         }
 
@@ -60,7 +36,6 @@ namespace Gateway.WebApi
                 endpoints.MapControllers();
             });
             app.UseAuthentication();
-            //app.UseAuthorization();
             await app.UseOcelot();
         }
     }
