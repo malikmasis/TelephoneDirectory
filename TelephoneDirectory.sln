@@ -28,8 +28,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelephoneDirectory.Report",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelephoneDirectory.Guide.Entities", "src\Microservices\Guide\TelephoneDirectory.Guide.Entities\TelephoneDirectory.Guide.Entities.csproj", "{7F75C8E8-922A-4D2C-961E-F076375887B0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelephoneDirectory.Global.Entities", "src\Global\TelephoneDirectory.Global.Entities\TelephoneDirectory.Global.Entities.csproj", "{E0173AC4-1501-4930-9BCC-C6312351595B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelephoneDirectory.Report.Entities", "src\Microservices\Report\TelephoneDirectory.Report.Entities\TelephoneDirectory.Report.Entities.csproj", "{D6DDE457-A068-4A2B-BFA3-662A915AA722}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelephoneDirectory.Contracts", "src\Global\TelephoneDirectory.Contracts\TelephoneDirectory.Contracts.csproj", "{26341DDC-F948-4BA1-BB62-C3C45585A379}"
@@ -38,7 +36,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Auth", "Auth", "{B825E947-7
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelephoneDirectory.Auth", "src\Microservices\Auth\TelephoneDirectory.Auth\TelephoneDirectory.Auth.csproj", "{825504E2-24A0-42F9-9D39-B96AB61FF647}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelephoneDirectory.Entities", "src\Microservices\Auth\TelephoneDirectory.Entities\TelephoneDirectory.Entities.csproj", "{1BD303CD-F7F8-44BB-B616-30225863D8F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelephoneDirectory.Entities", "src\Microservices\Auth\TelephoneDirectory.Entities\TelephoneDirectory.Entities.csproj", "{1BD303CD-F7F8-44BB-B616-30225863D8F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,10 +60,6 @@ Global
 		{7F75C8E8-922A-4D2C-961E-F076375887B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F75C8E8-922A-4D2C-961E-F076375887B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F75C8E8-922A-4D2C-961E-F076375887B0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E0173AC4-1501-4930-9BCC-C6312351595B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E0173AC4-1501-4930-9BCC-C6312351595B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E0173AC4-1501-4930-9BCC-C6312351595B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E0173AC4-1501-4930-9BCC-C6312351595B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D6DDE457-A068-4A2B-BFA3-662A915AA722}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D6DDE457-A068-4A2B-BFA3-662A915AA722}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6DDE457-A068-4A2B-BFA3-662A915AA722}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -95,7 +89,6 @@ Global
 		{FFA713AF-D5C4-47F0-A2B2-CEE4D59B9C4B} = {90E62EFE-805B-4286-8075-9109FC2A67EE}
 		{F83143E0-0D0C-43D5-92A9-B82D0877F228} = {2A4EB1A6-8983-49C7-87CF-B19B11755080}
 		{7F75C8E8-922A-4D2C-961E-F076375887B0} = {90E62EFE-805B-4286-8075-9109FC2A67EE}
-		{E0173AC4-1501-4930-9BCC-C6312351595B} = {9A42AE29-8CEA-4C88-BA3E-80E6CF25293A}
 		{D6DDE457-A068-4A2B-BFA3-662A915AA722} = {2A4EB1A6-8983-49C7-87CF-B19B11755080}
 		{26341DDC-F948-4BA1-BB62-C3C45585A379} = {9A42AE29-8CEA-4C88-BA3E-80E6CF25293A}
 		{B825E947-7F01-4969-9F14-294E0C88338E} = {1F53D536-D156-4DF2-BD4D-7676C49E7FFE}

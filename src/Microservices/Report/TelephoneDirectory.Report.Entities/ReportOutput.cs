@@ -1,6 +1,4 @@
-﻿using TelephoneDirectory.Global.Entities;
-
-namespace TelephoneDirectory.Report.Entities
+﻿namespace TelephoneDirectory.Report.Entities
 {
     public class ReportOutput : BaseEntity
     {

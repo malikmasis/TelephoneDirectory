@@ -4,8 +4,4 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Global\TelephoneDirectory.Global.Entities\TelephoneDirectory.Global.Entities.csproj" />
-  </ItemGroup>
-
 </Project>

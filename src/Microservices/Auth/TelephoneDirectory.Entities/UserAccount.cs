@@ -1,7 +1,4 @@
-﻿
-using TelephoneDirectory.Global.Entities;
-
-namespace TelephoneDirectory.Entities
+﻿namespace TelephoneDirectory.Auth.Entities
 {
     public class UserAccount: BaseEntity
     {

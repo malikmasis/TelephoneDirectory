@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TelephoneDirectory.Global.Entities
+namespace TelephoneDirectory.Auth.Entities
 {
     public abstract class BaseEntity
     {

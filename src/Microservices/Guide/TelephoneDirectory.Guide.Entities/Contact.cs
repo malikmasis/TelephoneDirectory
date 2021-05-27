@@ -1,6 +1,4 @@
-﻿using TelephoneDirectory.Global.Entities;
-
-namespace TelephoneDirectory.Guide.Entities
+﻿namespace TelephoneDirectory.Guide.Entities
 {
     public class Contact: BaseEntity
     {

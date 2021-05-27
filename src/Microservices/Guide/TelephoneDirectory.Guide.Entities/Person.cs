@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using TelephoneDirectory.Global.Entities;
 
 namespace TelephoneDirectory.Guide.Entities
 {
