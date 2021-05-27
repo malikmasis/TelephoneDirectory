@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using TelephoneDirectory.Entities;
+using TelephoneDirectory.Auth.Entities;
 
 namespace TelephoneDirectory.Auth.Data
 {
