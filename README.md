@@ -1,5 +1,5 @@
 ﻿# TelephoneDirectory
-microservices-> .net core 3.1 - Ocelot, RabbitMq, MassTransit, Postgresql, Mssql
+microservices-> .net core 3.1 - Ocelot, RabbitMq, MassTransit, Serilog, Seq, Swagger, Jwt, Postgresql, Mssql
 
 ##### Projeyi Ayağa Kaldırmak
 
@@ -17,16 +17,23 @@ Genel Yapı
 - Api Gateway -> Ocelot
 - Message Broker -> Rabbitmq
 - Service Bus -> Mass Transit
+- Logging -> Serilog and Seq
+- Database -> Postgre and Mssql
+- Open Doc -> Swagger
 
 Bulunan Microservisler
+- Ocelot - Gateway - Aradaki kordinasyonu sağlar.
 - Guide - Postgre - Rehber ve iletişim(1-N) bilgileriyle ilgili her türlü CRUD işlemini yapabilmekteyiz.
 - Report - Postgre - Rehberdeki kişiler ve bunların bulunduğu yerlerle ilgili bazı rapor verilmektedir.
-- Auth - MSSQL - Kullanıcıları tutuyoruz.
+- Auth - MSSQL - Kullanıcıları tutuyoruz. Jwt ile authentication yapılmaktadır.
 
 Kurulum
 Rabbitmq için aşağıdaki 2 dosyayı kurup gerek ayarlamaları yapmak gerekecektir. (windwos)
 https://www.erlang.org/downloads 
 https://www.rabbitmq.com/install-windows.html#installer
+
+seq ile logları görüntülemek için
+https://datalust.co/download
 
 
 Unit test ve Integration testleri de ekliyor olacağız. Aşağıdaki linkler bize bu konuda yardımcı olacaktır.

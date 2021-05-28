@@ -86,7 +86,7 @@ namespace TelephoneDirectory.Guide.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("update")]
         public async Task<IActionResult> Update(Person personData)
         {
             try
@@ -129,7 +129,7 @@ namespace TelephoneDirectory.Guide.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] Person person)
         {
             try
