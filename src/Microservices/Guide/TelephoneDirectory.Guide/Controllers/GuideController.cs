@@ -1,4 +1,5 @@
 ﻿using MassTransit;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -24,6 +25,7 @@ namespace TelephoneDirectory.Guide.Controllers
             _bus = bus;
         }
 
+        [Authorize]
         [HttpGet("getall")]
         public async Task<IActionResult> GetAll()
         {
