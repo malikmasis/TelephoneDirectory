@@ -1,9 +1,9 @@
-using Gateway.WebApi.Extentions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MMLib.Ocelot.Provider.AppConfiguration;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
@@ -19,12 +19,15 @@ namespace Gateway.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddJwtAuthentication( Configuration);
-            services.AddOcelot();
+            services.AddOcelot(Configuration)
+              .AddAppConfiguration();
+            services.AddSwaggerForOcelot(Configuration);
+
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -36,7 +39,12 @@ namespace Gateway.WebApi
                 endpoints.MapControllers();
             });
             app.UseAuthentication();
-            await app.UseOcelot();
+            app.UseSwaggerForOcelotUI(opt =>
+            {
+                opt.PathToSwaggerGenerator = "/swagger/docs";
+
+            }).UseOcelot()
+              .Wait();
         }
     }
 }

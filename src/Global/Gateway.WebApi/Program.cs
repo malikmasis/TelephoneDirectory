@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using MMLib.SwaggerForOcelot.DependencyInjection;
 
 namespace Gateway.WebApi
 {
@@ -13,16 +14,21 @@ namespace Gateway.WebApi
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseUrls(new string[] { "https://localhost:44382/" });
-                    webBuilder.UseStartup<Startup>();
-                })
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseUrls(new string[] { "https://localhost:44382/" });
+                webBuilder.UseStartup<Startup>();
+            })
             .ConfigureAppConfiguration((hostingContext, config) =>
             {
                 config
                 .SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
                 .AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
+
+                config.AddOcelotWithSwaggerSupport(options =>
+                {
+                    options.Folder = "OcelotConfiguration";
+                });
             });
     }
 }

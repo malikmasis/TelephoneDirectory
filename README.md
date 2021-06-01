@@ -1,5 +1,5 @@
 ﻿# TelephoneDirectory
-microservices-> .net core 3.1 - Ocelot, RabbitMq, MassTransit, Serilog, Seq, Swagger, Jwt, Postgresql, Mssql
+microservices-> .net core 3.1 - Ocelot, RabbitMq, MassTransit, Serilog, Seq, Swagger / SwaggerForOcelot, Jwt, Postgresql, Mssql
 
 ##### Projeyi Ayağa Kaldırmak
 
@@ -11,7 +11,7 @@ Burada her servise ait farklı bir veri tabanı bulunmaktadır. Bu şekilde sade
 * add-migration Initial -> .net core console için : dotnet ef migrations add Initial
 * update-database -> .net core console için : dotnet ef database update
 ```
-Not: Her iki servis için de bu işlemleri yapmak gerekmektedir.
+Not: Bütün servisler için bu işlemleri yapmak gerekmektedir.
 
 Genel Yapı
 - Api Gateway -> Ocelot
@@ -19,7 +19,7 @@ Genel Yapı
 - Service Bus -> Mass Transit
 - Logging -> Serilog and Seq
 - Database -> Postgre and Mssql
-- Open Doc -> Swagger
+- Open Doc -> Swagger and SwaggerForOcelot
 
 Bulunan Microservisler
 - Ocelot - Gateway - Aradaki kordinasyonu sağlar.
