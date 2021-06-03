@@ -1,13 +1,18 @@
 version: "3.8"
 services: 
-    authdb:
-        image: mcr.microsoft.com/mssql/server
+    # authdb:
+    #     image: mcr.microsoft.com/mssql/server:2019-latest
     guidedb: 
         image: postgres
-    reportdb: 
-        image: postgres
+    # reportdb: 
+    #     image: postgres
     rabbitmq: 
         image: rabbitmq:3.8.14-management
-volumes: 
-    authdb_volume:   
+    guide.api:
+        image: guide_image
+        build: 
+            context: .
+            dockerfile: src/Microservices/Guide/TelephoneDirectory.Guide/Dockerfile
+# volumes: 
+#     authdb_volume:   
     
