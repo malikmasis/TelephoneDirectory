@@ -1,0 +1,13 @@
+version: "3.8"
+services: 
+    authdb:
+        image: mcr.microsoft.com/mssql/server
+    guidedb: 
+        image: postgres
+    reportdb: 
+        image: postgres
+    rabbitmq: 
+        image: rabbitmq:3.8.14-management
+volumes: 
+    authdb_volume:   
+    

@@ -1,0 +1,36 @@
+version: "3.8"
+services: 
+    authdb:
+        container_name: authdb
+        restart: always
+        ports: 
+            - "1433:1433"
+        volumes:
+            - authdb_volume:/var/opt/mssql
+        environment: 
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=admin
+    guidedb: 
+        container_name: guidedb
+        restart: always
+        ports: 
+            - "5433:5432"
+        environment: 
+            - POSTGRES_USER=admin
+            - POSTGRES_PASSWORD=admin
+            - POSTGRES_DB=PhoneAuth
+    reportdb: 
+        container_name: reportdb
+        restart: always
+        ports: 
+            - "5432:5432"
+        environment: 
+            - POSTGRES_USER=admin
+            - POSTGRES_PASSWORD=admin
+            - POSTGRES_DB=PhoneReport   
+    rabbitmq: 
+        container_name: rabbitmq
+        restart: always
+        ports: 
+            - "5672:5672"
+            - "15672:15672"
