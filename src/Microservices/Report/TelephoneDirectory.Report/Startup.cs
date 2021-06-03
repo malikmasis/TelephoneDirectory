@@ -79,7 +79,7 @@ namespace TelephoneDirectory.Report
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
                     cfg.UseHealthCheck(provider);
-                    cfg.Host(new Uri("rabbitmq://localhost"), h =>
+                    cfg.Host(Configuration["Rabbitmq:Url"], "/", h =>
                     {
                         h.Username("guest");
                         h.Password("guest");

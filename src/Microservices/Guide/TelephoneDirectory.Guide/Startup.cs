@@ -71,11 +71,11 @@ namespace TelephoneDirectory.Guide
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(config =>
                 {
                     config.UseHealthCheck(provider);
-                    config.Host(new Uri("rabbitmq://localhost"), h =>
-                    {
-                        h.Username("guest");
-                        h.Password("guest");
-                    });
+                    config.Host(Configuration["Rabbitmq:Url"], "/", h =>
+                     {
+                         h.Username("guest");
+                         h.Password("guest");
+                     });
                 }));
 
                 x.AddRequestClient<SubmitToken>();
@@ -89,13 +89,13 @@ namespace TelephoneDirectory.Guide
                 {
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateIssuer = true, 
+                        ValidateIssuer = true,
                         ValidateAudience = true,
-                        ValidateLifetime = true, 
-                        ValidateIssuerSigningKey = true, 
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
 
                         ValidIssuer = Configuration.GetSection("Jwt")["Issuer"].ToString(),
-                        ValidAudience = Configuration["Jwt:Issuer"], 
+                        ValidAudience = Configuration["Jwt:Issuer"],
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                     };
                 });
