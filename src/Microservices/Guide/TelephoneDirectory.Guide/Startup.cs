@@ -71,7 +71,7 @@ namespace TelephoneDirectory.Guide
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(config =>
                 {
                     config.UseHealthCheck(provider);
-                    config.Host(Configuration["Rabbitmq:Url"], "/", h =>
+                    config.Host(Configuration["Rabbitmq:Url"], h =>
                      {
                          h.Username("guest");
                          h.Password("guest");

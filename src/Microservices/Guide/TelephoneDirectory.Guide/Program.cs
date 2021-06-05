@@ -27,7 +27,7 @@ namespace TelephoneDirectory.Guide
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseUrls(new string[] { "https://localhost:44337/" });
+                    //webBuilder.UseUrls(new string[] { "http://localhost:44337/" });
                     webBuilder.UseStartup<Startup>();
                 });
     }
