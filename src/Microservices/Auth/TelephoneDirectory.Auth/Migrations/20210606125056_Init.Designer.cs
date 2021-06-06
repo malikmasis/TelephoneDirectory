@@ -10,7 +10,7 @@ using TelephoneDirectory.Auth.Data;
 namespace TelephoneDirectory.Auth.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20210525143410_Init")]
+    [Migration("20210606125056_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace TelephoneDirectory.Auth.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("TelephoneDirectory.Entities.UserAccount", b =>
+            modelBuilder.Entity("TelephoneDirectory.Auth.Entities.UserAccount", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,6 +46,16 @@ namespace TelephoneDirectory.Auth.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UserAccounts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            CreatedDate = new DateTime(2021, 6, 6, 12, 50, 55, 873, DateTimeKind.Utc).AddTicks(4608),
+                            IsDeleted = false,
+                            Password = "admin",
+                            UserName = "admin"
+                        });
                 });
 #pragma warning restore 612, 618
         }

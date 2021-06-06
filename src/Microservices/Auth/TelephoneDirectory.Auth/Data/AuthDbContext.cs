@@ -18,5 +18,10 @@ namespace TelephoneDirectory.Auth.Data
         {
             return await base.SaveChangesAsync();
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserAccount>().HasData(new UserAccount[] { new UserAccount { Id = 1, UserName = "admin", Password = "admin" } });
+        }
     }
 }

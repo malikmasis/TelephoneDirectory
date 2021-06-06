@@ -23,6 +23,11 @@ namespace TelephoneDirectory.Auth.Migrations
                 {
                     table.PrimaryKey("PK_UserAccounts", x => x.Id);
                 });
+
+            migrationBuilder.InsertData(
+                table: "UserAccounts",
+                columns: new[] { "Id", "CreatedDate", "CreatedUser", "IsDeleted", "Password", "UserName" },
+                values: new object[] { 1L, new DateTime(2021, 6, 6, 12, 50, 55, 873, DateTimeKind.Utc).AddTicks(4608), null, false, "admin", "admin" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
