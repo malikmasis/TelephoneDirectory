@@ -1,15 +1,15 @@
 version: "3.8"
 services: 
-    # authdb:
-    #     container_name: authdb
-    #     restart: always
-    #     ports: 
-    #         - "1433:1433"
-    #     volumes:
-    #         - authdb_volume:/var/opt/mssql
-    #     environment: 
-    #         - ACCEPT_EULA=Y
-    #         - SA_PASSWORD=admin
+    authdb:
+        container_name: authdb
+        restart: always
+        ports: 
+            - "1453:1433"
+        volumes:
+            - authdb_volume:/var/opt/mssql
+        environment: 
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=Admin!23
     guidedb: 
         container_name: guidedb
         restart: always
@@ -44,7 +44,15 @@ services:
             - "44337:80"
         depends_on: 
             - guidedb
-
+    auth.api:
+        container_name: auth.api
+        environment: 
+            - ASPNETCORE_ENVIROENMENT=Development
+            - "ConnectionStrings:DefaultConnection=Data Source=authdb;Initial Catalog=PhoneAuth;Persist Security Info=True;User ID=sa;Password=Admin!23"
+        ports:
+            - "44001:80"
+        depends_on: 
+            - authdb
     pgAdmin4:
         container_name: pgAdmin4
         restart: always

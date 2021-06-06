@@ -1,7 +1,7 @@
 version: "3.8"
 services: 
-    # authdb:
-    #     image: mcr.microsoft.com/mssql/server:2019-latest
+    authdb:
+        image: mcr.microsoft.com/mssql/server:2019-latest
     guidedb: 
         image: postgres
     # reportdb: 
@@ -13,8 +13,13 @@ services:
         build: 
             context: .
             dockerfile: src/Microservices/Guide/TelephoneDirectory.Guide/Dockerfile
+    auth.api:
+        image: auth_image
+        build: 
+            context: .
+            dockerfile: src/Microservices/Auth/TelephoneDirectory.Auth/Dockerfile
     pgAdmin4:
         image: dpage/pgadmin4
-# volumes: 
-#     authdb_volume:   
+volumes: 
+    authdb_volume:   
     
