@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
+using TelephoneDirectory.Auth.Data;
 
 namespace TelephoneDirectory.Auth
 {
@@ -9,7 +12,13 @@ namespace TelephoneDirectory.Auth
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+            using (var scope = host.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<AuthDbContext>();
+                db.Database.Migrate();
+            }
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -27,7 +36,7 @@ namespace TelephoneDirectory.Auth
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseUrls(new string[] { "https://localhost:44001/" });
+                    //webBuilder.UseUrls(new string[] { "https://localhost:44001/" });
                     webBuilder.UseStartup<Startup>();
                 });
     }
