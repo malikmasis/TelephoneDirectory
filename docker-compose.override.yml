@@ -44,4 +44,13 @@ services:
             - "44337:80"
         depends_on: 
             - guidedb
+
+    pgAdmin4:
+        container_name: pgAdmin4
+        restart: always
+        environment: 
+            - PGADMIN_DEFAULT_EMAIL=malik.masis@gmail.com
+            - PGADMIN_DEFAULT_PASSWORD=admin
+        ports:
+            - "5050:80"
      

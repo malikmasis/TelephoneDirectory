@@ -13,6 +13,8 @@ services:
         build: 
             context: .
             dockerfile: src/Microservices/Guide/TelephoneDirectory.Guide/Dockerfile
+    pgAdmin4:
+        image: dpage/pgadmin4
 # volumes: 
 #     authdb_volume:   
     
