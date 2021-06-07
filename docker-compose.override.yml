@@ -37,7 +37,7 @@ services:
     guide.api:
         container_name: guide.api
         environment: 
-            - ASPNETCORE_ENVIROENMENT=Development
+            - ASPNETCORE_ENVIRONMENT=Development
             - Rabbitmq:Url=rabbitmq
             - "ConnectionStrings:DefaultConnection=Server=guidedb;Port=5432;Database=PhoneGuide;User Id=postgres;Password=admin;"
         ports:
@@ -47,7 +47,7 @@ services:
     auth.api:
         container_name: auth.api
         environment: 
-            - ASPNETCORE_ENVIROENMENT=Development
+            - ASPNETCORE_ENVIRONMENT=Development
             - "ConnectionStrings:DefaultConnection=Data Source=authdb;Initial Catalog=PhoneAuth;Persist Security Info=True;User ID=sa;Password=Admin!23"
         ports:
             - "44001:80"
