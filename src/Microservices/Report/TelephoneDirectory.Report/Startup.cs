@@ -20,14 +20,12 @@ namespace TelephoneDirectory.Report
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ReportDbContext>(options =>
@@ -79,7 +77,7 @@ namespace TelephoneDirectory.Report
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
                     cfg.UseHealthCheck(provider);
-                    cfg.Host(Configuration["Rabbitmq:Url"], "/", h =>
+                    cfg.Host(Configuration["Rabbitmq:Url"], h =>
                     {
                         h.Username("guest");
                         h.Password("guest");
@@ -127,7 +125,6 @@ namespace TelephoneDirectory.Report
             services.AddControllers();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

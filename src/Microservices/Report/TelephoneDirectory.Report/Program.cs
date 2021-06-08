@@ -23,12 +23,12 @@ namespace TelephoneDirectory.Report
 
                 log.MinimumLevel.Override("Microsoft", LogEventLevel.Warning);
                 log.MinimumLevel.Override("Quartz", LogEventLevel.Information);
-                log.WriteTo.Seq("http://localhost:5341");
+                //log.WriteTo.Seq("http://localhost:5341");
                 log.WriteTo.Console();
             })
             .ConfigureWebHostDefaults(webBuilder =>
             {
-                webBuilder.UseUrls(new string[] { "https://localhost:44373/" });
+                //webBuilder.UseUrls(new string[] { "https://localhost:44373/" });
                 webBuilder.UseStartup<Startup>();
             });
     }
