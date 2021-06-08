@@ -4,15 +4,22 @@ services:
         image: mcr.microsoft.com/mssql/server:2019-latest
     guidedb: 
         image: postgres
-    # reportdb: 
-    #     image: postgres
+    reportdb: 
+        image: postgres
     rabbitmq: 
         image: rabbitmq:3.8.14-management
+    rabbitmqmass: 
+        image: masstransit/rabbitmq
     guide.api:
         image: guide_image
         build: 
             context: .
             dockerfile: src/Microservices/Guide/TelephoneDirectory.Guide/Dockerfile
+    report.api:
+        image: report_image
+        build: 
+            context: .
+            dockerfile: src/Microservices/Report/TelephoneDirectory.Report/Dockerfile
     auth.api:
         image: auth_image
         build: 

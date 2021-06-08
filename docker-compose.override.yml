@@ -19,21 +19,27 @@ services:
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=admin
             - POSTGRES_DB=PhoneGuide
-    # reportdb: 
-    #     container_name: reportdb
-    #     restart: always
-    #     ports: 
-    #         - "5432:5432"
-    #     environment: 
-    #         - POSTGRES_USER=postgres
-    #         - POSTGRES_PASSWORD=admin
-    #         - POSTGRES_DB=PhoneReport   
+    reportdb: 
+        container_name: reportdb
+        restart: always
+        ports: 
+            - "5433:5432"
+        environment: 
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=admin
+            - POSTGRES_DB=PhoneReport   
     rabbitmq: 
         container_name: rabbitmq
         restart: always
         ports: 
             - "5672:5672"
             - "15672:15672"
+    rabbitmqmass: 
+        container_name: rabbitmqmass
+        restart: always
+        ports: 
+            - "5673:5672"
+            - "15673:15672"
     guide.api:
         container_name: guide.api
         environment: 
@@ -44,6 +50,20 @@ services:
             - "44337:80"
         depends_on: 
             - guidedb
+    report.api:
+        container_name: report.api
+        environment: 
+            - ASPNETCORE_ENVIRONMENT=Development
+            - Rabbitmq:Url=rabbitmqmass
+            # - ASPNETCORE_URLS=https://*:44373;http://*:44372
+            # - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+            # - ASPNETCORE_Kestrel__Certificates__Default__Path=certs/PhoneCertificate.pfx
+            - "ConnectionStrings:DefaultConnection=Server=reportdb;Port=5432;Database=PhoneReport;User Id=postgres;Password=admin;"
+        ports:
+            - "44373:443"
+            - "44372:80"
+        depends_on: 
+            - reportdb
     auth.api:
         container_name: auth.api
         environment: 
