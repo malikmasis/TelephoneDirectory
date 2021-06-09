@@ -32,7 +32,6 @@ namespace TelephoneDirectory.Report
 
                 log.MinimumLevel.Override("Microsoft", LogEventLevel.Warning);
                 log.MinimumLevel.Override("Quartz", LogEventLevel.Information);
-                log.WriteTo.Seq(host.Configuration["SeqServer:ServerUrl"]);
                 log.WriteTo.Console();
             })
             .ConfigureWebHostDefaults(webBuilder =>
