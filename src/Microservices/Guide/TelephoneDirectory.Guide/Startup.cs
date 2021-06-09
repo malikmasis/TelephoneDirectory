@@ -1,4 +1,3 @@
-using System;
 using System.Text;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -61,7 +60,6 @@ namespace TelephoneDirectory.Guide
                                 }
                             },
                             new string[] {}
-
                     }
                 });
             });
