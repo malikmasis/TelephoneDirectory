@@ -29,7 +29,7 @@ namespace TelephoneDirectory.Report.Controllers
                 var reports = await _context.Reports.ToListAsync();
                 if (reports == null)
                 {
-                    return NotFound();
+                    return NoContent();
                 }
                 return Ok(reports);
             }
@@ -51,7 +51,7 @@ namespace TelephoneDirectory.Report.Controllers
 
                 if (report == null)
                 {
-                    return NotFound();
+                    return NoContent();
                 }
                 return Ok(report);
             }

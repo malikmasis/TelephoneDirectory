@@ -103,7 +103,7 @@ namespace TelephoneDirectory.Guide.Controllers
 
                 if (person == null)
                 {
-                    return NotFound();
+                    return NoContent();
                 }
                 else
                 {
