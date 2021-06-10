@@ -73,6 +73,12 @@ services:
             - "44001:80"
         depends_on: 
             - authdb
+    gateway.api:
+        container_name: gateway.api
+        environment: 
+            - ASPNETCORE_ENVIRONMENT=Production
+        ports:
+            - "44382:80"
     pgAdmin4:
         container_name: pgAdmin4
         restart: always

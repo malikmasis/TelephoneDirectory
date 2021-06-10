@@ -25,6 +25,12 @@ services:
         build: 
             context: .
             dockerfile: src/Microservices/Auth/TelephoneDirectory.Auth/Dockerfile
+
+    gateway.api:
+        image: gateway_api_image
+        build: 
+            context: .
+            dockerfile: src/Global/Gateway.WebApi/Dockerfile
     pgAdmin4:
         image: dpage/pgadmin4
 volumes: 
