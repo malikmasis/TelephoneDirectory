@@ -1,9 +1,9 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/login",
+      "DownstreamPathTemplate": "/api/login/{everything}",
       "ServiceName": "auth",
-      "UpstreamPathTemplate": "/gateway/auth",
+      "UpstreamPathTemplate": "/gateway/login/{everything}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
       "SwaggerKey": "auth"
     }

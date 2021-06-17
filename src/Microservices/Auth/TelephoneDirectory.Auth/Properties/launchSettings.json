@@ -19,12 +19,11 @@
     "TelephoneDirectory.Auth": {
       "commandName": "Project",
       "launchBrowser": true,
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
       "launchUrl": "swagger",
       "applicationUrl": "http://localhost:44001",
-      "jsWebView2Debugging": false
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
     }
   }
 }

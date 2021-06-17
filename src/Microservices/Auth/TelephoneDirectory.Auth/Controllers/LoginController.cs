@@ -5,8 +5,8 @@ using TelephoneDirectory.Auth.Models;
 
 namespace TelephoneDirectory.Auth.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class LoginController : ControllerBase
     {
         private readonly ILoginService _loginService;
@@ -19,7 +19,7 @@ namespace TelephoneDirectory.Auth.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost]
+        [HttpPost("login")]
         public IActionResult Login([FromBody] UserModel login)
         {
             IActionResult response = Unauthorized();

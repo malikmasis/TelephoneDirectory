@@ -1,9 +1,9 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamPathTemplate": "/api/guide/{everything}",
       "ServiceName": "guide",
-      "UpstreamPathTemplate": "/gateway/{everything}",
+      "UpstreamPathTemplate": "/gateway/guide/{everything}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
       "SwaggerKey": "guide"
     }
