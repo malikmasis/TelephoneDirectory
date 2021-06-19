@@ -25,7 +25,6 @@ services:
         build: 
             context: .
             dockerfile: src/Microservices/Auth/TelephoneDirectory.Auth/Dockerfile
-
     gateway.api:
         image: gateway_api_image
         build: 
