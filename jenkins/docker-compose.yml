@@ -1,0 +1,11 @@
+version: '3.1'
+
+services: 
+    s_jenkins:
+        container_name: m_jenkins
+        image: malikj/jenkinswithdocker
+        ports: 
+            -  8080:8080
+        volumes:
+            - /opt/app_data/jenkins:/var/jenkins_home
+            - /var/run/docker.sock:/var/run/docker.sock
