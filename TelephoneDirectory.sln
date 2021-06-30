@@ -9,7 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{09B9115D-B
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		README.md = README.md
-		..\TelephoneDirectory.postman_collection.json = ..\TelephoneDirectory.postman_collection.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservices", "{1F53D536-D156-4DF2-BD4D-7676C49E7FFE}"

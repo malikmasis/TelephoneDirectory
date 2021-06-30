@@ -1,5 +1,5 @@
 ﻿# TelephoneDirectory
-microservices-> .net core 3.1 - Ocelot, RabbitMq, MassTransit, Serilog, Seq, Swagger / SwaggerForOcelot, Jwt, Postgresql, Mssql
+microservices-> .net core 3.1 - Ocelot, RabbitMq, MassTransit, Serilog, Jenkins, Swagger / SwaggerForOcelot, Jwt, Postgresql, Mssql
 
 ##### Projeyi Ayağa Kaldırmak
 
@@ -17,7 +17,8 @@ Genel Yapı
 - Api Gateway -> Ocelot
 - Message Broker -> Rabbitmq
 - Service Bus -> Mass Transit
-- Logging -> Serilog and Seq
+- Continuous Integration -> Jenkins
+- Logging -> Serilog and elastic search
 - Database -> Postgre and Mssql
 - Open Doc -> Swagger and SwaggerForOcelot
 
@@ -28,12 +29,10 @@ Bulunan Microservisler
 - Auth - MSSQL - Kullanıcıları tutuyoruz. Jwt ile authentication yapılmaktadır.
 
 Kurulum
-Rabbitmq için aşağıdaki 2 dosyayı kurup gerek ayarlamaları yapmak gerekecektir. (windwos)
-https://www.erlang.org/downloads 
-https://www.rabbitmq.com/install-windows.html#installer
-
-seq ile logları görüntülemek için
-https://datalust.co/download
+docker-compose.yml dosyası sayesinde hem kullanılan araçlar hem veri tabanları ayağa kalkacaktır.
+```
+* docker-compose up -d -> yapmak yeterli olacaktır.
+```
 
 
 Unit test ve Integration testleri de ekliyor olacağız. Aşağıdaki linkler bize bu konuda yardımcı olacaktır.
@@ -43,5 +42,3 @@ https://medium.com/software-development-turkey/birim-unit-test-ile-veri-k%C3%BCm
 
 - Integration Test:
 https://medium.com/software-development-turkey/integration-test-net-core-xunit-web-application-factory-600ca6a52223
-
-Not: docs klasörü altında postman koleskiyon dosyasına erişebilirsiniz.
