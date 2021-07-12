@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using TelephoneDirectory.Report.Data;
 using TelephoneDirectory.Report.Interfaces;
 
@@ -12,10 +13,10 @@ namespace TelephoneDirectory.Report.Services
             _reportDbContext = reportDbContext;
         }
 
-        public async Task Save()
+        public async Task Save(CancellationToken cancellationToken)
         {
             _reportDbContext.Reports.Add(new Entities.ReportOutput() { ReportStatus = Entities.ReportStatus.Completed });
-            await _reportDbContext.SaveChangesAsync();
+            await _reportDbContext.SaveChangesAsync(cancellationToken);
         }
     }
 }

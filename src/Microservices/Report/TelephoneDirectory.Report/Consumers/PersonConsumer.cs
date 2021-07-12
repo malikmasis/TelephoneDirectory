@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using MassTransit;
 using TelephoneDirectory.Guide.Entities;
@@ -21,7 +22,7 @@ namespace TelephoneDirectory.Report.Consumers
             {
                 throw new InvalidOperationException("The person was not valid");
             }
-            await _reportService.Save();
+            await _reportService.Save(new CancellationTokenSource().Token);
         }
     }
 }

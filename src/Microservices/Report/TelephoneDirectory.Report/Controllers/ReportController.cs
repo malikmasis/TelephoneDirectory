@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using TelephoneDirectory.Report.Command;
 using TelephoneDirectory.Report.Data;
 
 namespace TelephoneDirectory.Report.Controllers
@@ -13,12 +14,12 @@ namespace TelephoneDirectory.Report.Controllers
     public class ReportController : ControllerBase
     {
         private readonly ILogger<ReportController> _logger;
-        private readonly IReportDbContext _context;
+        private readonly IMediator _mediator;
 
-        public ReportController(IReportDbContext context, ILogger<ReportController> logger)
+        public ReportController(IReportDbContext context, ILogger<ReportController> logger, IMediator mediator)
         {
             _logger = logger;
-            _context = context;
+            _mediator = mediator;
         }
 
         [HttpGet("getall")]
@@ -26,7 +27,7 @@ namespace TelephoneDirectory.Report.Controllers
         {
             try
             {
-                var reports = await _context.Reports.ToListAsync();
+                var reports = await _mediator.Send(new GetListReportOutputCommand());
                 if (reports == null)
                 {
                     return NoContent();
@@ -44,10 +45,12 @@ namespace TelephoneDirectory.Report.Controllers
         [HttpGet("get/{id}")]
         public async Task<IActionResult> GetById(long id)
         {
-
             try
             {
-                var report = await _context.Reports.FindAsync(new object[] { id });
+                var report = await _mediator.Send(new GetReportOutputCommand
+                {
+                    Id = id
+                });
 
                 if (report == null)
                 {

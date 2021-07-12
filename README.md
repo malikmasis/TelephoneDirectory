@@ -1,5 +1,5 @@
 ﻿# TelephoneDirectory
-microservices-> .net core 3.1 - Ocelot, RabbitMq, MassTransit, Serilog, Jenkins, Swagger / SwaggerForOcelot, Jwt, Postgresql, Mssql
+microservices-> .net core 3.1 - Docker, Jenkins, Ocelot, RabbitMq, MassTransit, Serilog, Elasticsearch, Swagger / SwaggerForOcelot, Jwt, Postgresql, Mssql
 
 ##### Projeyi Ayağa Kaldırmak
 
@@ -21,6 +21,7 @@ Genel Yapı
 - Logging -> Serilog and elastic search
 - Database -> Postgre and Mssql
 - Open Doc -> Swagger and SwaggerForOcelot
+- Applied Pattern -> DDD, Mediator, CQRS
 
 Bulunan Microservisler
 - Ocelot - Gateway - Aradaki kordinasyonu sağlar.
