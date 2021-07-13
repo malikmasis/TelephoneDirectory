@@ -19,9 +19,9 @@ Genel Yapı
 - Service Bus -> Mass Transit
 - Continuous Integration -> Jenkins
 - Logging -> Serilog and elastic search
-- Database -> Postgre and Mssql
+- Databases -> Postgre and Mssql
 - Open Doc -> Swagger and SwaggerForOcelot
-- Applied Pattern -> DDD, Mediator, CQRS
+- Applied Pattern -> DDD, Mediator, CQRS, Circuit Breaker, Event Sourcing, Publisher-Subscriber
 
 Bulunan Microservisler
 - Ocelot - Gateway - Aradaki kordinasyonu sağlar.

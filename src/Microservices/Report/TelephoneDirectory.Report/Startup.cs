@@ -6,6 +6,7 @@ using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -17,6 +18,7 @@ using TelephoneDirectory.Report.Consumers;
 using TelephoneDirectory.Report.Data;
 using TelephoneDirectory.Report.Interfaces;
 using TelephoneDirectory.Report.Services;
+using HealthChecks.UI.Client;
 
 namespace TelephoneDirectory.Report
 {
@@ -126,6 +128,8 @@ namespace TelephoneDirectory.Report
                 });
 
             services.AddControllers();
+            services.AddHealthChecks()
+                .AddNpgSql(Configuration["ConnectionStrings:DefaultConnection"]);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -147,6 +151,11 @@ namespace TelephoneDirectory.Report
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
             });
         }
     }
