@@ -17,6 +17,7 @@ Genel Yapı
 - Api Gateway -> Ocelot
 - Message Broker -> Rabbitmq
 - Service Bus -> Mass Transit
+- Health Check -> Watchdog
 - Continuous Integration -> Jenkins
 - Logging -> Serilog and elastic search
 - Databases -> Postgre and Mssql

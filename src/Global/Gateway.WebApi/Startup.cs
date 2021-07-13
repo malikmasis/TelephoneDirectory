@@ -78,6 +78,9 @@ namespace Gateway.WebApi
                 });
 
             services.AddControllers();
+
+            services.AddHealthChecksUI()
+                 .AddInMemoryStorage();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -95,6 +98,8 @@ namespace Gateway.WebApi
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHealthChecksUI();
+
                 endpoints.MapControllers();
             });
 
