@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using TelephoneDirectory.Auth.Interfaces;
 using TelephoneDirectory.Auth.Models;
 
@@ -9,11 +10,13 @@ namespace TelephoneDirectory.Auth.Controllers
     [Route("api/[controller]")]
     public class LoginController : ControllerBase
     {
+        private readonly ILogger<LoginController> _logger;
         private readonly ILoginService _loginService;
         private readonly IJwtHandler _jwtHandler;
 
-        public LoginController(ILoginService loginService, IJwtHandler jwtHandler)
+        public LoginController(ILogger<LoginController> logger, ILoginService loginService, IJwtHandler jwtHandler)
         {
+            _logger = logger;
             _loginService = loginService;
             _jwtHandler = jwtHandler;
         }
@@ -30,6 +33,7 @@ namespace TelephoneDirectory.Auth.Controllers
                 response = Ok(new { token = tokenString });
             }
 
+            _logger.LogError("Couldn't log in");
             return response;
         }
     }

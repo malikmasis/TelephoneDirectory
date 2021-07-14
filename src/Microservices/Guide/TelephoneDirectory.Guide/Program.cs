@@ -43,7 +43,6 @@ namespace TelephoneDirectory.Guide
                     AutoRegisterTemplate = true,
                     IndexFormat = "guide-api-log-{0:yyyy.MM.dd}"
                 })
-                .ReadFrom.Configuration(configuration)
                 .CreateLogger();
 
         }

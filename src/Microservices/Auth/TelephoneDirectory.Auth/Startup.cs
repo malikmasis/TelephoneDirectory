@@ -27,7 +27,11 @@ namespace TelephoneDirectory.Auth
             services.AddDbContext<AuthDbContext>(options =>
                options.UseSqlServer(
                    Configuration.GetConnectionString("DefaultConnection"),
-                   b => b.MigrationsAssembly(typeof(AuthDbContext).Assembly.FullName)));
+                   b =>
+                   {
+                       b.MigrationsAssembly(typeof(AuthDbContext).Assembly.FullName);
+                       b.EnableRetryOnFailure();
+                   }));
 
             services.AddScoped<IAuthDbContext>(provider => provider.GetService<AuthDbContext>());
             services.AddScoped<ILoginService, LoginService>();
