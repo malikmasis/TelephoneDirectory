@@ -48,8 +48,6 @@ namespace TelephoneDirectory.Guide.Controllers
         [HttpGet("get/{id}")]
         public async Task<IActionResult> GetById(long id)
         {
-            _logger.LogInformation("get by id guide");
-
             try
             {
                 var person = await _context.Persons.Include(p => p.Contacts).FirstOrDefaultAsync(p => p.Id == id);

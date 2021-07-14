@@ -1,9 +1,11 @@
+using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using Serilog.Events;
+using Serilog.Sinks.Elasticsearch;
 using TelephoneDirectory.Report.Data;
 
 namespace TelephoneDirectory.Report
@@ -12,6 +14,8 @@ namespace TelephoneDirectory.Report
     {
         public static void Main(string[] args)
         {
+            ConfigureLogging();
+
             var host = CreateHostBuilder(args).Build();
             using (var scope = host.Services.CreateScope())
             {
@@ -21,23 +25,36 @@ namespace TelephoneDirectory.Report
             host.Run();
         }
 
+        private static void ConfigureLogging()
+        {
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true)
+                .Build();
+
+            Log.Logger = new LoggerConfiguration()
+               .Enrich.FromLogContext()
+               .Enrich.WithMachineName()
+               .Enrich.WithProperty("Application", "Report")
+               .WriteTo.Debug()
+               .WriteTo.Console()
+               .WriteTo.Elasticsearch(
+                   new ElasticsearchSinkOptions(
+                       new Uri(configuration["ElasticConfiguration:Uri"]))
+                   {
+                       AutoRegisterTemplate = true,
+                       TemplateName = "serilog-events-template",
+                       IndexFormat = "report-api-log-{0:yyyy.MM.dd}"
+                   })
+               .CreateLogger();
+        }
+
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-            .UseSerilog((host, log) =>
-            {
-                if (host.HostingEnvironment.IsProduction())
-                    log.MinimumLevel.Information();
-                else
-                    log.MinimumLevel.Debug();
-
-                log.MinimumLevel.Override("Microsoft", LogEventLevel.Warning);
-                log.MinimumLevel.Override("Quartz", LogEventLevel.Information);
-                log.WriteTo.Console();
-            })
             .ConfigureWebHostDefaults(webBuilder =>
             {
-                //webBuilder.UseUrls(new string[] { "https://localhost:44373/" });
                 webBuilder.UseStartup<Startup>();
-            });
+            })
+            .UseSerilog();
     }
 }

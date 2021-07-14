@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TelephoneDirectory.Report.Command;
-using TelephoneDirectory.Report.Data;
 
 namespace TelephoneDirectory.Report.Controllers
 {
@@ -16,7 +15,7 @@ namespace TelephoneDirectory.Report.Controllers
         private readonly ILogger<ReportController> _logger;
         private readonly IMediator _mediator;
 
-        public ReportController(IReportDbContext context, ILogger<ReportController> logger, IMediator mediator)
+        public ReportController(ILogger<ReportController> logger, IMediator mediator)
         {
             _logger = logger;
             _mediator = mediator;
