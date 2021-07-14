@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,26 +27,27 @@ namespace TelephoneDirectory.Guide
         }
         private static void ConfigureLogging()
         {
+            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true)
+                .AddJsonFile(
+                    $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json",
+                    optional: true)
                 .Build();
 
             Log.Logger = new LoggerConfiguration()
-               .Enrich.FromLogContext()
-               .Enrich.WithMachineName()
-               .Enrich.WithProperty("Application", "Guide")
-               .WriteTo.Debug()
-               .WriteTo.Console()
-               .WriteTo.Elasticsearch(
-                   new ElasticsearchSinkOptions(
-                       new Uri(configuration["ElasticConfiguration:Uri"]))
-                   {
-                       AutoRegisterTemplate = true,
-                       TemplateName = "serilog-events-template",
-                       IndexFormat = "guide-api-log-{0:yyyy.MM.dd}"
-                   })
-               .CreateLogger();
+                .Enrich.FromLogContext()
+                .Enrich.WithMachineName()
+                .WriteTo.Debug()
+                .WriteTo.Console()
+                .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(configuration["ElasticConfiguration:Uri"]))
+                {
+                    AutoRegisterTemplate = true,
+                    IndexFormat = "guide-api-log-{0:yyyy.MM.dd}"
+                })
+                .Enrich.WithProperty("Environmentt", environment)
+                .ReadFrom.Configuration(configuration)
+                .CreateLogger();
 
         }
 
@@ -54,6 +56,14 @@ namespace TelephoneDirectory.Guide
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                }).UseSerilog();
+                })
+                .ConfigureAppConfiguration(configuration =>
+                {
+                    configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                    configuration.AddJsonFile(
+                        $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json",
+                        optional: true);
+                })
+                .UseSerilog();
     }
 }

@@ -1,10 +1,10 @@
-﻿using MassTransit;
+﻿using System;
+using System.Threading.Tasks;
+using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
 using TelephoneDirectory.Guide.Data;
 using TelephoneDirectory.Guide.Entities;
 
@@ -48,6 +48,8 @@ namespace TelephoneDirectory.Guide.Controllers
         [HttpGet("get/{id}")]
         public async Task<IActionResult> GetById(long id)
         {
+            _logger.LogInformation("get by id guide");
+
             try
             {
                 var person = await _context.Persons.Include(p => p.Contacts).FirstOrDefaultAsync(p => p.Id == id);
