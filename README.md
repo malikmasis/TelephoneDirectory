@@ -1,5 +1,5 @@
 ﻿# TelephoneDirectory
-microservices-> .net core 3.1 - Docker, Jenkins, Ocelot, RabbitMq, MassTransit, Serilog, Elasticsearch, Swagger / SwaggerForOcelot, Jwt, Postgresql, Mssql
+microservices-> .net core 3.1 - Docker, Jenkins, Ocelot, RabbitMq, MassTransit, Serilog, Elasticsearch, Kibana, Swagger / SwaggerForOcelot, Jwt, Postgresql, Mssql
 
 ##### Projeyi Ayağa Kaldırmak
 
@@ -11,18 +11,19 @@ Burada her servise ait farklı bir veri tabanı bulunmaktadır. Bu şekilde sade
 * add-migration Initial -> .net core console için : dotnet ef migrations add Initial
 * update-database -> .net core console için : dotnet ef database update
 ```
-Not: Bütün servisler için bu işlemleri yapmak gerekmektedir.
+Not: Projede içerisindeki mevcut migration'lar otomatik olarak ayağa kalktığından herhangi bir işlem yapılmasına gerek yoktur.
 
 Genel Yapı
 - Api Gateway -> Ocelot
 - Message Broker -> Rabbitmq
 - Service Bus -> Mass Transit
-- Health Check -> Watchdog
+- Health Check -> Watchdog - (via slack implementation)
 - Continuous Integration -> Jenkins
-- Logging -> Serilog and elastic search
+- Logging -> Serilog, elastic search and kibana
 - Databases -> Postgre and Mssql
 - Open Doc -> Swagger and SwaggerForOcelot
 - Applied Pattern -> DDD, Mediator, CQRS, Circuit Breaker, Event Sourcing, Publisher-Subscriber
+- Tests -> xUnit (via MassTransit) - Mocking
 
 Bulunan Microservisler
 - Ocelot - Gateway - Aradaki kordinasyonu sağlar.
@@ -37,10 +38,11 @@ docker-compose.yml dosyası sayesinde hem kullanılan araçlar hem veri tabanlar
 ```
 
 
-Unit test ve Integration testleri de ekliyor olacağız. Aşağıdaki linkler bize bu konuda yardımcı olacaktır.
-
-- Unit Test:
+- Unit Test'ler eklenmeye başlandı. Consumer'ler için mass transsit ile kullanmaya başladık. Ayrıca mock'lama kullanılmaktadır.
+https://www.youtube.com/watch?v=Cx-Mc0DCpfE&ab_channel=ChrisPatterson - Mass Transit
 https://medium.com/software-development-turkey/birim-unit-test-ile-veri-k%C3%BCmeleri-xunit-inline-member-class-data-601b3fb4e723
+https://www.youtube.com/watch?v=6oxNumwFmR0&t=1s&ab_channel=MalikMasis - Mocking
 
 - Integration Test:
 https://medium.com/software-development-turkey/integration-test-net-core-xunit-web-application-factory-600ca6a52223
+https://www.youtube.com/watch?v=My0FdMKq2JA&t=4s&ab_channel=MalikMasis
