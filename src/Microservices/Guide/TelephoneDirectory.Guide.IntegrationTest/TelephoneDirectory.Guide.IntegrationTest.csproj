@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TelephoneDirectory.Guide.Entities\TelephoneDirectory.Guide.Entities.csproj" />
     <ProjectReference Include="..\TelephoneDirectory.Guide\TelephoneDirectory.Guide.csproj" />
   </ItemGroup>
 

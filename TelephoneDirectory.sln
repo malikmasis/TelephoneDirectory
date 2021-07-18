@@ -41,8 +41,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelephoneDirectory.Report.U
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelephoneDirectory.Guide.IntegrationTest", "src\Microservices\Guide\TelephoneDirectory.Guide.IntegrationTest\TelephoneDirectory.Guide.IntegrationTest.csproj", "{7DBF8CD8-58BD-4EA5-AAC6-EE588D7CEE62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelephoneDirectory.Report.IntegrationTest", "src\Microservices\Report\TelephoneDirectory.Report.IntegrationTest\TelephoneDirectory.Report.IntegrationTest.csproj", "{DA9621E3-A271-4483-BBFF-4783D4E20921}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,10 +87,6 @@ Global
 		{7DBF8CD8-58BD-4EA5-AAC6-EE588D7CEE62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DBF8CD8-58BD-4EA5-AAC6-EE588D7CEE62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DBF8CD8-58BD-4EA5-AAC6-EE588D7CEE62}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DA9621E3-A271-4483-BBFF-4783D4E20921}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA9621E3-A271-4483-BBFF-4783D4E20921}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA9621E3-A271-4483-BBFF-4783D4E20921}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA9621E3-A271-4483-BBFF-4783D4E20921}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -113,7 +107,6 @@ Global
 		{441957FF-AC21-41C1-851B-18AB526564E2} = {B825E947-7F01-4969-9F14-294E0C88338E}
 		{4BA81B7D-6EB6-461B-9FAE-268A3AA759B3} = {2A4EB1A6-8983-49C7-87CF-B19B11755080}
 		{7DBF8CD8-58BD-4EA5-AAC6-EE588D7CEE62} = {90E62EFE-805B-4286-8075-9109FC2A67EE}
-		{DA9621E3-A271-4483-BBFF-4783D4E20921} = {2A4EB1A6-8983-49C7-87CF-B19B11755080}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8E6515D2-E14F-4453-8213-7CD04030BCA2}
