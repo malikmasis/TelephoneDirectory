@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MassTransit.Testing;
 using Moq;
-using TelephoneDirectory.Guide.Entities;
+using TelephoneDirectory.Contracts;
 using TelephoneDirectory.Report.Consumers;
 using TelephoneDirectory.Report.Interfaces;
 using Xunit;
@@ -26,13 +26,13 @@ namespace TelephoneDirectory.Report.UnitTest
             await harness.Start();
             try
             {
-                await harness.InputQueueSendEndpoint.Send(new Person() { Name = "Hi" });
+                await harness.InputQueueSendEndpoint.Send(new PersonDto() { Id = 1});
 
                 // did the endpoint consume the message
-                Assert.True(harness.Consumed.Select<Person>().Any());
+                Assert.True(harness.Consumed.Select<PersonDto>().Any());
 
                 // did the actual consumer consume the message
-                Assert.True(consumer.Consumed.Select<Person>().Any());
+                Assert.True(consumer.Consumed.Select<PersonDto>().Any());
             }
             finally
             {
