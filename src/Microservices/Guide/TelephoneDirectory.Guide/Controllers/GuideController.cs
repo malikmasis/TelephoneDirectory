@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using TelephoneDirectory.Contracts;
 using TelephoneDirectory.Guide.Data;
 using TelephoneDirectory.Guide.Entities;
 
@@ -146,7 +147,11 @@ namespace TelephoneDirectory.Guide.Controllers
 
                 if (result > 0)
                 {
-                    await _bus.Publish(person);
+                    PersonDto personDto = new PersonDto()
+                    {
+                        Id = person.Id
+                    };
+                    await _bus.Publish(personDto);
                     return Ok(person.Id);
                 }
                 return BadRequest("Cannot save properly");

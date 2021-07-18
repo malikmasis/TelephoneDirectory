@@ -2,12 +2,12 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MassTransit;
-using TelephoneDirectory.Guide.Entities;
+using TelephoneDirectory.Contracts;
 using TelephoneDirectory.Report.Interfaces;
 
 namespace TelephoneDirectory.Report.Consumers
 {
-    public sealed class PersonConsumer : IConsumer<Person>
+    public sealed class PersonConsumer : IConsumer<PersonDto>
     {
         private readonly IReportService _reportService;
         public PersonConsumer(IReportService reportService)
@@ -15,9 +15,9 @@ namespace TelephoneDirectory.Report.Consumers
             _reportService = reportService;
         }
 
-        public async Task Consume(ConsumeContext<Person> context)
+        public async Task Consume(ConsumeContext<PersonDto> context)
         {
-            Person data = context.Message;
+            PersonDto data = context.Message;
             if (data == null)
             {
                 throw new InvalidOperationException("The person was not valid");
