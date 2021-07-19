@@ -16,7 +16,6 @@ namespace Gateway.WebApi
             Host.CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(webBuilder =>
             {
-                //webBuilder.UseUrls(new string[] { "https://localhost:44382/" });
                 webBuilder.UseStartup<Startup>();
             })
             .ConfigureAppConfiguration((hostingContext, config) =>

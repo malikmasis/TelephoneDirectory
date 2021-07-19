@@ -30,7 +30,7 @@ namespace TelephoneDirectory.Report
             Configuration = configuration;
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        public virtual void ConfigureServices(IServiceCollection services)
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
@@ -132,7 +132,7 @@ namespace TelephoneDirectory.Report
                 .AddNpgSql(Configuration["ConnectionStrings:DefaultConnection"]);
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
