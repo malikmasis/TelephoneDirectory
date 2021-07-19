@@ -1,29 +1,28 @@
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Testing;
-using TelephoneDirectory.Report.Entities;
+using TelephoneDirectory.Guide.Entities;
 using Xunit;
 
-namespace TelephoneDirectory.Report.IntegrationTest
+namespace TelephoneDirectory.Guide.IntegrationTest
 {
-    public class TestGuideController : IClassFixture<WebApplicationFactory<Startup>>
+    public class GuideControllerTest : IClassFixture<WebApplicationFactory<Startup>>
     {
         private readonly WebApplicationFactory<Startup> _factory;
-        public TestGuideController(WebApplicationFactory<Startup> factory)
+        public GuideControllerTest(WebApplicationFactory<Startup> factory)
         {
             _factory = factory;
         }
 
         [Fact]
-        public async Task GetAll()
+        public async Task Get_guide_by_id()
         {
             var client = _factory.CreateClient();
-            var response = await client.GetAsync("/api/Report/getall");
+            var response = await client.GetAsync("/api/Guide/get/1");
             Assert.True(response.IsSuccessStatusCode);
 
             var body = await response.Content.ReadAsStringAsync();
-            var reply = JsonSerializer.Deserialize<List<ReportOutput>>(body);
+            var reply = JsonSerializer.Deserialize<Person>(body);
             Assert.NotNull(reply);
         }
     }

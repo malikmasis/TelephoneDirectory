@@ -10,7 +10,7 @@ using Xunit;
 
 namespace TelephoneDirectory.Report.UnitTest
 {
-    public class TestPersonConsumer
+    public class PersonConsumerTest
     {
         [Fact]
         public async Task Should_test_the_consumer()

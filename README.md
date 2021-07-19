@@ -38,11 +38,11 @@ docker-compose.yml dosyası sayesinde hem kullanılan araçlar hem veri tabanlar
 ```
 
 
-- Unit Test'ler eklenmeye başlandı. Consumer'ler için mass transsit ile kullanmaya başladık. Ayrıca mock'lama kullanılmaktadır.
-https://www.youtube.com/watch?v=Cx-Mc0DCpfE&ab_channel=ChrisPatterson - Mass Transit
-https://medium.com/software-development-turkey/birim-unit-test-ile-veri-k%C3%BCmeleri-xunit-inline-member-class-data-601b3fb4e723
+- Unit Test'ler eklenmeye başlandı. Consumer'ler için mass transsit ile kullanmaya başladık. Ayrıca mock'lama kullanılmaktadır.<br />
+https://www.youtube.com/watch?v=Cx-Mc0DCpfE&ab_channel=ChrisPatterson - Mass Transit <br />
+https://medium.com/software-development-turkey/birim-unit-test-ile-veri-k%C3%BCmeleri-xunit-inline-member-class-data-601b3fb4e723 <br />
 https://www.youtube.com/watch?v=6oxNumwFmR0&t=1s&ab_channel=MalikMasis - Mocking
 
-- Integration Test:
-https://medium.com/software-development-turkey/integration-test-net-core-xunit-web-application-factory-600ca6a52223
+- Integration Test: <br />
+https://medium.com/software-development-turkey/integration-test-net-core-xunit-web-application-factory-600ca6a52223 <br />
 https://www.youtube.com/watch?v=My0FdMKq2JA&t=4s&ab_channel=MalikMasis
