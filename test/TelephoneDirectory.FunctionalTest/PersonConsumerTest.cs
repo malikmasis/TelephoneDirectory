@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ using TelephoneDirectory.Report.Consumers;
 using TelephoneDirectory.Report.Interfaces;
 using Xunit;
 
-namespace TelephoneDirectory.Report.UnitTest
+namespace TelephoneDirectory.FunctionalTest
 {
     public class PersonConsumerTest
     {
@@ -26,7 +27,7 @@ namespace TelephoneDirectory.Report.UnitTest
             await harness.Start();
             try
             {
-                await harness.InputQueueSendEndpoint.Send(new PersonDto() { Id = 1});
+                await harness.InputQueueSendEndpoint.Send(new PersonDto() { Id = 1 });
 
                 // did the endpoint consume the message
                 Assert.True(harness.Consumed.Select<PersonDto>().Any());

@@ -41,7 +41,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelephoneDirectory.Report.U
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelephoneDirectory.Guide.IntegrationTest", "src\Microservices\Guide\TelephoneDirectory.Guide.IntegrationTest\TelephoneDirectory.Guide.IntegrationTest.csproj", "{7DBF8CD8-58BD-4EA5-AAC6-EE588D7CEE62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelephoneDirectory.Report.IntegrationTest", "src\Microservices\Report\TelephoneDirectory.Report.IntegrationTest\TelephoneDirectory.Report.IntegrationTest.csproj", "{3E0A60AB-27A8-4797-A6AF-C4A425FAADA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelephoneDirectory.Report.IntegrationTest", "src\Microservices\Report\TelephoneDirectory.Report.IntegrationTest\TelephoneDirectory.Report.IntegrationTest.csproj", "{3E0A60AB-27A8-4797-A6AF-C4A425FAADA4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{93DE2B84-C87E-4F5E-95A9-05A92A780986}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelephoneDirectory.FunctionalTest", "test\TelephoneDirectory.FunctionalTest\TelephoneDirectory.FunctionalTest.csproj", "{9BE41533-EA56-429D-936F-F71060A16BDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +97,10 @@ Global
 		{3E0A60AB-27A8-4797-A6AF-C4A425FAADA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E0A60AB-27A8-4797-A6AF-C4A425FAADA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E0A60AB-27A8-4797-A6AF-C4A425FAADA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BE41533-EA56-429D-936F-F71060A16BDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BE41533-EA56-429D-936F-F71060A16BDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BE41533-EA56-429D-936F-F71060A16BDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BE41533-EA56-429D-936F-F71060A16BDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -114,6 +122,7 @@ Global
 		{4BA81B7D-6EB6-461B-9FAE-268A3AA759B3} = {2A4EB1A6-8983-49C7-87CF-B19B11755080}
 		{7DBF8CD8-58BD-4EA5-AAC6-EE588D7CEE62} = {90E62EFE-805B-4286-8075-9109FC2A67EE}
 		{3E0A60AB-27A8-4797-A6AF-C4A425FAADA4} = {2A4EB1A6-8983-49C7-87CF-B19B11755080}
+		{9BE41533-EA56-429D-936F-F71060A16BDC} = {93DE2B84-C87E-4F5E-95A9-05A92A780986}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8E6515D2-E14F-4453-8213-7CD04030BCA2}
