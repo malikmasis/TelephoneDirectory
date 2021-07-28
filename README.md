@@ -22,14 +22,15 @@ Genel Yapı
 - Logging -> Serilog, elastic search and kibana
 - Databases -> Postgre and Mssql
 - Open Doc -> Swagger and SwaggerForOcelot
-- Applied Pattern -> DDD, Mediator, CQRS, Circuit Breaker, Event Sourcing, Publisher-Subscriber
-- Tests -> xUnit (via MassTransit) - Mocking
+- Applied Pattern -> DDD, Saga Pattern, Mediator, CQRS, Circuit Breaker, Event Sourcing, Publisher-Subscriber
+- Tests -> xUnit (via MassTransit) - Mocking, Integration and Functional Tests
 
 Bulunan Microservisler
 - Ocelot - Gateway - Aradaki kordinasyonu sağlar.
 - Guide - Postgre - Rehber ve iletişim(1-N) bilgileriyle ilgili her türlü CRUD işlemini yapabilmekteyiz.
 - Report - Postgre - Rehberdeki kişiler ve bunların bulunduğu yerlerle ilgili bazı rapor verilmektedir.
 - Auth - MSSQL - Kullanıcıları tutuyoruz. Jwt ile authentication yapılmaktadır.
+- Saga - Transaction yönetimi için Saga Pattern'ın Orchestration yöntemi kullanılmıştır.
 
 Kurulum
 docker-compose.yml dosyası sayesinde hem kullanılan araçlar hem veri tabanları ayağa kalkacaktır.

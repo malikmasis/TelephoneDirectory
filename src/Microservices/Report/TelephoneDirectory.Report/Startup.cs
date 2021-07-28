@@ -79,6 +79,9 @@ namespace TelephoneDirectory.Report
             {
                 x.AddConsumer<PersonConsumer>();
                 x.AddConsumer<SubmitTokenConsumer>();
+                x.AddConsumer<ReportRequestReceivedConsumer>();
+                x.AddConsumer<ReportCreatedConsumer>();
+                x.AddConsumer<ReportFailedConsumer>();
 
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
@@ -104,8 +107,18 @@ namespace TelephoneDirectory.Report
 
                         ep.ConfigureConsumer<PersonConsumer>(provider);
                         ep.ConfigureConsumer<SubmitTokenConsumer>(provider);
+                        ep.ConfigureConsumer<ReportRequestReceivedConsumer>(provider);
+                        ep.ConfigureConsumer<ReportCreatedConsumer>(provider);
+                        ep.ConfigureConsumer<ReportFailedConsumer>(provider);
 
                     });
+
+                    //cfg.ReceiveEndpoint("registerorder.service", rs =>
+                    //{
+                    //    rs.ConfigureConsumer<ReportRequestReceivedConsumer>(provider);
+                    //    rs.ConfigureConsumer<ReportCreatedConsumer>(provider);
+                    //    rs.ConfigureConsumer<ReportFailedConsumer>(provider);
+                    //});
                 }));
             });
             services.AddMassTransitHostedService();

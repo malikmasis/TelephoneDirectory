@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using TelephoneDirectory.Contracts;
 using TelephoneDirectory.Guide.Data;
 using TelephoneDirectory.Guide.Entities;
+using TelephoneDirectory.Guide.Models;
 
 namespace TelephoneDirectory.Guide.Controllers
 {
@@ -163,5 +164,26 @@ namespace TelephoneDirectory.Guide.Controllers
             }
         }
 
+        [HttpPost("saga")]
+        public async Task<IActionResult> SagaPatternExample(string reportId)
+        {
+            try
+            {
+                var sendToUri = new Uri($"rabbitmq://localhost/saga.service");
+                var endPoint = await _bus.GetSendEndpoint(sendToUri);
+                await endPoint.Send<IGuideRequestCommand>(new GuideRequestCommand
+                {
+                    ReportId = reportId,
+                    RequestTime = DateTime.UtcNow
+                });
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Unexpectedd error: {ex.Message}");
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
