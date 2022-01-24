@@ -22,7 +22,7 @@ Genel Yapı
 - Logging -> Serilog, elastic search and kibana
 - Databases -> Postgre and Mssql
 - Open Doc -> Swagger and SwaggerForOcelot
-- Applied Pattern -> DDD, Saga Pattern, Mediator, CQRS, Circuit Breaker, Event Sourcing, Publisher-Subscriber
+- Applied Pattern -> DDD, Saga Pattern, Mediator, CQRS, Circuit Breaker, Event Sourcing, Publish-Subscribe
 - Tests -> xUnit (via MassTransit) - Mocking, Integration and Functional Tests
 
 Bulunan Microservisler
