@@ -1,5 +1,6 @@
 ﻿# TelephoneDirectory
 microservices-> .net core 3.1 - Docker, Jenkins, Ocelot, RabbitMq, MassTransit, Serilog, Elasticsearch, Kibana, Swagger / SwaggerForOcelot, Jwt, Postgresql, Mssql
+Bu projeyi daha ayrıntılı ele aldığım blog yazısı: https://medium.com/software-development-turkey/mikroservis-maceram-1e070463d0ea 
 
 ##### Projeyi Ayağa Kaldırmak
 
