@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -35,7 +35,6 @@
 
   <ItemGroup>
     <PackageReference Include="MassTransit" Version="7.0.3" />
-    <PackageReference Include="MassTransit.RabbitMQ" Version="7.0.3" />
   </ItemGroup>
 
   <ItemGroup>

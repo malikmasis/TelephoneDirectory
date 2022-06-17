@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+#nullable disable
+
 namespace TelephoneDirectory.Auth.Migrations
 {
     public partial class Init : Migration
@@ -11,13 +13,13 @@ namespace TelephoneDirectory.Auth.Migrations
                 name: "UserAccounts",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedDate = table.Column<DateTime>(nullable: true),
-                    CreatedUser = table.Column<long>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    UserName = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true)
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedUser = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -27,7 +29,7 @@ namespace TelephoneDirectory.Auth.Migrations
             migrationBuilder.InsertData(
                 table: "UserAccounts",
                 columns: new[] { "Id", "CreatedDate", "CreatedUser", "IsDeleted", "Password", "UserName" },
-                values: new object[] { 1L, new DateTime(2021, 6, 6, 12, 50, 55, 873, DateTimeKind.Utc).AddTicks(4608), null, false, "admin", "admin" });
+                values: new object[] { 1L, new DateTime(2022, 6, 17, 12, 35, 14, 658, DateTimeKind.Utc).AddTicks(4452), null, false, "admin", "admin" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
