@@ -40,7 +40,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Global\TelephoneDirectory.Contracts\TelephoneDirectory.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\..\Global\TelephoneDirectory.Contracts\TelephoneDirectory.Contracts.csproj" />
     <ProjectReference Include="..\TelephoneDirectory.Report.Entities\TelephoneDirectory.Report.Entities.csproj" />
   </ItemGroup>
 

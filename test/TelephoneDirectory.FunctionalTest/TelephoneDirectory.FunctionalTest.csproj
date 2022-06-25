@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Microservices\Report\TelephoneDirectory.Report\TelephoneDirectory.Report.csproj" />
+    <ProjectReference Include="..\..\src\Microservices\Csharp\Report\TelephoneDirectory.Report\TelephoneDirectory.Report.csproj" />
   </ItemGroup>
 
 </Project>

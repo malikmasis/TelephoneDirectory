@@ -1,9 +1,8 @@
-using System;
+using MassTransit.Testing;
+using Moq;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using MassTransit.Testing;
-using Moq;
 using TelephoneDirectory.Contracts;
 using TelephoneDirectory.Report.Consumers;
 using TelephoneDirectory.Report.Interfaces;
