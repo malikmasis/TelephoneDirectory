@@ -10,7 +10,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/", handler)
+	http.HandleFunc("/api/examplego", handler)
 	http.ListenAndServe(":9000", nil)
 
 	fmt.Println("Web Server")
