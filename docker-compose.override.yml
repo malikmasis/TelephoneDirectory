@@ -60,8 +60,8 @@ services:
             # - ASPNETCORE_Kestrel__Certificates__Default__Path=certs/PhoneCertificate.pfx
             - "ConnectionStrings:DefaultConnection=Server=reportdb;Port=5432;Database=PhoneReport;User Id=postgres;Password=admin;"
         ports:
-            - "44373:443"
-            - "44372:80"
+            # - "44373:443"
+            - "44373:80"
         depends_on: 
             - reportdb
     auth.api:
