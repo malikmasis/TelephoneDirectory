@@ -32,6 +32,10 @@ services:
             dockerfile: src/Global/Gateway.WebApi/Dockerfile
     pgAdmin4:
         image: dpage/pgadmin4
+    examplego.api:
+        image: examplego_api_image
+        build: 
+            context: src/Microservices/Golang/Example
 volumes: 
     authdb_volume:   
     
