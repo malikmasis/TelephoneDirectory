@@ -115,7 +115,8 @@ services:
     examplego.api:
         container_name: examplego.api
         ports:
-            - "9000:80"
+            - "9000:9000"
+        restart: unless-stopped
 networks:
     elastic:
         driver: bridge
