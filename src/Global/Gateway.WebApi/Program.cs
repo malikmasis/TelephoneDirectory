@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using MMLib.SwaggerForOcelot.DependencyInjection;
+using Serilog;
+using Serilog.Events;
 
 namespace Gateway.WebApi
 {
@@ -17,6 +19,15 @@ namespace Gateway.WebApi
             .ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.UseStartup<Startup>();
+            })
+            .UseSerilog((_, config) =>
+            {
+                config
+                    .MinimumLevel.Information()
+                    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+                    .Enrich.FromLogContext()
+                    .WriteTo.File(@"Logs\log.txt", rollingInterval: RollingInterval.Day)
+                    .WriteTo.Console();
             })
             .ConfigureAppConfiguration((hostingContext, config) =>
             {
