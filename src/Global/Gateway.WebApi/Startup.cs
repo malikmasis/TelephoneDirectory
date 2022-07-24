@@ -1,4 +1,3 @@
-using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using MMLib.Ocelot.Provider.AppConfiguration;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using System.Text;
 
 namespace Gateway.WebApi
 {

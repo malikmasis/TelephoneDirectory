@@ -15,6 +15,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.6" />
     <PackageReference Include="MMLib.Ocelot.Provider.AppConfiguration" Version="2.0.0" />
     <PackageReference Include="MMLib.SwaggerForOcelot" Version="5.2.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
