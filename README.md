@@ -1,5 +1,5 @@
 ﻿# TelephoneDirectory
-microservices-> .net 6.0 - Docker, Jenkins, Ocelot, RabbitMq, MassTransit, Serilog, Elasticsearch, Kibana, Swagger / SwaggerForOcelot, Jwt, Postgresql, Mssql
+microservices-> .net 6.0, golang - Docker, Jenkins, Ocelot, RabbitMq, MassTransit, Serilog, Elasticsearch, Kibana, Swagger / SwaggerForOcelot, Jwt, Postgresql, Mssql
 Bu projeyi daha ayrıntılı ele aldığım blog yazısı: https://medium.com/software-development-turkey/mikroservis-maceram-1e070463d0ea 
 
 ##### Projeyi Ayağa Kaldırmak
@@ -27,10 +27,11 @@ Genel Yapı
 - Tests -> xUnit (via MassTransit) - Mocking, Integration and Functional Tests
 
 Bulunan Microservisler
-- Ocelot - Gateway - Aradaki kordinasyonu sağlar.
-- Guide - Postgre - Rehber ve iletişim(1-N) bilgileriyle ilgili her türlü CRUD işlemini yapabilmekteyiz.
-- Report - Postgre - Rehberdeki kişiler ve bunların bulunduğu yerlerle ilgili bazı rapor verilmektedir.
-- Auth - MSSQL - Kullanıcıları tutuyoruz. Jwt ile authentication yapılmaktadır.
+- Ocelot - Gateway, .net6  - Aradaki kordinasyonu sağlar.
+- Guide - Postgre, .net6 - Rehber ve iletişim(1-N) bilgileriyle ilgili her türlü CRUD işlemini yapabilmekteyiz.
+- Report - Postgre, .net6 - Rehberdeki kişiler ve bunların bulunduğu yerlerle ilgili bazı rapor verilmektedir.
+- Auth - MSSQL, .net6 - Kullanıcıları tutuyoruz. Jwt ile authentication yapılmaktadır.
+- Example - No DB, golang - Basit bir golang projesi oluşturuldu. Geliştirilmesi devam ediyor.
 - Saga - Transaction yönetimi için Saga Pattern'ın Orchestration yöntemi kullanılmıştır.
 
 Kurulum
