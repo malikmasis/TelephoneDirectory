@@ -1,10 +1,9 @@
-﻿using System;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using MassTransit;
+﻿using MassTransit;
 using MassTransit.Saga;
 using Microsoft.Extensions.Configuration;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using TelephoneDirectory.Guide.StateMachines;
 
 namespace TelephoneDirectory.Saga

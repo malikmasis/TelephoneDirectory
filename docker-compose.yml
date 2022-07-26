@@ -14,17 +14,17 @@ services:
         image: guide_image
         build: 
             context: .
-            dockerfile: src/Microservices/Guide/TelephoneDirectory.Guide/Dockerfile
+            dockerfile: src/Microservices/Csharp/Guide/TelephoneDirectory.Guide/Dockerfile
     report.api:
         image: report_image
         build: 
             context: .
-            dockerfile: src/Microservices/Report/TelephoneDirectory.Report/Dockerfile
+            dockerfile: src/Microservices/Csharp/Report/TelephoneDirectory.Report/Dockerfile
     auth.api:
         image: auth_image
         build: 
             context: .
-            dockerfile: src/Microservices/Auth/TelephoneDirectory.Auth/Dockerfile
+            dockerfile: src/Microservices/Csharp/Auth/TelephoneDirectory.Auth/Dockerfile
     gateway.api:
         image: gateway_api_image
         build: 
@@ -32,6 +32,10 @@ services:
             dockerfile: src/Global/Gateway.WebApi/Dockerfile
     pgAdmin4:
         image: dpage/pgadmin4
+    examplego.api:
+        image: examplego_api_image
+        build: 
+            context: src/Microservices/Golang/Example
 volumes: 
     authdb_volume:   
     

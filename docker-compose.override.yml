@@ -112,7 +112,10 @@ services:
             - ELASTICSEARCH_URL=http://localhost:9200
         networks:
             - elastic 
-
+    examplego.api:
+        container_name: examplego.api
+        ports:
+            - "9000:80"
 networks:
     elastic:
         driver: bridge

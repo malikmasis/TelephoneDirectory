@@ -1,0 +1,10 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/examplego/{everything}",
+      "ServiceName": "examplego",
+      "UpstreamPathTemplate": "/gateway/examplego/{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ]
+    }
+  ]
+}

@@ -38,7 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Microservices\Guide\TelephoneDirectory.Guide\TelephoneDirectory.Guide.csproj" />
+    <ProjectReference Include="..\..\Microservices\Csharp\Guide\TelephoneDirectory.Guide\TelephoneDirectory.Guide.csproj" />
   </ItemGroup>
 
 </Project>
