@@ -1,6 +1,6 @@
 ﻿# TelephoneDirectory
 microservices -> .net 6.0, golang - Docker, Jenkins, Ocelot, RabbitMq, MassTransit, Serilog, Elasticsearch, Kibana, Swagger / SwaggerForOcelot, Jwt, Postgresql, Mssql
-If you want to read in detail in Turkish, please visit [here](https://medium.com/software-development-turkey/mikroservis-maceram-1e070463d0ea)
+>If you want to read in detail in Turkish, please visit [here](https://medium.com/software-development-turkey/mikroservis-maceram-1e070463d0ea)
 
 ##### Running the project
 
@@ -41,11 +41,11 @@ Thanks to the `docker-compose.yml` file, both the tools used and the databases w
 ```
 
 ##### Testing
-- Unit Tests started to be added. We started to use it with MassTransit for consumers. Also mocking is used.<br />
-https://www.youtube.com/watch?v=Cx-Mc0DCpfE&ab_channel=ChrisPatterson - Mass Transit <br />
-https://medium.com/software-development-turkey/birim-unit-test-ile-veri-k%C3%BCmeleri-xunit-inline-member-class-data-601b3fb4e723 <br />
-https://www.youtube.com/watch?v=6oxNumwFmR0&t=1s&ab_channel=MalikMasis - Mocking
-
-- Integration Test: <br />
-https://medium.com/software-development-turkey/integration-test-net-core-xunit-web-application-factory-600ca6a52223 <br />
-https://www.youtube.com/watch?v=My0FdMKq2JA&t=4s&ab_channel=MalikMasis
+- Unit Tests started to be added. We started to use it with MassTransit for consumers. Also mocking is used.
+[MassTransit unit testing - video](https://www.youtube.com/watch?v=Cx-Mc0DCpfE&ab_channel=ChrisPatterson) 
+[Unit testing in general - blog - Turkish](https://medium.com/software-development-turkey/birim-unit-test-ile-veri-k%C3%BCmeleri-xunit-inline-member-class-data-601b3fb4e723)
+[Mocking in unit testing  - video - Turkish](https://www.youtube.com/watch?v=6oxNumwFmR0&t=1s&ab_channel=MalikMasis)
+<br />
+- Integration Test:
+[Integration testing in general - blog - Turkish](https://medium.com/software-development-turkey/integration-test-net-core-xunit-web-application-factory-600ca6a52223)
+[Integration testing in general - video - Turkish](https://www.youtube.com/watch?v=My0FdMKq2JA&t=4s&ab_channel=MalikMasis)
