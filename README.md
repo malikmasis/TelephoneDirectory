@@ -43,6 +43,7 @@ Thanks to the `docker-compose.yml` file, both the tools used and the databases w
 ##### Testing
 
 - Unit Tests started to be added. We started to use it with MassTransit for consumers. Also mocking is used.
+
 [MassTransit unit testing - video](https://www.youtube.com/watch?v=Cx-Mc0DCpfE&ab_channel=ChrisPatterson)  <br />
 [Unit testing in general - blog - Turkish](https://medium.com/software-development-turkey/birim-unit-test-ile-veri-k%C3%BCmeleri-xunit-inline-member-class-data-601b3fb4e723) <br /> 
 [Mocking in unit testing  - video - Turkish](https://www.youtube.com/watch?v=6oxNumwFmR0&t=1s&ab_channel=MalikMasis)
