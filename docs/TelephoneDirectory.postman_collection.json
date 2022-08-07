@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "92dec154-a7ba-451c-b1e4-4e1504989a33",
+		"_postman_id": "60febe51-9656-4b7b-8db3-576bfd6ba6fb",
 		"name": "TelephoneDirectory",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20312468"
 	},
 	"item": [
 		{
@@ -131,20 +132,19 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Report",
 			"item": [
 				{
-					"name": "https://localhost:44382/gateway/report",
+					"name": "login",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:44382/gateway/report/get/1",
-							"protocol": "https",
+							"raw": "http://localhost:44382/gateway/report/get/1",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
@@ -160,13 +160,13 @@
 					"response": []
 				},
 				{
-					"name": "https://localhost:44382/gateway/report/getall",
+					"name": "get all",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:44382/gateway/report/getall",
-							"protocol": "https",
+							"raw": "http://localhost:44382/gateway/report/getall",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
@@ -179,10 +179,111 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "internal-get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:44373/api/report/getall",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "44373",
+							"path": [
+								"api",
+								"report",
+								"getall"
+							]
+						}
+					},
+					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"admin\",\r\n  \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:44382/gateway/login/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "44382",
+							"path": [
+								"gateway",
+								"login",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ExampleGo",
+			"item": [
+				{
+					"name": "internal",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:44382/gateway/examplego/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "44382",
+							"path": [
+								"gateway",
+								"examplego",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "common",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/api/examplego/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"examplego",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
