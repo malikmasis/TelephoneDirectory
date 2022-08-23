@@ -1,0 +1,30 @@
+# tye application configuration file
+# read all about it at https://github.com/dotnet/tye
+#
+# when you've given us a try, we'd love to know what you think:
+#    https://aka.ms/AA7q20u
+#
+name: telephonedirectory
+services:
+- name: gateway-webapi
+  project: src/Global/Gateway.WebApi/Gateway.WebApi.csproj
+  bindings:
+    - protocol: http
+      port: 44382
+- name: telephonedirectory-saga
+  project: src/Global/TelephoneDirectory.Saga/TelephoneDirectory.Saga.csproj
+- name: telephonedirectory-auth
+  project: src/Microservices/Csharp/Auth/TelephoneDirectory.Auth/TelephoneDirectory.Auth.csproj
+  bindings:
+    - protocol: http
+      port: 44001
+- name: telephonedirectory-guide
+  project: src/Microservices/Csharp/Guide/TelephoneDirectory.Guide/TelephoneDirectory.Guide.csproj
+  bindings:
+    - protocol: http
+      port: 44337
+- name: telephonedirectory-report
+  project: src/Microservices/Csharp/Report/TelephoneDirectory.Report/TelephoneDirectory.Report.csproj
+  bindings:
+    - protocol: http
+      port: 44373
