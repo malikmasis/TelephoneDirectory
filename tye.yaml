@@ -28,3 +28,38 @@ services:
   bindings:
     - protocol: http
       port: 44373
+- name: guidedb
+  image: postgres
+  env:
+    - name: POSTGRES_USER
+      value: postgres
+    - name: POSTGRES_PASSWORD
+      value: admin
+    - name: POSTGRES_DB
+      value: PhoneGuide
+  bindings:
+    - port: 5432
+- name: reportdb
+  image: postgres
+  env:
+    - name: POSTGRES_USER
+      value: postgres
+    - name: POSTGRES_PASSWORD
+      value: admin
+    - name: POSTGRES_DB
+      value: PhoneReport
+  bindings:
+    - port: 5433
+- name: authdb
+  image: mcr.microsoft.com/mssql/server:2019-latest
+  env:
+    - name: SA_PASSWORD
+      value: Admin!23
+    - name: ACCEPT_EULA
+      value: 'Y'
+  volumes:
+    - name: authdb_volume
+      target: /var/opt/mssql
+  bindings:
+    - port: 1453
+      connectionString: Server=${host},${port};User Id=sa;Database=PhoneAuth;Password=${env:SA_PASSWORD};
