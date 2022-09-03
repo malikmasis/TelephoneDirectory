@@ -1,5 +1,5 @@
 ﻿# TelephoneDirectory
-microservices -> .net 6.0, golang - Docker, Jenkins, Ocelot, RabbitMq, MassTransit, Serilog, Elasticsearch, Kibana, Swagger / SwaggerForOcelot, Jwt, Postgresql, Mssql
+microservices -> .net 6.0, golang - [Docker](https://medium.com/software-development-turkey/docker-%C3%A7al%C4%B1%C5%9Fma-notlar%C4%B1m-be626fd14cc1), [Tye](https://medium.com/software-development-turkey/deneysel-bir-%C3%BCr%C3%BCn-project-tye-768e335527d2), Jenkins, [Ocelot](https://ocelot.readthedocs.io/en/latest/introduction/gettingstarted.html), RabbitMq, [MassTransit](https://masstransit-project.com/getting-started/), Serilog, Elasticsearch, Kibana, [Swagger / SwaggerForOcelot](https://feyyazacet.medium.com/swagger-ocelot-swaggerforocelot-1ec49bbf8790), Jwt, Postgresql, Mssql
 >If you want to read in detail in Turkish, please visit [here](https://medium.com/software-development-turkey/mikroservis-maceram-1e070463d0ea)
 
 ##### Running the project
