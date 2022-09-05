@@ -1,5 +1,5 @@
-﻿using System;
-using Automatonymous;
+﻿using MassTransit;
+using System;
 using TelephoneDirectory.Contracts;
 
 namespace TelephoneDirectory.Guide.StateMachines
@@ -27,42 +27,41 @@ namespace TelephoneDirectory.Guide.StateMachines
             Event(() => ReportCreated, x => x.CorrelateById(context => context.Message.CorrelationId));
             Event(() => ReportFailed, x => x.CorrelateById(context => context.Message.CorrelationId));
 
-            During(Initial, new Automatonymous.Binders.EventActivities<GuideSagaState>[] 
-            { 
+            During(Initial, new EventActivities<GuideSagaState>[]
+            {
                 When(CreateReportCommandReceived).Then(context =>
                 {
-                    context.Instance.ReportId = context.Data.ReportId;
+                    context.Saga.ReportId= context.MessageId.Value.ToString();
                 })
-                .Publish(ctx => new GuideRequestReceivedEvent(ctx.Instance))
+                .Publish(ctx => new GuideRequestReceivedEvent(ctx.Saga))
                 .TransitionTo(Submitted)
-                .ThenAsync(context => Console.Out.WriteLineAsync(context.Instance.ToString()))
+                .ThenAsync(context => Console.Out.WriteLineAsync(context.Saga.ToString()))
             });
 
-            During(Submitted, new Automatonymous.Binders.EventActivities<GuideSagaState>[] 
+            During(Submitted, new EventActivities<GuideSagaState>[]
             {
                 When(ReportRequestReceived)
                 .TransitionTo(Processed)
-                .ThenAsync(context => Console.Out.WriteLineAsync(context.Instance.ToString()))
+                .ThenAsync(context => Console.Out.WriteLineAsync(context.Saga.ToString()))
             });
 
-            During(Processed, new Automatonymous.Binders.EventActivities<GuideSagaState>[]
+            During(Processed, new EventActivities<GuideSagaState>[]
             {
                 When(ReportCreated).Then(context =>
                 {
-                    context.Instance.ReportId = context.Data.ReportId;
+                    context.Saga.ReportId = context.MessageId.Value.ToString();
                 })
-                .Publish(ctx => new GuideCreatedEvent(ctx.Instance)).Finalize()
-                .ThenAsync(context => Console.Out.WriteLineAsync(context.Instance.ToString())),
+                .Publish(ctx => new GuideCreatedEvent(ctx.Saga)).Finalize()
+                .ThenAsync(context => Console.Out.WriteLineAsync(context.Saga.ToString())),
 
                 When(ReportFailed).Then(context =>
                 {
-                    context.Instance.ReportId = context.Data.ReportId;
-
-                    context.Instance.FaultMessage = context.Data.FaultMessage;
-                    context.Instance.FaultTime = context.Data.FaultTime;
+                    context.Saga.ReportId = context.MessageId.Value.ToString();
+                    context.Saga.FaultMessage = context.Message.FaultMessage;
+                    context.Saga.FaultTime = context.Message.FaultTime;
                 })
-                .Publish(ctx => new GuideFailedEvent(ctx.Instance)).Finalize()
-                .ThenAsync(context => Console.Out.WriteLineAsync(context.Instance.ToString()))
+                .Publish(ctx => new GuideFailedEvent(ctx.Saga)).Finalize()
+                .ThenAsync(context => Console.Out.WriteLineAsync(context.Saga.ToString()))
             });
         }
     }
