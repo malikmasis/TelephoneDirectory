@@ -1,4 +1,3 @@
-using System.Text;
 using HealthChecks.UI.Client;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -11,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 using TelephoneDirectory.Contracts;
 using TelephoneDirectory.Guide.Data;
 
@@ -70,7 +70,8 @@ namespace TelephoneDirectory.Guide
             {
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(config =>
                 {
-                    config.UseHealthCheck(provider);
+                    //TODO configure it
+                    //config.UseHealthCheck(provider);
                     config.Host(Configuration["Rabbitmq:Url"], h =>
                      {
                          h.Username("guest");
@@ -81,7 +82,6 @@ namespace TelephoneDirectory.Guide
                 x.AddRequestClient<SubmitToken>();
 
             });
-            services.AddMassTransitHostedService();
 
             services
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
