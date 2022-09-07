@@ -22,6 +22,7 @@ namespace TelephoneDirectory.Report.Consumers
             {
                 throw new InvalidOperationException("The person was not valid");
             }
+            //TODO : Need fallback
             await _reportService.Save(new CancellationTokenSource().Token);
         }
     }

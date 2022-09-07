@@ -88,8 +88,8 @@ namespace TelephoneDirectory.Report
                     //cfg.UseHealthCheck(provider);
                     cfg.Host(Configuration["Rabbitmq:Url"], h =>
                     {
-                        h.Username("guest");
-                        h.Password("guest");
+                        h.Username(Configuration["Rabbitmq:Username"]);
+                        h.Password(Configuration["Rabbitmq:Password"]);
                     });
                     cfg.ReceiveEndpoint("ticketQueue", ep =>
                     {

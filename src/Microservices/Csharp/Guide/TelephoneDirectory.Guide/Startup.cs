@@ -74,8 +74,8 @@ namespace TelephoneDirectory.Guide
                     //config.UseHealthCheck(provider);
                     config.Host(Configuration["Rabbitmq:Url"], h =>
                      {
-                         h.Username("guest");
-                         h.Password("guest");
+                         h.Username(Configuration["Rabbitmq:Username"]);
+                         h.Password(Configuration["Rabbitmq:Password"]);
                      });
                 }));
 
