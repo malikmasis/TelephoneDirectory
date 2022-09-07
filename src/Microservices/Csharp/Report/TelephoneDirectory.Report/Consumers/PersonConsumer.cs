@@ -1,7 +1,6 @@
-﻿using System;
-using System.Threading;
+﻿using MassTransit;
+using System;
 using System.Threading.Tasks;
-using MassTransit;
 using TelephoneDirectory.Contracts;
 using TelephoneDirectory.Report.Interfaces;
 
@@ -22,8 +21,8 @@ namespace TelephoneDirectory.Report.Consumers
             {
                 throw new InvalidOperationException("The person was not valid");
             }
-            //TODO : Need fallback
-            await _reportService.Save(new CancellationTokenSource().Token);
+
+            await _reportService.Save();
         }
     }
 }
