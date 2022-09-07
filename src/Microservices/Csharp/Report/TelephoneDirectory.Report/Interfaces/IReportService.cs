@@ -5,6 +5,6 @@ namespace TelephoneDirectory.Report.Interfaces
 {
     public interface IReportService
     {
-        Task Save(CancellationToken cancellationToken);
+        Task Save(CancellationToken cancellationToken = default);
     }
 }
