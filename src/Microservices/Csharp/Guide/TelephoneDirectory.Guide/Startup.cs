@@ -10,8 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System;
 using System.Text;
-using TelephoneDirectory.Contracts;
 using TelephoneDirectory.Guide.Data;
 
 namespace TelephoneDirectory.Guide
@@ -54,14 +54,14 @@ namespace TelephoneDirectory.Guide
                 {
                     {
                           new OpenApiSecurityScheme
-                            {
+                          {
                                 Reference = new OpenApiReference
                                 {
                                     Type = ReferenceType.SecurityScheme,
                                     Id = "Bearer"
                                 }
-                            },
-                            new string[] {}
+                          },
+                          Array.Empty<string>()
                     }
                 });
             });
@@ -70,17 +70,12 @@ namespace TelephoneDirectory.Guide
             {
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(config =>
                 {
-                    //TODO configure it
-                    //config.UseHealthCheck(provider);
                     config.Host(Configuration["Rabbitmq:Url"], h =>
                      {
                          h.Username(Configuration["Rabbitmq:Username"]);
                          h.Password(Configuration["Rabbitmq:Password"]);
                      });
                 }));
-
-                x.AddRequestClient<SubmitToken>();
-
             });
 
             services

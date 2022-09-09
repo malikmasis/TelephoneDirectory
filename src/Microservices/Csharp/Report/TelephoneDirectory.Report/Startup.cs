@@ -61,14 +61,14 @@ namespace TelephoneDirectory.Report
                 {
                     {
                           new OpenApiSecurityScheme
-                            {
+                          {
                                 Reference = new OpenApiReference
                                 {
                                     Type = ReferenceType.SecurityScheme,
                                     Id = "Bearer"
                                 }
-                            },
-                            new string[] {}
+                          },
+                          Array.Empty<string>()
 
                     }
                 });
@@ -84,8 +84,6 @@ namespace TelephoneDirectory.Report
 
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
-                    //TODO config it 
-                    //cfg.UseHealthCheck(provider);
                     cfg.Host(Configuration["Rabbitmq:Url"], h =>
                     {
                         h.Username(Configuration["Rabbitmq:Username"]);
@@ -112,13 +110,6 @@ namespace TelephoneDirectory.Report
                         ep.ConfigureConsumer<ReportFailedConsumer>(provider);
 
                     });
-
-                    //cfg.ReceiveEndpoint("registerorder.service", rs =>
-                    //{
-                    //    rs.ConfigureConsumer<ReportRequestReceivedConsumer>(provider);
-                    //    rs.ConfigureConsumer<ReportCreatedConsumer>(provider);
-                    //    rs.ConfigureConsumer<ReportFailedConsumer>(provider);
-                    //});
                 }));
             });
 
@@ -129,17 +120,18 @@ namespace TelephoneDirectory.Report
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,
-                        ValidateAudience = true, 
-                        ValidateLifetime = true,  
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
 
-                        ValidIssuer = Configuration["Jwt:Issuer"], 
-                        ValidAudience = Configuration["Jwt:Issuer"], 
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"])) 
+                        ValidIssuer = Configuration["Jwt:Issuer"],
+                        ValidAudience = Configuration["Jwt:Issuer"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                     };
                 });
 
             services.AddControllers();
+
             services.AddHealthChecks()
                 .AddNpgSql(Configuration["ConnectionStrings:DefaultConnection"]);
         }
