@@ -1,10 +1,16 @@
-# tye application configuration file
-# read all about it at https://github.com/dotnet/tye
-#
-# when you've given us a try, we'd love to know what you think:
-#    https://aka.ms/AA7q20u
-#
 name: telephonedirectory
+extensions:
+- name: dapr
+  components-path: "./"
+  services:
+    telephonedirectory-guide:
+      http-port: 7002
+      grpc-port: 7003
+    telephonedirectory-report:
+      http-port: 8002
+      grpc-port: 8003
+      enabled: true
+      
 services:
 - name: gateway-webapi
   project: src/Global/Gateway.WebApi/Gateway.WebApi.csproj
@@ -63,3 +69,8 @@ services:
   bindings:
     - port: 1453
       connectionString: Server=${host},${port};User Id=sa;Database=PhoneAuth;Password=${env:SA_PASSWORD};
+- name: redis
+  image: redis
+  bindings:
+    - port: 6973
+      containerPort: 6379
