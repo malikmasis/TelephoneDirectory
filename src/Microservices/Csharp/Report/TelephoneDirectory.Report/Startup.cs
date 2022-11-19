@@ -18,6 +18,8 @@ using TelephoneDirectory.Report.Consumers;
 using TelephoneDirectory.Report.Data;
 using TelephoneDirectory.Report.Interfaces;
 using TelephoneDirectory.Report.Services;
+using Dapr;
+using Dapr.Client;
 
 namespace TelephoneDirectory.Report
 {
@@ -130,13 +132,15 @@ namespace TelephoneDirectory.Report
                     };
                 });
 
-            services.AddControllers();
+            services.AddEndpointsApiExplorer();
+            
+            services.AddControllers().AddDapr();
 
             services.AddHealthChecks()
                 .AddNpgSql(Configuration["ConnectionStrings:DefaultConnection"]);
         }
 
-        public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public virtual void Configure(IApplicationBuilder app,  IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -151,7 +155,9 @@ namespace TelephoneDirectory.Report
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            
+            app.UseCloudEvents();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
@@ -160,6 +166,7 @@ namespace TelephoneDirectory.Report
                     Predicate = _ => true,
                     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
                 });
+                endpoints.MapSubscribeHandler();
             });
         }
     }

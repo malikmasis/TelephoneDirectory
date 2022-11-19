@@ -1,9 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using Dapr;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
+using TelephoneDirectory.Contracts;
 using TelephoneDirectory.Report.Command;
 
 namespace TelephoneDirectory.Report.Controllers
@@ -64,5 +66,13 @@ namespace TelephoneDirectory.Report.Controllers
             }
         }
 
+        [Topic("pubsub", "PersonDeleted")]
+        [HttpPost("PersonDeleted")]
+        public ActionResult AddProduct(PersonDto personDto)
+        {
+            Console.WriteLine($"Deleted Person Id: {personDto.Id}");
+
+            return Ok();
+        }
     }
 }
