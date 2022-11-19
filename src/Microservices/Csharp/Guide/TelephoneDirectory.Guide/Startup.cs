@@ -99,6 +99,8 @@ namespace TelephoneDirectory.Guide
 
             services.AddHealthChecks()
                 .AddNpgSql(Configuration["ConnectionStrings:DefaultConnection"]);
+
+            services.AddDaprClient();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

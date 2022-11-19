@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using Dapr.Client;
 using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,12 +21,14 @@ namespace TelephoneDirectory.Guide.Controllers
         private readonly ILogger<GuideController> _logger;
         private readonly IBus _bus;
         private readonly IGuideDbContext _context;
+        private readonly DaprClient _daprClient;
 
-        public GuideController(IGuideDbContext context, IBus bus, ILogger<GuideController> logger)
+        public GuideController(IGuideDbContext context, IBus bus, DaprClient daprClient, ILogger<GuideController> logger)
         {
-            _logger = logger;
             _context = context;
             _bus = bus;
+            _daprClient = daprClient;
+            _logger = logger;
         }
 
         [Authorize]
@@ -79,9 +83,18 @@ namespace TelephoneDirectory.Guide.Controllers
                     return NoContent();
                 }
                 _context.Persons.Remove(person);
-                await _context.SaveChangesAsync();
+                int result = await _context.SaveChangesAsync();
+                if (result > 0)
+                {
+                    PersonDto personDto = new()
+                    {
+                        Id = person.Id
+                    };
+                    await _daprClient.PublishEventAsync("pubsub", "PersonDeleted", personDto);
+                    return Ok(person.Id);
+                }
 
-                return Ok(person.Id);
+                return BadRequest("Cannot delete properly");
             }
             catch (Exception ex)
             {
