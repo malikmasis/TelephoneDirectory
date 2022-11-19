@@ -30,7 +30,9 @@
     <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="8.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.3.1" />
-    <PackageReference Include="MassTransit" Version="8.0.6" />
+	<PackageReference Include="MassTransit" Version="8.0.6" />
+	<PackageReference Include="Dapr.Client" Version="1.9.0" />
+    <PackageReference Include="Dapr.AspNetCore" Version="1.9.0" />
   </ItemGroup>
 
   <ItemGroup>
