@@ -1,6 +1,8 @@
 ﻿# TelephoneDirectory
-microservices -> .net 6.0, golang - [Docker](https://medium.com/software-development-turkey/docker-%C3%A7al%C4%B1%C5%9Fma-notlar%C4%B1m-be626fd14cc1), [Tye](https://medium.com/software-development-turkey/deneysel-bir-%C3%BCr%C3%BCn-project-tye-768e335527d2), Jenkins, [Ocelot](https://ocelot.readthedocs.io/en/latest/introduction/gettingstarted.html), RabbitMq, [MassTransit](https://medium.com/software-development-turkey/lightweight-service-bus-masstransit-1c31c7a6e483), Serilog, Elasticsearch, Kibana, [Swagger / SwaggerForOcelot](https://feyyazacet.medium.com/swagger-ocelot-swaggerforocelot-1ec49bbf8790), Jwt, Postgresql, Mssql
+microservices -> .net 6.0, golang - [Docker](https://medium.com/software-development-turkey/docker-%C3%A7al%C4%B1%C5%9Fma-notlar%C4%B1m-be626fd14cc1), [Tye](https://medium.com/software-development-turkey/deneysel-bir-%C3%BCr%C3%BCn-project-tye-768e335527d2),[Dapr](https://malikmasis.blogspot.com/2022/11/dapr-ile-bagmsz-servisler.html), Jenkins, [Ocelot](https://ocelot.readthedocs.io/en/latest/introduction/gettingstarted.html), RabbitMq, [MassTransit](https://medium.com/software-development-turkey/lightweight-service-bus-masstransit-1c31c7a6e483), Serilog, Elasticsearch, Kibana, [Swagger / SwaggerForOcelot](https://feyyazacet.medium.com/swagger-ocelot-swaggerforocelot-1ec49bbf8790), Jwt, Postgresql, Mssql
 >If you want to read in detail in Turkish, please visit [here](https://medium.com/software-development-turkey/mikroservis-maceram-1e070463d0ea)
+
+> [Summary of the project - video - Turkish](https://www.youtube.com/watch?v=uXuOKL1cxIE&t=3s&ab_channel=MalikMasis) 
 
 ##### Running the project
 
@@ -39,6 +41,10 @@ Thanks to the `docker-compose.yml` file, both the tools used and the databases w
 ```
 * docker-compose up -d
 ```
+Or
+```
+* tye run
+```
 
 ##### Testing
 
@@ -48,8 +54,8 @@ Thanks to the `docker-compose.yml` file, both the tools used and the databases w
 [Unit testing in general - blog - Turkish](https://medium.com/software-development-turkey/birim-unit-test-ile-veri-k%C3%BCmeleri-xunit-inline-member-class-data-601b3fb4e723) <br /> 
 [Mocking in unit testing  - video - Turkish](https://www.youtube.com/watch?v=6oxNumwFmR0&t=1s&ab_channel=MalikMasis)
 <br />
-
 - Integration Test:
 
 [Integration testing in general - blog - Turkish](https://medium.com/software-development-turkey/integration-test-net-core-xunit-web-application-factory-600ca6a52223) <br />
 [Integration testing in general - video - Turkish](https://www.youtube.com/watch?v=My0FdMKq2JA&t=4s&ab_channel=MalikMasis)
+
