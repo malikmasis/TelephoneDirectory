@@ -2,14 +2,13 @@
 
 namespace TelephoneDirectory.Contracts
 {
-    //TODO make record for best practices
-    public interface OrderSubmissionRejected
+    public record OrderSubmissionRejected
     {
-        Guid CorrelationId { get; }
-        Guid OrderId { get; }
-        string Reason { get; }
-        string ReportId { get; }
-        string FaultMessage { get; }
-        DateTime FaultTime { get; }
+        public Guid CorrelationId { get; }
+        public Guid OrderId { get; }
+        public string Reason { get; }
+        public string ReportId { get; }
+        public string FaultMessage { get; }
+        public DateTime FaultTime { get; }
     }
 }

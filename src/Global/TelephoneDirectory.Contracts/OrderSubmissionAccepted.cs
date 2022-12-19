@@ -2,9 +2,9 @@
 
 namespace TelephoneDirectory.Contracts
 {
-    public interface OrderSubmissionAccepted
+    public record OrderSubmissionAccepted
     {
-        string ReportId { get; }
-        Guid CorrelationId { get; }
+        public string ReportId { get; }
+        public Guid CorrelationId { get; }
     }
 }

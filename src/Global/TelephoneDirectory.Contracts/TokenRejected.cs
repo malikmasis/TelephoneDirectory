@@ -1,8 +1,8 @@
 namespace TelephoneDirectory.Contracts
 {
-    public interface TokenRejected : BaseContract
+    public record TokenRejected : BaseContract
     {
-        string Token { get; }
-        string Reason { get; }
+        public string Token { get; }
+        public string Reason { get; }
     }
 }

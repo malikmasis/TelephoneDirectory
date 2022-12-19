@@ -1,7 +1,7 @@
 namespace TelephoneDirectory.Contracts
 {
-    public interface SubmitToken : BaseContract
+    public record SubmitToken : BaseContract
     {
-        string Token { get; }
+        public string Token { get; }
     }
 }

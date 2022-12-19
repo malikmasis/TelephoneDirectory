@@ -1,6 +1,6 @@
 namespace TelephoneDirectory.Contracts
 {
-    public interface TokenAccepted : BaseContract
+    public record TokenAccepted : BaseContract
     {
     }
 }

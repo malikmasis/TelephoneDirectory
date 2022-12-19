@@ -2,9 +2,9 @@
 
 namespace TelephoneDirectory.Contracts
 {
-    public interface BaseContract
+    public record BaseContract
     {
-        Guid EventId { get; }
-        DateTime Timestamp { get; }
+        public Guid EventId { get; }
+        public DateTime Timestamp { get; }
     }
 }

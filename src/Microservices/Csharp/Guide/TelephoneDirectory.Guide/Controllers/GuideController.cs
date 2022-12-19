@@ -1,12 +1,11 @@
-﻿using System;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
-using Dapr.Client;
+﻿using Dapr.Client;
 using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 using TelephoneDirectory.Contracts;
 using TelephoneDirectory.Guide.Data;
 using TelephoneDirectory.Guide.Entities;
@@ -154,7 +153,7 @@ namespace TelephoneDirectory.Guide.Controllers
                 if (person == null)
                 {
                     await Task.CompletedTask;
-                    throw new ArgumentException(nameof(person));
+                    throw new ArgumentNullException(nameof(person));
                 }
                 _context.Persons.Add(person);
                 int result = await _context.SaveChangesAsync();
