@@ -1,4 +1,6 @@
-namespace TelephoneDirectory.Contracts
+using TelephoneDirectory.Contracts.Base;
+
+namespace TelephoneDirectory.Contracts.Eto
 {
     public record SubmitToken : BaseContract
     {

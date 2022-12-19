@@ -1,6 +1,6 @@
 using MassTransit;
 using System.Threading.Tasks;
-using TelephoneDirectory.Contracts;
+using TelephoneDirectory.Contracts.Eto;
 
 namespace TelephoneDirectory.Report.Consumers
 {

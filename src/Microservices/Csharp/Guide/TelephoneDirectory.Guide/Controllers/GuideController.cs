@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
-using TelephoneDirectory.Contracts;
+using TelephoneDirectory.Contracts.Abstraction;
+using TelephoneDirectory.Contracts.Dto;
 using TelephoneDirectory.Guide.Data;
 using TelephoneDirectory.Guide.Entities;
 using TelephoneDirectory.Guide.Models;
@@ -75,7 +76,7 @@ namespace TelephoneDirectory.Guide.Controllers
         {
             try
             {
-                var person = await _context.Persons.FindAsync(new object[] { id });
+                var person = await _context.Persons.FindAsync(new long[] { id });
 
                 if (person == null)
                 {

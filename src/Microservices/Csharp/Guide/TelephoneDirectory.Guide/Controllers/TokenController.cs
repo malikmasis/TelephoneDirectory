@@ -2,7 +2,7 @@
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using TelephoneDirectory.Contracts;
+using TelephoneDirectory.Contracts.Eto;
 
 namespace TelephoneDirectory.Guide.Controllers
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TelephoneDirectory.Contracts
+namespace TelephoneDirectory.Contracts.Abstraction
 {
     public interface IGuideRequestReceivedEvent
     {
