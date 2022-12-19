@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace TelephoneDirectory.Contracts
+namespace TelephoneDirectory.Contracts.Abstraction
 {
-    public interface IGuideFailedEvent
+    public interface IGuideCreatedEvent
     {
         Guid CorrelationId { get; }
         string ReportId { get; }

@@ -1,5 +1,5 @@
 ﻿using System;
-using TelephoneDirectory.Contracts;
+using TelephoneDirectory.Contracts.Abstraction;
 
 namespace TelephoneDirectory.Guide.Models
 {

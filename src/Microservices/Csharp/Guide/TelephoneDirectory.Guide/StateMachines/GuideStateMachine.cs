@@ -1,6 +1,7 @@
 ﻿using MassTransit;
 using System;
-using TelephoneDirectory.Contracts;
+using TelephoneDirectory.Contracts.Abstraction;
+using TelephoneDirectory.Contracts.Eto;
 
 namespace TelephoneDirectory.Guide.StateMachines
 {

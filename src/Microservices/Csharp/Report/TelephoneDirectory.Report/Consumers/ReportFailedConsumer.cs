@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using MassTransit;
-using TelephoneDirectory.Contracts;
+using TelephoneDirectory.Contracts.Abstraction;
 
 namespace TelephoneDirectory.Report.Consumers
 {
