@@ -1,24 +1,23 @@
-﻿using System.Threading;
+﻿using MediatR;
+using System.Threading;
 using System.Threading.Tasks;
-using MediatR;
 using TelephoneDirectory.Report.Command;
 using TelephoneDirectory.Report.Data;
 using TelephoneDirectory.Report.Entities;
 
-namespace TelephoneDirectory.Report.Handler
+namespace TelephoneDirectory.Report.Handler;
+
+public class GetOrderCommandHandler : IRequestHandler<GetReportOutputCommand, ReportOutput>
 {
-    public class GetOrderCommandHandler : IRequestHandler<GetReportOutputCommand, ReportOutput>
+    private readonly IReportDbContext _context;
+
+    public GetOrderCommandHandler(IReportDbContext context)
     {
-        private readonly IReportDbContext _context;
+        _context = context;
+    }
 
-        public GetOrderCommandHandler(IReportDbContext context)
-        {
-            _context = context;
-        }
-
-        public async Task<ReportOutput> Handle(GetReportOutputCommand request, CancellationToken cancellationToken)
-        {
-            return await _context.Reports.FindAsync(new object[] { request.Id });
-        }
+    public async Task<ReportOutput> Handle(GetReportOutputCommand request, CancellationToken cancellationToken)
+    {
+        return await _context.Reports.FindAsync(new object[] { request.Id });
     }
 }

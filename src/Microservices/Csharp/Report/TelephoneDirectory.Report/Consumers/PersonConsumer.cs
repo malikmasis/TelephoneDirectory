@@ -4,25 +4,24 @@ using System.Threading.Tasks;
 using TelephoneDirectory.Contracts.Dto;
 using TelephoneDirectory.Report.Interfaces;
 
-namespace TelephoneDirectory.Report.Consumers
+namespace TelephoneDirectory.Report.Consumers;
+
+public sealed class PersonConsumer : IConsumer<PersonDto>
 {
-    public sealed class PersonConsumer : IConsumer<PersonDto>
+    private readonly IReportService _reportService;
+    public PersonConsumer(IReportService reportService)
     {
-        private readonly IReportService _reportService;
-        public PersonConsumer(IReportService reportService)
+        _reportService = reportService;
+    }
+
+    public async Task Consume(ConsumeContext<PersonDto> context)
+    {
+        PersonDto data = context.Message;
+        if (data == null)
         {
-            _reportService = reportService;
+            throw new InvalidOperationException("The person was not valid");
         }
 
-        public async Task Consume(ConsumeContext<PersonDto> context)
-        {
-            PersonDto data = context.Message;
-            if (data == null)
-            {
-                throw new InvalidOperationException("The person was not valid");
-            }
-
-            await _reportService.Save();
-        }
+        await _reportService.Save();
     }
 }

@@ -1,12 +1,11 @@
-﻿using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using TelephoneDirectory.Auth.Entities;
 
-namespace TelephoneDirectory.Auth.Data
+namespace TelephoneDirectory.Auth.Data;
+
+public interface IAuthDbContext
 {
-    public interface IAuthDbContext
-    {
-        DbSet<UserAccount> UserAccounts { get; set; }
-        Task<int> SaveChangesAsync();
-    }
+    DbSet<UserAccount> UserAccounts { get; set; }
+    Task<int> SaveChangesAsync();
 }

@@ -1,9 +1,8 @@
 ﻿using TelephoneDirectory.Auth.Models;
 
-namespace TelephoneDirectory.Auth.Interfaces
+namespace TelephoneDirectory.Auth.Interfaces;
+
+public interface ILoginService
 {
-    public interface ILoginService
-    {
-        bool IsAuth(UserModel userModel);
-    }
+    bool IsAuth(UserModel userModel);
 }

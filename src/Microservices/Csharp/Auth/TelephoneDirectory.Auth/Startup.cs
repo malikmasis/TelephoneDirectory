@@ -12,68 +12,67 @@ using TelephoneDirectory.Auth.Handler;
 using TelephoneDirectory.Auth.Interfaces;
 using TelephoneDirectory.Auth.Services;
 
-namespace TelephoneDirectory.Auth
+namespace TelephoneDirectory.Auth;
+
+public class Startup
 {
-    public class Startup
+    public IConfiguration Configuration { get; }
+    public Startup(IConfiguration configuration)
     {
-        public IConfiguration Configuration { get; }
-        public Startup(IConfiguration configuration)
+        Configuration = configuration;
+    }
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddDbContext<AuthDbContext>(options =>
+           options.UseSqlServer(
+               Configuration.GetConnectionString("DefaultConnection"),
+               b =>
+               {
+                   b.MigrationsAssembly(typeof(AuthDbContext).Assembly.FullName);
+                   b.EnableRetryOnFailure();
+               }));
+
+        services.AddScoped<IAuthDbContext>(provider => provider.GetService<AuthDbContext>());
+        services.AddScoped<ILoginService, LoginService>();
+        services.AddScoped<IJwtHandler, JwtHandler>();
+
+        services.AddSwaggerGen(c =>
         {
-            Configuration = configuration;
-        }
-
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddDbContext<AuthDbContext>(options =>
-               options.UseSqlServer(
-                   Configuration.GetConnectionString("DefaultConnection"),
-                   b =>
-                   {
-                       b.MigrationsAssembly(typeof(AuthDbContext).Assembly.FullName);
-                       b.EnableRetryOnFailure();
-                   }));
-
-            services.AddScoped<IAuthDbContext>(provider => provider.GetService<AuthDbContext>());
-            services.AddScoped<ILoginService, LoginService>();
-            services.AddScoped<IJwtHandler, JwtHandler>();
-
-            services.AddSwaggerGen(c =>
+            c.SwaggerDoc("v1", new OpenApiInfo
             {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "Auth Microservice API",
-                });
+                Version = "v1",
+                Title = "Auth Microservice API",
             });
+        });
 
-            services.AddControllers();
+        services.AddControllers();
 
-            services.AddHealthChecks()
-                .AddSqlServer(Configuration["ConnectionStrings:DefaultConnection"]);
-        }
+        services.AddHealthChecks()
+            .AddSqlServer(Configuration["ConnectionStrings:DefaultConnection"]);
+    }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        if (env.IsDevelopment())
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Auth.API v1"));
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
-                {
-                    Predicate = _ => true,
-                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                });
-            });
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Auth.API v1"));
         }
+
+        app.UseHttpsRedirection();
+
+        app.UseRouting();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+            endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
+            {
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
+        });
     }
 }

@@ -1,6 +1,5 @@
-﻿namespace TelephoneDirectory.Report.Interfaces
+﻿namespace TelephoneDirectory.Report.Interfaces;
+
+public interface IBaseReportService
 {
-    public interface IBaseReportService
-    {
-    }
 }

@@ -1,10 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace TelephoneDirectory.Report.Interfaces
+namespace TelephoneDirectory.Report.Interfaces;
+
+public interface IReportService
 {
-    public interface IReportService
-    {
-        Task Save(CancellationToken cancellationToken = default);
-    }
+    Task Save(CancellationToken cancellationToken = default);
 }

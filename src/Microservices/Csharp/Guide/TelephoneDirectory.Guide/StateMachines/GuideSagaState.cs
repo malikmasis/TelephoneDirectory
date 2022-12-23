@@ -1,15 +1,14 @@
 ﻿using MassTransit;
 using System;
 
-namespace TelephoneDirectory.Guide.StateMachines
-{
-    public class GuideSagaState : SagaStateMachineInstance
-    {
-        public Guid CorrelationId { get; set; }
+namespace TelephoneDirectory.Guide.StateMachines;
 
-        public State CurrentState { get; set; }
-        public string ReportId { get; set; }
-        public string FaultMessage { get; set; }
-        public DateTime FaultTime { get; set; }
-    }
+public class GuideSagaState : SagaStateMachineInstance
+{
+    public Guid CorrelationId { get; set; }
+
+    public State CurrentState { get; set; }
+    public string ReportId { get; set; }
+    public string FaultMessage { get; set; }
+    public DateTime FaultTime { get; set; }
 }
