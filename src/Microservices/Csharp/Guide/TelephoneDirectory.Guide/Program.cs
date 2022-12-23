@@ -8,50 +8,49 @@ using Serilog.Sinks.Elasticsearch;
 using System;
 using TelephoneDirectory.Guide.Data;
 
-namespace TelephoneDirectory.Guide
+namespace TelephoneDirectory.Guide;
+
+public static class Program
 {
-    public static class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
+        ConfigureLogging();
+
+        var host = CreateHostBuilder(args).Build();
+        using (var scope = host.Services.CreateScope())
         {
-            ConfigureLogging();
-
-            var host = CreateHostBuilder(args).Build();
-            using (var scope = host.Services.CreateScope())
-            {
-                var db = scope.ServiceProvider.GetRequiredService<GuideDbContext>();
-                db.Database.Migrate();
-            }
-            host.Run();
+            var db = scope.ServiceProvider.GetRequiredService<GuideDbContext>();
+            db.Database.Migrate();
         }
-        private static void ConfigureLogging()
-        {
-            var configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true)
-                .Build();
-
-            Log.Logger = new LoggerConfiguration()
-                .Enrich.FromLogContext()
-                .Enrich.WithMachineName()
-                .Enrich.WithProperty("Application", "Guide")
-                .WriteTo.Debug()
-                .WriteTo.Console()
-                .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(configuration["ElasticConfiguration:Uri"]))
-                {
-                    AutoRegisterTemplate = true,
-                    IndexFormat = "guide-api-log-{0:yyyy.MM.dd}"
-                })
-                .CreateLogger();
-
-        }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                })
-                .UseSerilog();
+        host.Run();
     }
+    private static void ConfigureLogging()
+    {
+        var configuration = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true)
+            .Build();
+
+        Log.Logger = new LoggerConfiguration()
+            .Enrich.FromLogContext()
+            .Enrich.WithMachineName()
+            .Enrich.WithProperty("Application", "Guide")
+            .WriteTo.Debug()
+            .WriteTo.Console()
+            .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(configuration["ElasticConfiguration:Uri"]))
+            {
+                AutoRegisterTemplate = true,
+                IndexFormat = "guide-api-log-{0:yyyy.MM.dd}"
+            })
+            .CreateLogger();
+
+    }
+
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            })
+            .UseSerilog();
 }

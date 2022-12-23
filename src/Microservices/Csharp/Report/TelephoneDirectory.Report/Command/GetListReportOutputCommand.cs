@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using MediatR;
+﻿using MediatR;
+using System.Collections.Generic;
 using TelephoneDirectory.Report.Entities;
 
-namespace TelephoneDirectory.Report.Command
+namespace TelephoneDirectory.Report.Command;
+
+public class GetListReportOutputCommand : IRequest<List<ReportOutput>>
 {
-    public class GetListReportOutputCommand : IRequest<List<ReportOutput>>
-    {
-        public List<ReportOutput> ReportOutputs { get; set; }
-    }
+    public List<ReportOutput> ReportOutputs { get; set; }
 }

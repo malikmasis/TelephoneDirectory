@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace TelephoneDirectory.Contracts.Base
+namespace TelephoneDirectory.Contracts.Base;
+
+public record BaseContract
 {
-    public record BaseContract
-    {
-        public Guid EventId { get; }
-        public DateTime Timestamp { get; }
-    }
+    public Guid EventId { get; }
+    public DateTime Timestamp { get; }
 }

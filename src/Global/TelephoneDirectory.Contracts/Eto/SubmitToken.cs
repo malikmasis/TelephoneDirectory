@@ -1,9 +1,8 @@
 using TelephoneDirectory.Contracts.Base;
 
-namespace TelephoneDirectory.Contracts.Eto
+namespace TelephoneDirectory.Contracts.Eto;
+
+public record SubmitToken : BaseContract
 {
-    public record SubmitToken : BaseContract
-    {
-        public string Token { get; }
-    }
+    public string Token { get; }
 }

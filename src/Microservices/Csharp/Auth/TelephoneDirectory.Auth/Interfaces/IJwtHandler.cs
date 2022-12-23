@@ -1,7 +1,6 @@
-﻿namespace TelephoneDirectory.Auth.Interfaces
+﻿namespace TelephoneDirectory.Auth.Interfaces;
+
+public interface IJwtHandler
 {
-    public interface IJwtHandler
-    {
-        string GenerateJSONWebToken();
-    }
+    string GenerateJSONWebToken();
 }

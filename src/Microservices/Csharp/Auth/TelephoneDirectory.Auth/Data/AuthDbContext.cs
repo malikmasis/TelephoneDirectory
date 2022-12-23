@@ -1,27 +1,26 @@
-﻿using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using TelephoneDirectory.Auth.Entities;
 
-namespace TelephoneDirectory.Auth.Data
+namespace TelephoneDirectory.Auth.Data;
+
+public class AuthDbContext : DbContext, IAuthDbContext
 {
-    public class AuthDbContext : DbContext, IAuthDbContext
+
+    public AuthDbContext(DbContextOptions<AuthDbContext> options)
+        : base(options)
     {
+    }
 
-        public AuthDbContext(DbContextOptions<AuthDbContext> options)
-            : base(options)
-        {
-        }
+    public DbSet<UserAccount> UserAccounts { get; set; }
 
-        public DbSet<UserAccount> UserAccounts { get; set; }
+    public async Task<int> SaveChangesAsync()
+    {
+        return await base.SaveChangesAsync();
+    }
 
-        public async Task<int> SaveChangesAsync()
-        {
-            return await base.SaveChangesAsync();
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<UserAccount>().HasData(new UserAccount[] { new UserAccount { Id = 1, UserName = "admin", Password = "admin" } });
-        }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<UserAccount>().HasData(new UserAccount[] { new UserAccount { Id = 1, UserName = "admin", Password = "admin" } });
     }
 }

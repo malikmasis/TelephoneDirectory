@@ -2,21 +2,20 @@
 using System.Threading.Tasks;
 using TelephoneDirectory.Report.Entities;
 
-namespace TelephoneDirectory.Report.Data
+namespace TelephoneDirectory.Report.Data;
+
+public class ReportDbContext : DbContext, IReportDbContext
 {
-    public class ReportDbContext : DbContext, IReportDbContext
+
+    public ReportDbContext(DbContextOptions<ReportDbContext> options)
+        : base(options)
     {
+    }
 
-        public ReportDbContext(DbContextOptions<ReportDbContext> options)
-            : base(options)
-        {
-        }
+    public DbSet<ReportOutput> Reports { get; set; }
 
-        public DbSet<ReportOutput> Reports { get; set; }
-
-        public async Task<int> SaveChangesAsync()
-        {
-            return await base.SaveChangesAsync();
-        }
+    public async Task<int> SaveChangesAsync()
+    {
+        return await base.SaveChangesAsync();
     }
 }

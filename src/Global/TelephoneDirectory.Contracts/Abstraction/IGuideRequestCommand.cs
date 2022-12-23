@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace TelephoneDirectory.Contracts.Abstraction
+namespace TelephoneDirectory.Contracts.Abstraction;
+
+public interface IGuideRequestCommand
 {
-    public interface IGuideRequestCommand
-    {
-        string ReportId { get; set; }
-        DateTime RequestTime { get; set; }
-    }
+    string ReportId { get; set; }
+    DateTime RequestTime { get; set; }
 }

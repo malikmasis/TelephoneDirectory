@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace TelephoneDirectory.Contracts.Abstraction
+namespace TelephoneDirectory.Contracts.Abstraction;
+
+public interface IGuideCreatedEvent
 {
-    public interface IGuideCreatedEvent
-    {
-        Guid CorrelationId { get; }
-        string ReportId { get; }
-    }
+    Guid CorrelationId { get; }
+    string ReportId { get; }
 }

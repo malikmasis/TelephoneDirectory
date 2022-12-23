@@ -1,7 +1,6 @@
-﻿namespace TelephoneDirectory.Contracts.Dto
+﻿namespace TelephoneDirectory.Contracts.Dto;
+
+public record PersonDto
 {
-    public record PersonDto
-    {
-        public long Id { get; set; }
-    }
+    public long Id { get; set; }
 }

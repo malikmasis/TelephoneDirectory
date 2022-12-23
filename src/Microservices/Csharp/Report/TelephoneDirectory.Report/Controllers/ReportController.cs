@@ -8,71 +8,70 @@ using System.Threading.Tasks;
 using TelephoneDirectory.Contracts.Dto;
 using TelephoneDirectory.Report.Command;
 
-namespace TelephoneDirectory.Report.Controllers
+namespace TelephoneDirectory.Report.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class ReportController : ControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ReportController : ControllerBase
+    private readonly ILogger<ReportController> _logger;
+    private readonly IMediator _mediator;
+
+    public ReportController(ILogger<ReportController> logger, IMediator mediator)
     {
-        private readonly ILogger<ReportController> _logger;
-        private readonly IMediator _mediator;
+        _logger = logger;
+        _mediator = mediator;
+    }
 
-        public ReportController(ILogger<ReportController> logger, IMediator mediator)
+    [HttpGet("getall")]
+    public async Task<IActionResult> GetAll()
+    {
+        try
         {
-            _logger = logger;
-            _mediator = mediator;
+            var reports = await _mediator.Send(new GetListReportOutputCommand());
+            if (reports == null)
+            {
+                return NoContent();
+            }
+            return Ok(reports);
         }
-
-        [HttpGet("getall")]
-        public async Task<IActionResult> GetAll()
+        catch (Exception ex)
         {
-            try
-            {
-                var reports = await _mediator.Send(new GetListReportOutputCommand());
-                if (reports == null)
-                {
-                    return NoContent();
-                }
-                return Ok(reports);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Unexpectedd error: {ex.Message}");
-                return BadRequest(ex.Message);
-            }
+            _logger.LogError($"Unexpectedd error: {ex.Message}");
+            return BadRequest(ex.Message);
         }
+    }
 
-        [Authorize]
-        [HttpGet("get/{id}")]
-        public async Task<IActionResult> GetById(long id)
+    [Authorize]
+    [HttpGet("get/{id}")]
+    public async Task<IActionResult> GetById(long id)
+    {
+        try
         {
-            try
+            var report = await _mediator.Send(new GetReportOutputCommand
             {
-                var report = await _mediator.Send(new GetReportOutputCommand
-                {
-                    Id = id
-                });
+                Id = id
+            });
 
-                if (report == null)
-                {
-                    return NoContent();
-                }
-                return Ok(report);
-            }
-            catch (Exception ex)
+            if (report == null)
             {
-                _logger.LogError($"Unexpectedd error: {ex.Message}");
-                return BadRequest(ex.Message);
+                return NoContent();
             }
+            return Ok(report);
         }
-
-        [Topic("pubsub", "PersonDeleted")]
-        [HttpPost("PersonDeleted")]
-        public ActionResult AddProduct(PersonDto personDto)
+        catch (Exception ex)
         {
-            Console.WriteLine($"Deleted Person Id: {personDto.Id}");
-
-            return Ok();
+            _logger.LogError($"Unexpectedd error: {ex.Message}");
+            return BadRequest(ex.Message);
         }
+    }
+
+    [Topic("pubsub", "PersonDeleted")]
+    [HttpPost("PersonDeleted")]
+    public ActionResult AddProduct(PersonDto personDto)
+    {
+        Console.WriteLine($"Deleted Person Id: {personDto.Id}");
+
+        return Ok();
     }
 }
