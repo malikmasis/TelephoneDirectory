@@ -10,7 +10,7 @@ using Xunit;
 
 namespace TelephoneDirectory.FunctionalTest;
 
-public class PersonConsumerTest
+public sealed class PersonConsumerTest
 {
     [Fact]
     public async Task Should_test_the_consumer()

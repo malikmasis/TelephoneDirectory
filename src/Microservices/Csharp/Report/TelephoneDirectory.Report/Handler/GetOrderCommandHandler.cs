@@ -7,7 +7,7 @@ using TelephoneDirectory.Report.Entities;
 
 namespace TelephoneDirectory.Report.Handler;
 
-public class GetOrderCommandHandler : IRequestHandler<GetReportOutputCommand, ReportOutput>
+public sealed class GetOrderCommandHandler : IRequestHandler<GetReportOutputCommand, ReportOutput>
 {
     private readonly IReportDbContext _context;
 

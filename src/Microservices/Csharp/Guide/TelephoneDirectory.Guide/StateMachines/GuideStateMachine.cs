@@ -5,7 +5,7 @@ using TelephoneDirectory.Contracts.Eto;
 
 namespace TelephoneDirectory.Guide.StateMachines;
 
-public class GuideStateMachine : MassTransitStateMachine<GuideSagaState>
+public sealed class GuideStateMachine : MassTransitStateMachine<GuideSagaState>
 {
     public State Submitted { get; private set; }
     public State Processed { get; private set; }

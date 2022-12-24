@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace TelephoneDirectory.Report.IntegrationTest.Base;
 
-public class TestStartup : Startup
+public sealed class TestStartup : Startup
 {
     public TestStartup(IConfiguration configuration) : base(configuration)
     {

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace TelephoneDirectory.Report.IntegrationTest.Base;
 
-public class TestAuthFactory<TEntryPoint> : WebApplicationFactory<TEntryPoint> where TEntryPoint : class
+public sealed class TestAuthFactory<TEntryPoint> : WebApplicationFactory<TEntryPoint> where TEntryPoint : class
 {
     protected override IWebHostBuilder CreateWebHostBuilder()
     {

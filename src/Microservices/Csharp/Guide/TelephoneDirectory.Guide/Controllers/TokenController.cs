@@ -8,7 +8,7 @@ namespace TelephoneDirectory.Guide.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class TokenController : ControllerBase
+public sealed class TokenController : ControllerBase
 {
     private readonly IRequestClient<SubmitToken> _submitTokenRequestClient;
     private readonly ILogger<GuideController> _logger;

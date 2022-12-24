@@ -7,7 +7,7 @@ using Xunit;
 
 namespace TelephoneDirectory.Report.IntegrationTest;
 
-public class ReportControllerTest : BaseTest
+public sealed class ReportControllerTest : BaseTest
 {
     public ReportControllerTest(TestAuthFactory<TestStartup> factory) : base(factory)
     {

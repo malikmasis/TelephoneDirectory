@@ -1,6 +1,6 @@
 ﻿namespace TelephoneDirectory.Report.Entities;
 
-public class ReportOutput : BaseEntity
+public sealed class ReportOutput : BaseEntity
 {
     public ReportStatus ReportStatus { get; set; }
 }

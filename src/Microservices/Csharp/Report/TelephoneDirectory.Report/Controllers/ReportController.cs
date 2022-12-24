@@ -12,7 +12,7 @@ namespace TelephoneDirectory.Report.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ReportController : ControllerBase
+public sealed class ReportController : ControllerBase
 {
     private readonly ILogger<ReportController> _logger;
     private readonly IMediator _mediator;

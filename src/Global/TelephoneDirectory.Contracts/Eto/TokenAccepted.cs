@@ -2,6 +2,6 @@ using TelephoneDirectory.Contracts.Base;
 
 namespace TelephoneDirectory.Contracts.Eto;
 
-public record TokenAccepted : BaseContract
+public sealed record TokenAccepted : BaseContract
 {
 }

@@ -16,7 +16,7 @@ namespace TelephoneDirectory.Guide.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class GuideController : ControllerBase
+public sealed class GuideController : ControllerBase
 {
     private readonly ILogger<GuideController> _logger;
     private readonly IBus _bus;

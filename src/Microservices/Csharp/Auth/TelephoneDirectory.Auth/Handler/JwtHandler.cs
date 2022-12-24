@@ -9,7 +9,7 @@ using TelephoneDirectory.Auth.Interfaces;
 
 namespace TelephoneDirectory.Auth.Handler;
 
-public class JwtHandler : IJwtHandler
+public sealed class JwtHandler : IJwtHandler
 {
     private readonly IConfiguration _config;
 

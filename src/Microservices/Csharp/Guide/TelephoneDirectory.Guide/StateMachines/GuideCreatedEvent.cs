@@ -3,7 +3,7 @@ using TelephoneDirectory.Contracts.Abstraction;
 
 namespace TelephoneDirectory.Guide.StateMachines;
 
-public class GuideCreatedEvent : IGuideCreatedEvent
+public sealed class GuideCreatedEvent : IGuideCreatedEvent
 {
     private readonly GuideSagaState _reportSagaState;
     public GuideCreatedEvent(GuideSagaState reportSagaState)

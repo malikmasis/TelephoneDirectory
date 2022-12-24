@@ -5,7 +5,7 @@ using TelephoneDirectory.Contracts.Abstraction;
 
 namespace TelephoneDirectory.Report.Consumers;
 
-public class ReportFailedConsumer : IConsumer<IGuideFailedEvent>
+public sealed class ReportFailedConsumer : IConsumer<IGuideFailedEvent>
 {
     public async Task Consume(ConsumeContext<IGuideFailedEvent> context)
     {

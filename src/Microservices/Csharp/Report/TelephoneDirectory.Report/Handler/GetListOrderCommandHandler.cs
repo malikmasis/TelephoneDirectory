@@ -9,7 +9,7 @@ using TelephoneDirectory.Report.Entities;
 
 namespace TelephoneDirectory.Report.Handler;
 
-public class GetListOrderCommandHandler : IRequestHandler<GetListReportOutputCommand, List<ReportOutput>>
+public sealed class GetListOrderCommandHandler : IRequestHandler<GetListReportOutputCommand, List<ReportOutput>>
 {
     private readonly IReportDbContext _context;
 
