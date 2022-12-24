@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace TelephoneDirectory.Report.IntegrationTest.Base;
 
 //https://stackoverflow.com/questions/61769497/skip-jwt-auth-during-tests-asp-net-core-3-1-web-api
-public class TestAuthHandler : AuthenticationHandler<AuthenticationSchemeOptions>
+public sealed class TestAuthHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
     public const string DefaultScheme = "Test";
     public TestAuthHandler(IOptionsMonitor<AuthenticationSchemeOptions> options,

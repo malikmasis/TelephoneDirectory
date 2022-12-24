@@ -2,7 +2,7 @@
 
 namespace TelephoneDirectory.Contracts.Eto;
 
-public record OrderSubmissionRejected
+public sealed record OrderSubmissionRejected
 {
     public Guid CorrelationId { get; }
     public Guid OrderId { get; }

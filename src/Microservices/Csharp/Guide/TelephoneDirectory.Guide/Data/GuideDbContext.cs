@@ -4,7 +4,7 @@ using TelephoneDirectory.Guide.Entities;
 
 namespace TelephoneDirectory.Guide.Data;
 
-public class GuideDbContext : DbContext, IGuideDbContext
+public sealed class GuideDbContext : DbContext, IGuideDbContext
 {
     public GuideDbContext(DbContextOptions<GuideDbContext> options)
         : base(options)

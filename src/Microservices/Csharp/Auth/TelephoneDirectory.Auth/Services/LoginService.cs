@@ -5,7 +5,7 @@ using TelephoneDirectory.Auth.Models;
 
 namespace TelephoneDirectory.Auth.Services;
 
-public class LoginService : ILoginService
+public sealed class LoginService : ILoginService
 {
     private readonly IAuthDbContext _reportDbContext;
     public LoginService(IAuthDbContext reportDbContext)

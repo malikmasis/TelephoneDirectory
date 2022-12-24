@@ -4,7 +4,7 @@ using TelephoneDirectory.Report.Entities;
 
 namespace TelephoneDirectory.Report.Data;
 
-public class ReportDbContext : DbContext, IReportDbContext
+public sealed class ReportDbContext : DbContext, IReportDbContext
 {
 
     public ReportDbContext(DbContextOptions<ReportDbContext> options)

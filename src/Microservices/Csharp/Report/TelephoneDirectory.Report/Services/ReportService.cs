@@ -5,7 +5,7 @@ using TelephoneDirectory.Report.Interfaces;
 
 namespace TelephoneDirectory.Report.Services;
 
-public class ReportService : IReportService
+public sealed class ReportService : IReportService
 {
     private readonly IReportDbContext _reportDbContext;
     public ReportService(IReportDbContext reportDbContext)

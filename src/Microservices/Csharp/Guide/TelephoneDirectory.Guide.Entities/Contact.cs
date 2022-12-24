@@ -1,6 +1,6 @@
 ﻿namespace TelephoneDirectory.Guide.Entities;
 
-public class Contact : BaseEntity
+public sealed class Contact : BaseEntity
 {
     public long PersonId { get; set; }
     public InfoType InfoType { get; set; }

@@ -8,7 +8,7 @@ namespace TelephoneDirectory.Auth.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class LoginController : ControllerBase
+public sealed class LoginController : ControllerBase
 {
     private readonly ILogger<LoginController> _logger;
     private readonly ILoginService _loginService;

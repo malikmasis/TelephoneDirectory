@@ -5,7 +5,7 @@ using TelephoneDirectory.Contracts.Abstraction;
 
 namespace TelephoneDirectory.Report.Consumers;
 
-public class ReportRequestReceivedConsumer : IConsumer<IGuideRequestReceivedEvent>
+public sealed class ReportRequestReceivedConsumer : IConsumer<IGuideRequestReceivedEvent>
 {
     public async Task Consume(ConsumeContext<IGuideRequestReceivedEvent> context)
     {

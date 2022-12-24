@@ -4,7 +4,7 @@ using TelephoneDirectory.Auth.Entities;
 
 namespace TelephoneDirectory.Auth.Data;
 
-public class AuthDbContext : DbContext, IAuthDbContext
+public sealed class AuthDbContext : DbContext, IAuthDbContext
 {
 
     public AuthDbContext(DbContextOptions<AuthDbContext> options)
