@@ -111,7 +111,7 @@ public sealed class GuideController : ControllerBase
             if (personData == null)
             {
                 await Task.CompletedTask;
-                throw new ArgumentException(nameof(personData));
+                throw new ArgumentNullException(nameof(personData));
             }
 
             var person = await _context.Persons.Include(p => p.Contacts).FirstOrDefaultAsync(p => p.Id == personData.Id);
