@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using TelephoneDirectory.Contracts.Abstraction;
 using TelephoneDirectory.Contracts.Dto;
@@ -196,6 +197,24 @@ public sealed class GuideController : ControllerBase
         {
             _logger.LogError($"Unexpectedd error: {ex.Message}");
             return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpGet("consumedbygo")]
+    public async Task SendEventByDapr(long id)
+    {
+        try
+        {
+            string PUBSUB_NAME = "messages";
+            string TOPIC_NAME = "neworder";
+            CancellationTokenSource source = new CancellationTokenSource();
+            CancellationToken cancellationToken = source.Token;
+            await _daprClient.PublishEventAsync(PUBSUB_NAME, TOPIC_NAME, id, cancellationToken);
+            _logger.LogInformation("This example event should consume by the golang app");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unexpectedd error: {ex.Message}");
         }
     }
 }

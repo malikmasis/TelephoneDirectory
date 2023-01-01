@@ -20,7 +20,7 @@ var sub = &common.Subscription{
 }
 
 func main() {
-	s := daprd.NewService(":8088")
+	s := daprd.NewService(":8095")
 
 	if err := s.AddTopicEventHandler(sub, eventHandler); err != nil {
 		log.Fatalf("error adding topic subscription: %v", err)
@@ -35,3 +35,5 @@ func eventHandler(ctx context.Context, e *common.TopicEvent) (retry bool, err er
 	log.Printf("event - PubsubName: %s, Topic: %s, ID: %s, Data: %s", e.PubsubName, e.Topic, e.ID, e.Data)
 	return false, nil
 }
+
+//dapr run --app-id sub --app-protocol http --app-port 8092 --dapr-http-port 3500 --log-level debug --components-path ./config go run sub/sub.go

@@ -30,3 +30,5 @@ func main() {
 
 	fmt.Println("Done (CTRL+C to Exit)")
 }
+
+//dapr run --app-id pub --log-level debug --components-path ./config go run pub/pub.go
