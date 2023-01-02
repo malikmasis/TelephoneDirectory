@@ -68,6 +68,7 @@ public sealed class ReportController : ControllerBase
 
     [Topic("pubsub", "PersonDeleted")]
     [HttpPost("PersonDeleted")]
+    //TODO Change the action name
     public ActionResult AddProduct(PersonDto personDto)
     {
         Console.WriteLine($"Deleted Person Id: {personDto.Id}");
