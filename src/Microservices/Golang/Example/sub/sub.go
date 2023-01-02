@@ -14,13 +14,13 @@ import (
 // - Topic: is the name of the topic to subscribe.
 // - Route: tell dapr where to request the API to publish the message to the subscriber when get a message from topic.
 var sub = &common.Subscription{
-	PubsubName: "messages",
+	PubsubName: "pubsub",
 	Topic:      "neworder",
 	Route:      "/orders",
 }
 
 func main() {
-	s := daprd.NewService(":8095")
+	s := daprd.NewService(":8071")
 
 	if err := s.AddTopicEventHandler(sub, eventHandler); err != nil {
 		log.Fatalf("error adding topic subscription: %v", err)
@@ -36,4 +36,5 @@ func eventHandler(ctx context.Context, e *common.TopicEvent) (retry bool, err er
 	return false, nil
 }
 
-//dapr run --app-id sub --app-protocol http --app-port 8092 --dapr-http-port 3500 --log-level debug --components-path ./config go run sub/sub.go
+//dapr run --app-id sub --app-protocol http --app-port 8071 --dapr-http-port 3500 --log-level debug --components-path ./config go run sub/sub.go
+//dapr run --app-id sub --app-protocol http --app-port 8071 --dapr-http-port 3500 --log-level debug go run sub/sub.go

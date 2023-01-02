@@ -9,7 +9,7 @@ import (
 
 var (
 	// set the environment as instructions.
-	pubsubName = "messages"
+	pubsubName = "pubsub"
 	topicName  = "neworder"
 )
 
@@ -32,3 +32,4 @@ func main() {
 }
 
 //dapr run --app-id pub --log-level debug --components-path ./config go run pub/pub.go
+//dapr run --app-id pub --log-level debug go run pub/pub.go

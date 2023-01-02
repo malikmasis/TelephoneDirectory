@@ -205,7 +205,7 @@ public sealed class GuideController : ControllerBase
     {
         try
         {
-            string PUBSUB_NAME = "messages";
+            string PUBSUB_NAME = "pubsub";
             string TOPIC_NAME = "neworder";
             CancellationTokenSource source = new CancellationTokenSource();
             CancellationToken cancellationToken = source.Token;
