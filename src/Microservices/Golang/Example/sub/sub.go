@@ -20,7 +20,7 @@ var sub = &common.Subscription{
 }
 
 func main() {
-	s := daprd.NewService(":8071")
+	s := daprd.NewService(":8023")
 
 	if err := s.AddTopicEventHandler(sub, eventHandler); err != nil {
 		log.Fatalf("error adding topic subscription: %v", err)
