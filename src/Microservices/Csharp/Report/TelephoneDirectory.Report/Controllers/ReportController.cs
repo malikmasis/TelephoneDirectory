@@ -33,6 +33,7 @@ public sealed class ReportController : ControllerBase
             {
                 return NoContent();
             }
+
             return Ok(reports);
         }
         catch (Exception ex)
@@ -48,15 +49,12 @@ public sealed class ReportController : ControllerBase
     {
         try
         {
-            var report = await _mediator.Send(new GetReportOutputCommand
-            {
-                Id = id
-            });
-
+            var report = await _mediator.Send(new GetReportOutputCommand(id));
             if (report == null)
             {
                 return NoContent();
             }
+            
             return Ok(report);
         }
         catch (Exception ex)
@@ -68,8 +66,7 @@ public sealed class ReportController : ControllerBase
 
     [Topic("pubsub", "PersonDeleted")]
     [HttpPost("PersonDeleted")]
-    //TODO Change the action name
-    public ActionResult AddProduct(PersonDto personDto)
+    public ActionResult PersonDeleted(PersonDto personDto)
     {
         Console.WriteLine($"Deleted Person Id: {personDto.Id}");
 

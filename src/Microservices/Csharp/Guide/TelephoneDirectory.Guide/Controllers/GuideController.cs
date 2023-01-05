@@ -43,6 +43,7 @@ public sealed class GuideController : ControllerBase
             {
                 return NoContent();
             }
+            
             return Ok(persons);
         }
         catch (Exception ex)
@@ -58,11 +59,11 @@ public sealed class GuideController : ControllerBase
         try
         {
             var person = await _context.Persons.Include(p => p.Contacts).FirstOrDefaultAsync(p => p.Id == id);
-
             if (person == null)
             {
                 return NoContent();
             }
+            
             return Ok(person);
         }
         catch (Exception ex)
@@ -83,6 +84,7 @@ public sealed class GuideController : ControllerBase
             {
                 return NoContent();
             }
+            
             _context.Persons.Remove(person);
             int result = await _context.SaveChangesAsync();
             if (result > 0)
@@ -116,7 +118,6 @@ public sealed class GuideController : ControllerBase
             }
 
             var person = await _context.Persons.Include(p => p.Contacts).FirstOrDefaultAsync(p => p.Id == personData.Id);
-
             if (person == null)
             {
                 return NoContent();
@@ -131,7 +132,6 @@ public sealed class GuideController : ControllerBase
                 person.Contacts = personData.Contacts;
 
                 int result = await _context.SaveChangesAsync();
-
                 if (result > 0)
                 {
                     return Ok(person.Id);
@@ -157,9 +157,10 @@ public sealed class GuideController : ControllerBase
                 await Task.CompletedTask;
                 throw new ArgumentNullException(nameof(person));
             }
+            
             _context.Persons.Add(person);
+            
             int result = await _context.SaveChangesAsync();
-
             if (result > 0)
             {
                 PersonDto personDto = new PersonDto()

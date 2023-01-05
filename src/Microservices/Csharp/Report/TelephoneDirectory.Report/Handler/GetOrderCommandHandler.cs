@@ -18,6 +18,6 @@ public sealed class GetOrderCommandHandler : IRequestHandler<GetReportOutputComm
 
     public async Task<ReportOutput> Handle(GetReportOutputCommand request, CancellationToken cancellationToken)
     {
-        return await _context.Reports.FindAsync(new object[] { request.Id });
+        return await _context.Reports.FindAsync(new object[] { request.Id }, cancellationToken);
     }
 }
