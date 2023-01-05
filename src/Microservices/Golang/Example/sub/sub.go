@@ -20,6 +20,7 @@ var sub = &common.Subscription{
 }
 
 func main() {
+	log.Printf("sub is running on port 8023")
 	s := daprd.NewService(":8023")
 
 	if err := s.AddTopicEventHandler(sub, eventHandler); err != nil {

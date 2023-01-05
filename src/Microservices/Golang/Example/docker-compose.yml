@@ -1,0 +1,43 @@
+version: "3.8"
+services:
+  ############################
+  # Golang app + Dapr sidecar
+  ############################
+  goapp:
+    build: ./sub
+    depends_on:
+      - redis
+      - placement
+    networks:
+      - hello-dapr
+  goapp-dapr:
+    image: "daprio/daprd:edge"
+    command: ["./daprd",
+     "-app-id", "goapp",
+     "-app-port", "8023",
+     "-dapr-http-port", "3500",
+     "-placement-host-address", "placement:50006",
+     "-components-path", "/components"]
+    volumes:
+        - "./components/:/components"
+    depends_on:
+      - goapp
+    network_mode: "service:goapp"
+  placement:
+    image: "daprio/dapr"
+    command: ["./placement", "-port", "50006"]
+    ports:
+      - "50006:50006"
+    networks:
+      - hello-dapr
+  ############################
+  # Redis state store
+  ############################
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+    networks:
+      - hello-dapr
+networks:
+    hello-dapr:
