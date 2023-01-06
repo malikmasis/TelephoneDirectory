@@ -40,8 +40,8 @@ services:
         ports: 
             - "5673:5672"
             - "15673:15672"
-    guide.api:
-        container_name: guide.api
+    guide-api:
+        container_name: guide-api
         environment: 
             - ASPNETCORE_ENVIRONMENT=Development
             - Rabbitmq:Url=rabbitmq
@@ -50,6 +50,21 @@ services:
             - "44337:80"
         depends_on: 
             - guidedb
+            # - placement
+        # networks:
+        # - hello-dapr
+    guide-dapr:
+      image: "daprio/daprd:edge"
+      command:   ["./daprd",
+        "-app-id", "guide-api",
+        "-dapr-http-port", "7002",
+        # "-placement-host-address", "placement:50006",
+        "-components-path", "/components"]
+      volumes:
+        - "./components/:/components"
+      depends_on:
+        - guide-api
+      network_mode: "service:guide-api"
     report.api:
         container_name: report.api
         environment: 
@@ -121,8 +136,8 @@ services:
       depends_on:
         - redis
         - placement
-      networks:
-        - hello-dapr
+      # networks:
+      #   - hello-dapr
     goapp-dapr:
       image: "daprio/daprd:edge"
       command:   ["./daprd",
@@ -141,19 +156,19 @@ services:
       command: ["./placement", "-port", "50006"]
       ports:
         - "50006:50006"
-      networks:
-        - hello-dapr
+      # networks:
+      #   - hello-dapr
     redis:
       image: "redis:alpine"
       ports:
         - "6379:6379"
-      networks:
-        - hello-dapr
+      # networks:
+      #   - hello-dapr
 
 networks:
     elastic:
         driver: bridge
-    hello-dapr:
+    # hello-dapr:
     
 volumes: 
     elasticsearch-data:
