@@ -65,8 +65,8 @@ services:
       depends_on:
         - guide-api
       network_mode: "service:guide-api"
-    report.api:
-        container_name: report.api
+    report-api:
+        container_name: report-api
         environment: 
             - ASPNETCORE_ENVIRONMENT=Development
             - Rabbitmq:Url=rabbitmqmass
@@ -79,8 +79,8 @@ services:
             - "44373:80"
         depends_on: 
             - reportdb
-    auth.api:
-        container_name: auth.api
+    auth-api:
+        container_name: auth-api
         environment: 
             - ASPNETCORE_ENVIRONMENT=Development
             - "ConnectionStrings:DefaultConnection=Data Source=authdb;Initial Catalog=PhoneAuth;Persist Security Info=True;User ID=sa;Password=Admin!23"
@@ -88,8 +88,8 @@ services:
             - "44001:80"
         depends_on: 
             - authdb
-    gateway.api:
-        container_name: gateway.api
+    gateway-api:
+        container_name: gateway-api
         environment: 
             - ASPNETCORE_ENVIRONMENT=Production
         ports:
@@ -127,8 +127,8 @@ services:
             - ELASTICSEARCH_URL=http://localhost:9200
         networks:
             - elastic 
-    examplego.api:
-        container_name: examplego.api
+    examplego-api:
+        container_name: examplego-api
         ports:
             - "9000:80"
     goapp:

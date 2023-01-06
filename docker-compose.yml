@@ -15,24 +15,24 @@ services:
         build: 
             context: .
             dockerfile: src/Microservices/Csharp/Guide/TelephoneDirectory.Guide/Dockerfile
-    report.api:
+    report-api:
         image: report_image
         build: 
             context: .
             dockerfile: src/Microservices/Csharp/Report/TelephoneDirectory.Report/Dockerfile
-    auth.api:
+    auth-api:
         image: auth_image
         build: 
             context: .
             dockerfile: src/Microservices/Csharp/Auth/TelephoneDirectory.Auth/Dockerfile
-    gateway.api:
+    gateway-api:
         image: gateway_api_image
         build: 
             context: .
             dockerfile: src/Global/Gateway.WebApi/Dockerfile
     pgAdmin4:
         image: dpage/pgadmin4
-    examplego.api:
+    examplego-api:
         image: examplego_api_image
         build: 
             context: src/Microservices/Golang/Example
