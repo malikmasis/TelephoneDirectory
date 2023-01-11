@@ -43,7 +43,7 @@ public sealed class GuideController : ControllerBase
             {
                 return NoContent();
             }
-            
+
             return Ok(persons);
         }
         catch (Exception ex)
@@ -63,7 +63,7 @@ public sealed class GuideController : ControllerBase
             {
                 return NoContent();
             }
-            
+
             return Ok(person);
         }
         catch (Exception ex)
@@ -84,7 +84,7 @@ public sealed class GuideController : ControllerBase
             {
                 return NoContent();
             }
-            
+
             _context.Persons.Remove(person);
             int result = await _context.SaveChangesAsync();
             if (result > 0)
@@ -157,9 +157,9 @@ public sealed class GuideController : ControllerBase
                 await Task.CompletedTask;
                 throw new ArgumentNullException(nameof(person));
             }
-            
+
             _context.Persons.Add(person);
-            
+
             int result = await _context.SaveChangesAsync();
             if (result > 0)
             {
@@ -202,20 +202,20 @@ public sealed class GuideController : ControllerBase
     }
 
     [HttpGet("consumedbygo")]
-    public async Task SendEventByDapr(long id)
+    public async Task SendEventByDapr()
     {
         try
         {
             string PUBSUB_NAME = "pubsub";
             string TOPIC_NAME = "neworder";
-            CancellationTokenSource source = new CancellationTokenSource();
+            CancellationTokenSource source = new();
             CancellationToken cancellationToken = source.Token;
-            await _daprClient.PublishEventAsync(PUBSUB_NAME, TOPIC_NAME, id, cancellationToken);
+            await _daprClient.PublishEventAsync(PUBSUB_NAME, TOPIC_NAME, new { Email = "malik.masis@gmail.com" }, cancellationToken);
             _logger.LogInformation("This example event should consume by the golang app");
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unexpectedd error: {ex.Message}");
+            _logger.LogError($"Unexpectedd error: {ex.Message} \n {ex?.InnerException}");
         }
     }
 }
