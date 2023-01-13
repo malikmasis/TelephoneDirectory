@@ -67,7 +67,8 @@ namespace TelephoneDirectory.Report.UnitTest
                     .WithJsonBody(new { message = invalidRequestMessage });
 
             // Act & Assert
-            await pact.VerifyAsync(async ctx => {
+            await pact.VerifyAsync(async ctx =>
+            {
                 var response = await ConsumerApiClient.ValidateDateTimeUsingProviderApi(String.Empty, ctx.MockServerUri);
                 var body = await response.Content.ReadAsStringAsync();
                 Assert.Contains(invalidRequestMessage, body);
@@ -87,7 +88,8 @@ namespace TelephoneDirectory.Report.UnitTest
                 .WithStatus(HttpStatusCode.NotFound);
 
             // Act & Assert
-            await pact.VerifyAsync(async ctx => {
+            await pact.VerifyAsync(async ctx =>
+            {
                 var response = await ConsumerApiClient.ValidateDateTimeUsingProviderApi(validDate, ctx.MockServerUri);
                 Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
             });
@@ -109,7 +111,8 @@ namespace TelephoneDirectory.Report.UnitTest
                 .WithJsonBody(new { test = "NO", validDateTime = expectedDateParsed });
 
             // Act & Assert
-            await pact.VerifyAsync(async ctx => {
+            await pact.VerifyAsync(async ctx =>
+            {
                 var response = await ConsumerApiClient.ValidateDateTimeUsingProviderApi(expectedDateString, ctx.MockServerUri);
                 var body = await response.Content.ReadAsStringAsync();
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
