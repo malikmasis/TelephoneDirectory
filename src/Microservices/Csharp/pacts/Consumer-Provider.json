@@ -1,0 +1,118 @@
+{
+  "consumer": {
+    "name": "Consumer"
+  },
+  "interactions": [
+    {
+      "description": "A invalid GET request for Date Validation with empty string date parameter",
+      "providerStates": [
+        {
+          "name": "There is data"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/api/provider",
+        "query": {
+          "validDateTime": [
+            ""
+          ]
+        }
+      },
+      "response": {
+        "body": {
+          "message": "validDateTime is required"
+        },
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "status": 400
+      }
+    },
+    {
+      "description": "A invalid GET request for Date Validation with invalid date parameter",
+      "providerStates": [
+        {
+          "name": "There is data"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/api/provider",
+        "query": {
+          "validDateTime": [
+            "lolz"
+          ]
+        }
+      },
+      "response": {
+        "body": {
+          "message": "validDateTime is not a date or time"
+        },
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "status": 400
+      }
+    },
+    {
+      "description": "A valid GET request for Date Validation",
+      "providerStates": [
+        {
+          "name": "There is data"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/api/provider",
+        "query": {
+          "validDateTime": [
+            "04/04/2018"
+          ]
+        }
+      },
+      "response": {
+        "body": {
+          "test": "NO",
+          "validDateTime": "04-04-2018 00:00:00"
+        },
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "status": 200
+      }
+    },
+    {
+      "description": "A valid GET request for Date Validation",
+      "providerStates": [
+        {
+          "name": "There is no data"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/api/provider",
+        "query": {
+          "validDateTime": [
+            "04/04/2018"
+          ]
+        }
+      },
+      "response": {
+        "status": 404
+      }
+    }
+  ],
+  "metadata": {
+    "pactRust": {
+      "ffi": "0.3.11",
+      "models": "0.4.5"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "Provider"
+  }
+}
