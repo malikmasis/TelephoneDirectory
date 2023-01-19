@@ -1,9 +1,6 @@
-﻿using System;
-using System.Globalization;
-using System.IO;
-using System.Threading;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using TelephoneDirectory.Contracts.Dto;
 
 namespace Provider.Controllers;
 
@@ -17,42 +14,18 @@ public class ProviderController : Controller
         this._Configuration = configuration;
     }
 
-    // GET api/provider?validDateTime=[DateTime String]
+    // GET api/provider?id=1
     [HttpGet]
-    public IActionResult Get(string validDateTime)
+    public IActionResult Get(int id)
     {
-        if (String.IsNullOrEmpty(validDateTime))
+        if (id > 0)
         {
-            return BadRequest(new { message = "validDateTime is required" });
+            return new JsonResult(new PersonDto
+            {
+                Id = 1
+            });
         }
 
-        if (this.DataMissing())
-        {
-            return NotFound();
-        }
-
-        DateTime parsedDateTime;
-        try
-        {
-            parsedDateTime = DateTime.Parse(validDateTime, CultureInfo.GetCultureInfo("en-AU").DateTimeFormat);
-        }
-        catch (Exception)
-        {
-            return BadRequest(new { message = "validDateTime is not a date or time" });
-        }
-
-        return new JsonResult(new
-        {
-            test = "NO",
-            validDateTime = parsedDateTime.ToString("dd-MM-yyyy HH:mm:ss")
-        });
-    }
-
-    private bool DataMissing()
-    {
-        string path = Path.Combine(Path.GetTempPath(), "data");
-        string pathWithFile = Path.Combine(path, "somedata.txt");
-
-        return !System.IO.File.Exists(pathWithFile);
+        return NoContent();
     }
 }

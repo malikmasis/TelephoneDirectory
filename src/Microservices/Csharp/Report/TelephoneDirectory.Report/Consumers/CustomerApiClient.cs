@@ -6,13 +6,13 @@ namespace TelephoneDirectory.Report.Consumers;
 
 public static class ConsumerApiClient
 {
-    static public async Task<HttpResponseMessage> ValidateDateTimeUsingProviderApi(string dateTimeToValidate, Uri baseUri)
+    static public async Task<HttpResponseMessage> GetPersonUsingGuideApi(int id, Uri baseUri)
     {
         using (var client = new HttpClient { BaseAddress = baseUri })
         {
             try
             {
-                var response = await client.GetAsync($"/api/provider?validDateTime={dateTimeToValidate}");
+                var response = await client.GetAsync($"/api/provider?id=1");
                 return response;
             }
             catch (System.Exception ex)
