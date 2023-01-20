@@ -218,4 +218,18 @@ public sealed class GuideController : ControllerBase
             _logger.LogError($"Unexpectedd error: {ex.Message} \n {ex?.InnerException}");
         }
     }
+
+    [HttpGet("getperson/{id}")]
+    public IActionResult Get(long id)
+    {
+        if (id > 0)
+        {
+            return new JsonResult(new PersonDto
+            {
+                Id = 1
+            });
+        }
+
+        return NoContent();
+    }
 }

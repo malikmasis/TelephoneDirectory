@@ -30,15 +30,14 @@ namespace TelephoneDirectory.Report.UnitTest
         }
 
         [Fact]
-        public async Task ItParsesADateCorrectly()
+        public async Task GetPerson_WhenIdGreaterThanZero_ReturnGuide()
         {
-            var expectedDateString = "1";
             int id = 1;
 
-            pact.UponReceiving("A valid GET request for Date Validation")
+            pact.UponReceiving("A valid GET request for Guide")
                 .Given("There is data")
-                .WithRequest(HttpMethod.Get, "/api/provider")
-                .WithQuery("id", expectedDateString)
+                .WithRequest(HttpMethod.Get, "/api/guide/getperson/1")
+                //.WithQuery("id", expectedDateString)
             .WillRespond()
                 .WithStatus(HttpStatusCode.OK)
                 .WithHeader("Content-Type", "application/json; charset=utf-8")

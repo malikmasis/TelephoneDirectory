@@ -4,7 +4,7 @@
   },
   "interactions": [
     {
-      "description": "A valid GET request for Date Validation",
+      "description": "A valid GET request for Guide",
       "providerStates": [
         {
           "name": "There is data"
@@ -12,12 +12,7 @@
       ],
       "request": {
         "method": "GET",
-        "path": "/api/provider",
-        "query": {
-          "id": [
-            "1"
-          ]
-        }
+        "path": "/api/guide/getperson/1"
       },
       "response": {
         "body": {

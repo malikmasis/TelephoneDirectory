@@ -12,7 +12,7 @@ public static class ConsumerApiClient
         {
             try
             {
-                var response = await client.GetAsync($"/api/provider?id=1");
+                var response = await client.GetAsync($"/api/guide/getperson/1");
                 return response;
             }
             catch (System.Exception ex)
