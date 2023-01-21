@@ -16,12 +16,12 @@ public class ProviderApiTests : IClassFixture<ProviderApiTestsFixture>
     private readonly IHost server;
     public Uri ServerUri { get; }
 
-    private readonly ProviderApiTestsFixture fixture;
+    private readonly ProviderApiTestsFixture _fixture;
     private readonly ITestOutputHelper _output;
 
     public ProviderApiTests(ProviderApiTestsFixture fixture, ITestOutputHelper output)
     {
-        this.fixture = fixture;
+        _fixture = fixture;
         _output = output;
     }
 
@@ -45,9 +45,9 @@ public class ProviderApiTests : IClassFixture<ProviderApiTestsFixture>
         IPactVerifier pactVerifier = new PactVerifier(config);
         var pactFile = new FileInfo(@"../../../../../pacts/consumer-provider.json");
         pactVerifier
-            .ServiceProvider("Provide", fixture.ServerUri)
+            .ServiceProvider("Provide", _fixture.ServerUri)
             .WithFileSource(pactFile)
-            .WithProviderStateUrl(new Uri($"{fixture.PactServiceUri}/provider-states"))
+            .WithProviderStateUrl(new Uri(_fixture.ServerUri, "provider-states"))
             .Verify();
     }
 }

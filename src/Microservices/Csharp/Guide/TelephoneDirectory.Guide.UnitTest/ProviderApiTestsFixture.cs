@@ -14,13 +14,13 @@ namespace TelephoneDirectory.Guide.UnitTest;
 
 public class ProviderApiTestsFixture : IDisposable
 {
-    public readonly string PactServiceUri = "http://localhost:44337";
+    private const string _pactServiceUri = "http://localhost:44337";
     private readonly IHost server;
     public Uri ServerUri { get; }
 
     public ProviderApiTestsFixture()
     {
-        ServerUri = new Uri(PactServiceUri);
+        ServerUri = new Uri(_pactServiceUri);
         server = Host.CreateDefaultBuilder()
                      .ConfigureWebHostDefaults(webBuilder =>
                      {

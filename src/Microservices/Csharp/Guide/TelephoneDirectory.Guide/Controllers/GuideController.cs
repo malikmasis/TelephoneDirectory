@@ -39,11 +39,6 @@ public sealed class GuideController : ControllerBase
         try
         {
             var persons = await _context.Persons.Include(p => p.Contacts).ToListAsync();
-            if (persons == null)
-            {
-                return NoContent();
-            }
-
             return Ok(persons);
         }
         catch (Exception ex)

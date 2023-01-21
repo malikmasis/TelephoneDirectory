@@ -18,22 +18,22 @@ Postgre and Mssql were used as databases. You can switch them easily.
 
 ##### General structure
 - API Gateway -> Ocelot
-- Message Broker -> Rabbitmq, redis(dapr)
-- Service Bus -> Mass Transit
+- Message Broker -> Rabbitmq, Redis(dapr)
+- Service Bus -> MassTransit
 - Health Check -> Watchdog - (via slack implementation)
 - Continuous Integration -> Jenkins
-- Logging -> Serilog, elastic search and kibana
+- Logging -> Serilog, Elastic Search and Kibana
 - Databases -> Postgre and Mssql
 - Open Doc -> Swagger and SwaggerForOcelot
 - Applied Pattern -> DDD, Saga Pattern, Mediator, CQRS, Circuit Breaker, Event Sourcing, Publish-Subscribe, Sidecar
-- Tests -> xUnit (via MassTransit) - Mocking, Integration and Functional Tests
+- Tests -> xUnit (via MassTransit) - Mocking, Integration, CDC, and Functional Tests
 
 ##### Existed microservices
 - Ocelot - Gateway, .net6  - It provides coordination as a gateway.
 - Guide - Postgre, .net6 - We can perform all kinds of CRUD operations related to contacts.
 - Report - Postgre, .net6 - There are some reports on the people in the directory.
 - Auth - MSSQL, .net6 - We keep users. Authentication is done with JWT.
-- Example - No DB, golang - A simple golang project has been created. It consumes events by integrated dapr.
+- Example - A simple golang project that consumes events by integrated dapr and sends notifications.
 - Saga - Saga Pattern's Orchestration method is used for transaction management.
 
 ##### Installation
