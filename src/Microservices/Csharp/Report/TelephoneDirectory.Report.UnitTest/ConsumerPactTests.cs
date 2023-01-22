@@ -18,7 +18,7 @@ namespace TelephoneDirectory.Report.UnitTest
         {
             var Config = new PactConfig
             {
-                PactDir = @"..\..\..\..\..\pacts",
+                PactDir = @"..\..\..\..\..\..\..\Global\pacts",
                 Outputters = new[] { new XUnitOutput(output) },
                 DefaultJsonSettings = new JsonSerializerSettings
                 {

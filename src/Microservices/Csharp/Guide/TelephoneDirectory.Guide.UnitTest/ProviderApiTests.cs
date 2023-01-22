@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Hosting;
 using PactNet.Infrastructure.Outputters;
 using PactNet.Verifier;
 using System;
@@ -11,11 +10,6 @@ namespace TelephoneDirectory.Guide.UnitTest;
 
 public class ProviderApiTests : IClassFixture<ProviderApiTestsFixture>
 {
-    private ITestOutputHelper _outputHelper { get; }
-
-    private readonly IHost server;
-    public Uri ServerUri { get; }
-
     private readonly ProviderApiTestsFixture _fixture;
     private readonly ITestOutputHelper _output;
 
@@ -33,17 +27,13 @@ public class ProviderApiTests : IClassFixture<ProviderApiTestsFixture>
         {
             Outputters = new List<IOutput>
             {
-                // NOTE: PactNet defaults to a ConsoleOutput, however
-                // xUnit 2 does not capture the console output, so this
-                // sample creates a custom xUnit outputter. You will
-                // have to do the same in xUnit projects.
                 new XUnitOutput(_output),
-            },
+            }
         };
 
         //Act / Assert
         IPactVerifier pactVerifier = new PactVerifier(config);
-        var pactFile = new FileInfo(@"../../../../../pacts/consumer-provider.json");
+        var pactFile = new FileInfo(@"../../../../../../../Global/pacts/consumer-provider.json");
         pactVerifier
             .ServiceProvider("Provide", _fixture.ServerUri)
             .WithFileSource(pactFile)
