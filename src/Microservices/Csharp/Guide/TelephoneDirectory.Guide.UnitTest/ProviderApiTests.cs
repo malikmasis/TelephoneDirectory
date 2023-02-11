@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
 using PactNet.Infrastructure.Outputters;
 using PactNet.Verifier;
 using System;
@@ -10,14 +8,15 @@ using Xunit.Abstractions;
 
 namespace TelephoneDirectory.Guide.UnitTest;
 
-public class ProviderApiTests
+public class ProviderApiTests : IClassFixture<ProviderApiTestsFixture>
 {
-    private readonly string _pactServiceUri = "http://127.0.0.1:9001";
-    private ITestOutputHelper _outputHelper { get; }
+    private readonly ProviderApiTestsFixture _fixture;
+    private readonly ITestOutputHelper _output;
 
-    public ProviderApiTests(ITestOutputHelper output)
+    public ProviderApiTests(ProviderApiTestsFixture fixture, ITestOutputHelper output)
     {
-        _outputHelper = output;
+        _fixture = fixture;
+        _output = output;
     }
 
     [Fact]
@@ -26,28 +25,19 @@ public class ProviderApiTests
         // Arrange
         var config = new PactVerifierConfig
         {
-            // NOTE: We default to using a ConsoleOutput, however xUnit 2 does not capture the console output,
-            // so a custom outputter is required.
             Outputters = new List<IOutput>
-                {
-                    new XUnitOutput(_outputHelper)
-                }
+            {
+                new XUnitOutput(_output),
+            }
         };
 
-        using (var _webHost = WebHost.CreateDefaultBuilder()
-            .UseStartup<TestStartup>()
-            .UseUrls(_pactServiceUri).Build())
-        {
-            _webHost.Start();
-
-            //Act / Assert
-            IPactVerifier pactVerifier = new PactVerifier(config);
-            var pactFile = new FileInfo(@"../../../../../pacts/consumer-provider.json");
-            pactVerifier
-                .ServiceProvider("Provide", new Uri(_pactServiceUri))
-                .WithFileSource(pactFile)
-                .WithProviderStateUrl(new Uri($"{_pactServiceUri}/provider-states"))
-                .Verify();
-        }
+        //Act / Assert
+        IPactVerifier pactVerifier = new PactVerifier(config);
+        var pactFile = new FileInfo(@"../../../../../../../Global/pacts/consumer-provider.json");
+        pactVerifier
+            .ServiceProvider("Provide", _fixture.ServerUri)
+            .WithFileSource(pactFile)
+            .WithProviderStateUrl(new Uri(_fixture.ServerUri, "provider-states"))
+            .Verify();
     }
 }
