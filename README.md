@@ -57,5 +57,9 @@ Or
 - Integration Test:
 
 [Integration testing in general - blog - Turkish](https://medium.com/software-development-turkey/integration-test-net-core-xunit-web-application-factory-600ca6a52223) <br />
-[Integration testing in general - video - Turkish](https://www.youtube.com/watch?v=My0FdMKq2JA&t=4s&ab_channel=MalikMasis)
+[Integration testing in general - video - Turkish](https://www.youtube.com/watch?v=My0FdMKq2JA&t=4s&ab_channel=MalikMasis) <br />
+- Consumer Driven Contracts Test:
+
+[Implementation of CDC with Pact](https://medium.com/software-development-turkey/pact-ile-cdc-testing-1c97aad99d5e)
+
 
