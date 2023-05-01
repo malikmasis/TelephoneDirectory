@@ -47,5 +47,5 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker-compose -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f docker-compose.yml up -d
+          docker-compose -f docker-compose.yml up -d
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
