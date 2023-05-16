@@ -13,50 +13,50 @@ namespace TelephoneDirectory.Report.Controllers;
 [Route("api/[controller]")]
 public sealed class ExampleController : ControllerBase
 {
-    private static readonly ActivitySource _activitySource = new("Tracing.NET");
-    private readonly ILogger<ReportController> _logger;
+	private static readonly ActivitySource _activitySource = new("Tracing.NET");
 
-    public ExampleController(ILogger<ReportController> logger)
-    {
-        _logger = logger;
-    }
-    
-    [HttpGet("log")]
-    public Task Log()
-    {
-        _logger.LogInformation("Hello! It is {Time}", DateTime.UtcNow);
-        _logger.LogError("Test Error");
+	private readonly ILogger<ExampleController> _logger;
 
-        return Task.CompletedTask;
-    }
+	public ExampleController(ILogger<ExampleController> logger)
+	{
+		_logger = logger;
+	}
 
-    [HttpGet("tracing")]
-    public async Task Tracing()
-    {
-        using var activity = _activitySource.StartActivity("Example");
+	[HttpGet("log")]
+	public Task Log()
+	{
+		_logger.LogInformation("Hello! It is {Time}", DateTime.UtcNow);
+		_logger.LogError("Test Error");
 
-        // note that "sampleActivity" can be null here if nobody listen events generated
-        // by the "SampleActivitySource" activity source.
-        activity?.AddTag("UserId", "AnyUser");
+		return Task.CompletedTask;
+	}
 
-        // Simulate a long running operation
-        await Task.Delay(500);
-    }
+	[HttpGet("tracing")]
+	public async Task Tracing()
+	{
+		using var activity = _activitySource.StartActivity("Example");
 
-    [HttpGet("metric")]
-    public Counter<int> Metric()
-    {
-        //Metric
-        var meter = new Meter("Metrics.NET");
+		// note that "sampleActivity" can be null here if nobody listen events generated
+		// by the "SampleActivitySource" activity source.
+		activity?.AddTag("UserId", "AnyUser");
 
-        var counter = meter.CreateCounter<int>("RequestsOfCounter", "ms", "Example request");
-        meter.CreateObservableGauge("ThreadCount",
-                                    () => new[] { new Measurement<int>(ThreadPool.ThreadCount) });
+		// Simulate a long running operation
+		await Task.Delay(500);
+	}
 
-        // Measure the number of requests
-        counter.Add(1, KeyValuePair.Create<string, object>("name", "Türkiye"));
+	[HttpGet("metric")]
+	public Counter<int> Metric()
+	{
+		//Metric
+		var meter = new Meter("Metrics.NET");
 
-        return counter;
-    }
+		var counter = meter.CreateCounter<int>("RequestsOfCounter", "ms", "Example request");
+		meter.CreateObservableGauge("ThreadCount",
+		                            () => new[] { new Measurement<int>(ThreadPool.ThreadCount) });
+
+		// Measure the number of requests
+		counter.Add(1, KeyValuePair.Create<string, object>("name", "Türkiye"));
+
+		return counter;
+	}
 }
-
