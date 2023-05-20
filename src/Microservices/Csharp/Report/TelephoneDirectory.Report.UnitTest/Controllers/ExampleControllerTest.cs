@@ -26,8 +26,8 @@ public class ExampleControllerTest
 	[Fact]
 	public void LogTest()
 	{
-		var exception = Record.ExceptionAsync(() => _openTelemetryController.Log());
-		Assert.Null(exception.Result);
+		var exception = Record.Exception(() => _openTelemetryController.Log());
+		Assert.Null(exception);
 	}
 
 	[Fact]

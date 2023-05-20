@@ -13,7 +13,7 @@ namespace TelephoneDirectory.Report.Controllers;
 [Route("api/[controller]")]
 public sealed class ExampleController : ControllerBase
 {
-	private static readonly ActivitySource _activitySource = new("Tracing.NET");
+	private static readonly ActivitySource ActivitySource = new("Tracing.NET");
 
 	private readonly ILogger<ExampleController> _logger;
 
@@ -23,18 +23,16 @@ public sealed class ExampleController : ControllerBase
 	}
 
 	[HttpGet("log")]
-	public Task Log()
+	public void Log()
 	{
 		_logger.LogInformation("Hello! It is {Time}", DateTime.UtcNow);
 		_logger.LogError("Test Error");
-
-		return Task.CompletedTask;
 	}
 
 	[HttpGet("tracing")]
 	public async Task Tracing()
 	{
-		using var activity = _activitySource.StartActivity("Example");
+		using var activity = ActivitySource.StartActivity("Example");
 
 		// note that "sampleActivity" can be null here if nobody listen events generated
 		// by the "SampleActivitySource" activity source.
