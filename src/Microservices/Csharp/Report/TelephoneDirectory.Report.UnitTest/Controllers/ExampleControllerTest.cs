@@ -13,23 +13,21 @@ namespace TelephoneDirectory.Report.UnitTest.Controllers;
 
 public class ExampleControllerTest
 {
-	private readonly ILogger<ExampleController> _logger;
-
-	private readonly ExampleController _openTelemetryController;
+	private readonly ExampleController _exampleController;
 
 	public ExampleControllerTest()
 	{
-		_logger = Mock.Of<ILogger<ExampleController>>();
-		_openTelemetryController = new ExampleController(_logger);
+		var logger = Mock.Of<ILogger<ExampleController>>();
+		_exampleController = new ExampleController(logger);
 	}
 
 	[Fact]
 	public void LogTest()
 	{
-		var exception = Record.Exception(() => _openTelemetryController.Log());
+		var exception = Record.Exception(() => _exampleController.Log());
 		Assert.Null(exception);
 	}
-
+	
 	[Fact]
 	public async Task GivenInitialRequest_WhenTracingCalled()
 	{
@@ -37,7 +35,7 @@ public class ExampleControllerTest
 		var activitiesStarted = SetupActivityListener();
 
 		// Act
-		await _openTelemetryController.Tracing();
+		await _exampleController.Tracing();
 
 		// Assert
 		Assert.Single(activitiesStarted);
@@ -49,7 +47,7 @@ public class ExampleControllerTest
 	public void MetricTest()
 	{
 		// Act
-		var counter = _openTelemetryController.Metric();
+		var counter = _exampleController.Metric();
 		Assert.NotNull(counter);
 		Assert.Contains("RequestsOfCounter", counter.Name);
 
