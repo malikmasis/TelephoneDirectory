@@ -20,6 +20,7 @@ using TelephoneDirectory.Report.Interfaces;
 using TelephoneDirectory.Report.Services;
 using Dapr;
 using Dapr.Client;
+using TelephoneDirectory.Report.Extensions;
 
 namespace TelephoneDirectory.Report
 {
@@ -133,7 +134,7 @@ namespace TelephoneDirectory.Report
                 });
 
             services.AddEndpointsApiExplorer();
-            
+            services.AddCustomOpenTelemetry();
             services.AddControllers().AddDapr();
 
             services.AddHealthChecks()
@@ -148,6 +149,8 @@ namespace TelephoneDirectory.Report
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Report.API v1"));
             }
+
+            app.UseOpenTelemetryPrometheusScrapingEndpoint();
 
             app.UseHttpsRedirection();
 

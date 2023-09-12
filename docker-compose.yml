@@ -36,6 +36,14 @@ services:
         image: examplego_api_image
         build: 
             context: src/Microservices/Golang/Example
+    otel-collector:
+        image: otel/opentelemetry-collector:latest
+    jaeger:
+        container_name: jaeger
+        image: jaegertracing/all-in-one
+    prometheus:
+        container_name: prometheus
+        image: prom/prometheus:latest
 volumes: 
     authdb_volume:   
     
