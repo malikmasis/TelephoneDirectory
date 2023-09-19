@@ -164,7 +164,30 @@ services:
         - "6379:6379"
       # networks:
       #   - hello-dapr
+    otel-collector:
+        image: otel/opentelemetry-collector:latest
+        command: ["--config=/etc/otel-collector-config.yaml"]
+        volumes:
+        - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml
+        - ./output:/etc/output:rw # Store the logs
+        ports:
+        - "4317:4317"
+        - "8888:8888"   # Prometheus metrics exposed by the collector
+        - "8889:8889"   # Prometheus exporter metrics
+        depends_on:
+        - jaeger
+    jaeger:
+        container_name: jaeger
+        image: jaegertracing/all-in-one
+        ports:
+        - "16686:16686"
+        - "14250"
 
+    prometheus:
+        container_name: prometheus
+        image: prom/prometheus:latest
+        ports:
+        - "9090:9090"
 networks:
     elastic:
         driver: bridge
