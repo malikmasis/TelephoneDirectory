@@ -2,11 +2,19 @@
 
 public sealed class ReportOutput : BaseEntity
 {
-    public ReportStatus ReportStatus { get; set; }
+	public ReportStatus ReportStatus { get; private set; }
+
+	public ReportOutput SetReportCompleted()
+	{
+		ReportStatus = ReportStatus.Completed;
+
+		return this;
+	}
 }
 
 public enum ReportStatus
 {
-    Preparing = 1,
-    Completed
+	None = 0,
+	Preparing = 1,
+	Completed = 2
 }

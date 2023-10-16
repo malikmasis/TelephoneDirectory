@@ -24,7 +24,11 @@ public sealed class GuideController : ControllerBase
     private readonly IGuideDbContext _context;
     private readonly DaprClient _daprClient;
 
-    public GuideController(IGuideDbContext context, IBus bus, DaprClient daprClient, ILogger<GuideController> logger)
+    public GuideController(
+        IGuideDbContext context,
+        IBus bus,
+        DaprClient daprClient,
+        ILogger<GuideController> logger)
     {
         _context = context;
         _bus = bus;
@@ -102,7 +106,7 @@ public sealed class GuideController : ControllerBase
     }
 
     [HttpPut("update")]
-    public async Task<IActionResult> Update(Person personData)
+    public async Task<IActionResult> Update(Person personData, CancellationToken cancellationToken)
     {
         try
         {
@@ -112,18 +116,26 @@ public sealed class GuideController : ControllerBase
                 throw new ArgumentNullException(nameof(personData));
             }
 
-            var person = await _context.Persons.Include(p => p.Contacts).FirstOrDefaultAsync(p => p.Id == personData.Id);
-            if (person == null)
+            var person = await _context
+                               .Persons.
+                               Include(p => p.Contacts)
+                               .SingleOrDefaultAsync(
+                                   p => p.Id == personData.Id,
+                                   cancellationToken);
+            
+            if (person is null)
             {
                 return NoContent();
             }
             else
             {
-                person.Name = personData.Name;
-                person.Surname = personData.Surname;
-                person.Company = personData.Company;
-                person.Latitude = personData.Latitude;
-                person.Longitude = personData.Longitude;
+                person
+                    .SetName(personData.Name)
+                    .SetSurname(personData.Surname)
+                    .SetCompany(personData.Company)
+                    .SetLatitude(personData.Latitude)
+                    .SetLongitude(personData.Longitude);
+                
                 person.Contacts = personData.Contacts;
 
                 int result = await _context.SaveChangesAsync();
@@ -158,7 +170,7 @@ public sealed class GuideController : ControllerBase
             int result = await _context.SaveChangesAsync();
             if (result > 0)
             {
-                PersonDto personDto = new PersonDto()
+                PersonDto personDto = new()
                 {
                     Id = person.Id
                 };
