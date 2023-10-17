@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Threading;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using TelephoneDirectory.Auth.Entities;
 
@@ -14,9 +15,9 @@ public sealed class AuthDbContext : DbContext, IAuthDbContext
 
     public DbSet<UserAccount> UserAccounts { get; set; }
 
-    public async Task<int> SaveChangesAsync()
+    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
     {
-        return await base.SaveChangesAsync();
+        return await base.SaveChangesAsync(cancellationToken);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

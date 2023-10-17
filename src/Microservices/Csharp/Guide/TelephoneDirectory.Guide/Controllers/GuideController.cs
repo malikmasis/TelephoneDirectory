@@ -38,11 +38,14 @@ public sealed class GuideController : ControllerBase
 
     [Authorize]
     [HttpGet("getall")]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll(CancellationToken cancelToken = default)
     {
         try
         {
-            var persons = await _context.Persons.Include(p => p.Contacts).ToListAsync();
+            var persons = await _context
+                                .Persons
+                                .Include(p => p.Contacts)
+                                .ToListAsync(cancelToken);
             return Ok(persons);
         }
         catch (Exception ex)
@@ -53,11 +56,14 @@ public sealed class GuideController : ControllerBase
     }
 
     [HttpGet("get/{id}")]
-    public async Task<IActionResult> GetById(long id)
+    public async Task<IActionResult> GetById(long id, CancellationToken cancelToken = default)
     {
         try
         {
-            var person = await _context.Persons.Include(p => p.Contacts).FirstOrDefaultAsync(p => p.Id == id);
+            var person = await _context
+                               .Persons
+                               .Include(p => p.Contacts)
+                               .SingleOrDefaultAsync(p => p.Id == id, cancelToken);
             if (person == null)
             {
                 return NoContent();
@@ -73,7 +79,7 @@ public sealed class GuideController : ControllerBase
     }
 
     [HttpDelete("delete/{id}")]
-    public async Task<IActionResult> Delete(long id)
+    public async Task<IActionResult> Delete(long id, CancellationToken cancelToken = default)
     {
         try
         {
@@ -85,7 +91,7 @@ public sealed class GuideController : ControllerBase
             }
 
             _context.Persons.Remove(person);
-            int result = await _context.SaveChangesAsync();
+            int result = await _context.SaveChangesAsync(cancelToken);
             if (result > 0)
             {
                 PersonDto personDto = new()
@@ -106,7 +112,7 @@ public sealed class GuideController : ControllerBase
     }
 
     [HttpPut("update")]
-    public async Task<IActionResult> Update(Person personData, CancellationToken cancellationToken)
+    public async Task<IActionResult> Update(Person personData, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -119,9 +125,7 @@ public sealed class GuideController : ControllerBase
             var person = await _context
                                .Persons.
                                Include(p => p.Contacts)
-                               .SingleOrDefaultAsync(
-                                   p => p.Id == personData.Id,
-                                   cancellationToken);
+                               .SingleOrDefaultAsync(p => p.Id == personData.Id, cancellationToken);
             
             if (person is null)
             {
@@ -138,7 +142,7 @@ public sealed class GuideController : ControllerBase
                 
                 person.Contacts = personData.Contacts;
 
-                int result = await _context.SaveChangesAsync();
+                int result = await _context.SaveChangesAsync(cancellationToken);
                 if (result > 0)
                 {
                     return Ok(person.Id);
@@ -155,7 +159,7 @@ public sealed class GuideController : ControllerBase
     }
 
     [HttpPost("create")]
-    public async Task<IActionResult> Create([FromBody] Person person)
+    public async Task<IActionResult> Create([FromBody] Person person, CancellationToken cancellationToken = default )
     {
         try
         {
@@ -167,14 +171,14 @@ public sealed class GuideController : ControllerBase
 
             _context.Persons.Add(person);
 
-            int result = await _context.SaveChangesAsync();
+            int result = await _context.SaveChangesAsync(cancellationToken);
             if (result > 0)
             {
                 PersonDto personDto = new()
                 {
                     Id = person.Id
                 };
-                await _bus.Publish(personDto);
+                await _bus.Publish(personDto, cancellationToken);
                 return Ok(person.Id);
             }
             return BadRequest("Cannot save properly");

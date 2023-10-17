@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Threading;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using TelephoneDirectory.Guide.Entities;
 
@@ -8,5 +9,5 @@ public interface IGuideDbContext
 {
     DbSet<Person> Persons { get; set; }
     DbSet<Contact> Contacts { get; set; }
-    Task<int> SaveChangesAsync();
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

@@ -16,7 +16,7 @@ public sealed class PersonConsumer : IConsumer<PersonDto>
 
     public async Task Consume(ConsumeContext<PersonDto> context)
     {
-        PersonDto data = context.Message;
+        var data = context.Message;
         if (data == null)
         {
             throw new InvalidOperationException("The person was not valid");
