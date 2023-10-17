@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TelephoneDirectory.Auth.Interfaces;
@@ -23,11 +24,11 @@ public sealed class LoginController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost("login")]
-    public IActionResult Login([FromBody] UserModel login)
+    public async Task<IActionResult> Login([FromBody] UserModel login)
     {
         IActionResult response = Unauthorized();
 
-        if (_loginService.IsAuth(login))
+        if (await _loginService.IsAuthAsync(login))
         {
             var tokenString = _jwtHandler.GenerateJSONWebToken();
             response = Ok(new { token = tokenString });

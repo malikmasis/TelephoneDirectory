@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using TelephoneDirectory.Auth.Data;
 using TelephoneDirectory.Auth.Interfaces;
 using TelephoneDirectory.Auth.Models;
@@ -13,8 +15,10 @@ public sealed class LoginService : ILoginService
         _reportDbContext = reportDbContext;
     }
 
-    public bool IsAuth(UserModel userModel)
+    public async Task<bool> IsAuthAsync(UserModel userModel)
     {
-        return _reportDbContext.UserAccounts.Any(p => p.UserName == userModel.Username && p.Password == userModel.Password);
+        return await _reportDbContext
+               .UserAccounts
+               .AnyAsync(p => p.UserName == userModel.Username && p.Password == userModel.Password);
     }
 }
