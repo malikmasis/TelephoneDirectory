@@ -34,7 +34,6 @@ require (
 	github.com/rogpeppe/fastuuid v1.2.0 // indirect
 	github.com/stretchr/objx v0.4.0 // indirect
 	github.com/stretchr/testify v1.7.4 // indirect
-	github.com/twilio/twilio-go v1.3.0 // indirect
 	github.com/yuin/goldmark v1.3.5 // indirect
 	go.opentelemetry.io/proto/otlp v0.7.0 // indirect
 	go.uber.org/atomic v1.9.0 // indirect
