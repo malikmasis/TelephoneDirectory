@@ -15,7 +15,7 @@ public sealed class GuideDbContext : DbContext, IGuideDbContext
     public DbSet<Person> Persons { get; set; }
     public DbSet<Contact> Contacts { get; set; }
 
-    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+    public async override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
     {
         return await base.SaveChangesAsync(cancellationToken);
     }

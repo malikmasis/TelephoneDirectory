@@ -1,4 +1,3 @@
-using HealthChecks.UI.Client;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -12,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Text;
+using HealthChecks.UI.Client;
 using TelephoneDirectory.Guide.Data;
 
 namespace TelephoneDirectory.Guide;
@@ -125,7 +125,7 @@ public class Startup
             endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
             {
                 Predicate = _ => true,
-                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                ResponseWriter =  UIResponseWriter.WriteHealthCheckUIResponse
             });
         });
     }
