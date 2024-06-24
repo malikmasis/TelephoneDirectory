@@ -4,12 +4,11 @@ services:
         container_name: authdb
         restart: always
         ports: 
-            - "1453:1433"
-        volumes:
-            - authdb_volume:/var/opt/mssql
+            - "1433:1433"
         environment: 
             - ACCEPT_EULA=Y
-            - SA_PASSWORD=Admin!23
+            - MSSQL_SA_PASSWORD=Admin!23
+            - MSSQL_PID=EnterpriseCore
     guidedb: 
         container_name: guidedb
         restart: always
