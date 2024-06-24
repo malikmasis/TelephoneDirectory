@@ -7,7 +7,7 @@ services:
             - "1433:1433"
         environment: 
             - ACCEPT_EULA=Y
-            - SA_PASSWORD=Admin!23
+            - MSSQL_SA_PASSWORD=Admin!23
     guidedb: 
         container_name: guidedb
         restart: always
@@ -81,7 +81,7 @@ services:
         container_name: auth-api
         environment: 
             - ASPNETCORE_ENVIRONMENT=Development
-            - "ConnectionStrings:DefaultConnection=Data Source=authdb;Initial Catalog=PhoneAuth;Persist Security Info=True;User ID=sa;Password=Admin!23"
+            - "ConnectionStrings:DefaultConnection=Data Source=authdb;Initial Catalog=PhoneAuth;Persist Security Info=True;User ID=sa;Password=Admin!23;Trust Server Certificate=True"
         ports:
             - "44001:80"
         depends_on: 
