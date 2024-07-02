@@ -19,228 +19,187 @@ namespace TelephoneDirectory.Guide.Controllers;
 [Route("api/[controller]")]
 public sealed class GuideController : ControllerBase
 {
-    private readonly ILogger<GuideController> _logger;
-    private readonly IBus _bus;
-    private readonly IGuideDbContext _context;
-    private readonly DaprClient _daprClient;
+	private readonly ILogger<GuideController> _logger;
 
-    public GuideController(
-        IGuideDbContext context,
-        IBus bus,
-        DaprClient daprClient,
-        ILogger<GuideController> logger)
-    {
-        _context = context;
-        _bus = bus;
-        _daprClient = daprClient;
-        _logger = logger;
-    }
+	private readonly IBus _bus;
 
-    [Authorize]
-    [HttpGet("getall")]
-    public async Task<IActionResult> GetAll(CancellationToken cancelToken = default)
-    {
-        try
-        {
-            var persons = await _context
-                                .Persons
-                                .Include(p => p.Contacts)
-                                .ToListAsync(cancelToken);
-            return Ok(persons);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Unexpectedd error: {ex.Message}");
-            return BadRequest(ex.Message);
-        }
-    }
+	private readonly IGuideDbContext _context;
 
-    [HttpGet("get/{id}")]
-    public async Task<IActionResult> GetById(long id, CancellationToken cancelToken = default)
-    {
-        try
-        {
-            var person = await _context
-                               .Persons
-                               .Include(p => p.Contacts)
-                               .SingleOrDefaultAsync(p => p.Id == id, cancelToken);
-            if (person == null)
-            {
-                return NoContent();
-            }
+	private readonly DaprClient _daprClient;
 
-            return Ok(person);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Unexpectedd error: {ex.Message}");
-            return BadRequest(ex.Message);
-        }
-    }
+	public GuideController(
+		IGuideDbContext context,
+		IBus bus,
+		DaprClient daprClient,
+		ILogger<GuideController> logger)
+	{
+		_context = context;
+		_bus = bus;
+		_daprClient = daprClient;
+		_logger = logger;
+	}
 
-    [HttpDelete("delete/{id}")]
-    public async Task<IActionResult> Delete(long id, CancellationToken cancelToken = default)
-    {
-        try
-        {
-            var person = await _context.Persons.FindAsync(new long[] { id });
+	[Authorize]
+	[HttpGet("getall")]
+	public async Task<IActionResult> GetAll(CancellationToken cancelToken = default)
+	{
+		var persons = await _context
+		                    .Persons
+		                    .Include(p => p.Contacts)
+		                    .ToListAsync(cancelToken);
 
-            if (person == null)
-            {
-                return NoContent();
-            }
+		return Ok(persons);
+	}
 
-            _context.Persons.Remove(person);
-            int result = await _context.SaveChangesAsync(cancelToken);
-            if (result > 0)
-            {
-                PersonDto personDto = new()
-                {
-                    Id = person.Id
-                };
-                await _daprClient.PublishEventAsync("pubsub", "PersonDeleted", personDto);
-                return Ok(person.Id);
-            }
+	[HttpGet("get/{id}")]
+	public async Task<IActionResult> GetById(long id, CancellationToken cancelToken = default)
+	{
+		var person = await _context
+		                   .Persons
+		                   .Include(p => p.Contacts)
+		                   .SingleOrDefaultAsync(p => p.Id == id, cancelToken);
 
-            return BadRequest("Cannot delete properly");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Unexpectedd error: {ex.Message}");
-            return BadRequest(ex.Message);
-        }
-    }
+		if (person == null)
+		{
+			return NoContent();
+		}
 
-    [HttpPut("update")]
-    public async Task<IActionResult> Update(Person personData, CancellationToken cancellationToken = default)
-    {
-        try
-        {
-            if (personData == null)
-            {
-                await Task.CompletedTask;
-                throw new ArgumentNullException(nameof(personData));
-            }
+		return Ok(person);
+	}
 
-            var person = await _context
-                               .Persons.
-                               Include(p => p.Contacts)
-                               .SingleOrDefaultAsync(p => p.Id == personData.Id, cancellationToken);
-            
-            if (person is null)
-            {
-                return NoContent();
-            }
-            else
-            {
-                person
-                    .SetName(personData.Name)
-                    .SetSurname(personData.Surname)
-                    .SetCompany(personData.Company)
-                    .SetLatitude(personData.Latitude)
-                    .SetLongitude(personData.Longitude);
-                
-                person.Contacts = personData.Contacts;
+	[HttpDelete("delete/{id}")]
+	public async Task<IActionResult> Delete(long id, CancellationToken cancelToken = default)
+	{
+		var person = await _context.Persons.FindAsync(new long[] { id });
 
-                int result = await _context.SaveChangesAsync(cancellationToken);
-                if (result > 0)
-                {
-                    return Ok(person.Id);
-                }
+		if (person == null)
+		{
+			return NoContent();
+		}
 
-                return BadRequest("Cannot update properly");
-            }
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Unexpectedd error: {ex.Message}");
-            return BadRequest(ex.Message);
-        }
-    }
+		_context.Persons.Remove(person);
+		int result = await _context.SaveChangesAsync(cancelToken);
 
-    [HttpPost("create")]
-    public async Task<IActionResult> Create([FromBody] Person person, CancellationToken cancellationToken = default )
-    {
-        try
-        {
-            if (person == null)
-            {
-                await Task.CompletedTask;
-                throw new ArgumentNullException(nameof(person));
-            }
+		if (result > 0)
+		{
+			PersonDto personDto = new()
+			{
+				Id = person.Id
+			};
+			await _daprClient.PublishEventAsync("pubsub", "PersonDeleted", personDto);
 
-            _context.Persons.Add(person);
+			return Ok(person.Id);
+		}
 
-            int result = await _context.SaveChangesAsync(cancellationToken);
-            if (result > 0)
-            {
-                PersonDto personDto = new()
-                {
-                    Id = person.Id
-                };
-                await _bus.Publish(personDto, cancellationToken);
-                return Ok(person.Id);
-            }
-            return BadRequest("Cannot save properly");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Unexpectedd error: {ex.Message}");
-            return BadRequest(ex.Message);
-        }
-    }
+		return BadRequest("Cannot delete properly");
+	}
 
-    [HttpPost("saga")]
-    public async Task<IActionResult> SagaPatternExample(string reportId)
-    {
-        try
-        {
-            var sendToUri = new Uri($"rabbitmq://localhost/saga.service");
-            var endPoint = await _bus.GetSendEndpoint(sendToUri);
-            await endPoint.Send<IGuideRequestCommand>(new GuideRequestCommand
-            {
-                ReportId = reportId,
-                RequestTime = DateTime.UtcNow
-            });
+	[HttpPut("update")]
+	public async Task<IActionResult> Update(Person personData, CancellationToken cancellationToken = default)
+	{
+		if (personData == null)
+		{
+			await Task.CompletedTask;
 
-            return Ok();
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Unexpectedd error: {ex.Message}");
-            return BadRequest(ex.Message);
-        }
-    }
+			throw new ArgumentNullException(nameof(personData));
+		}
 
-    [HttpGet("consumedbygo")]
-    public async Task SendEventByDapr()
-    {
-        try
-        {
-            string PUBSUB_NAME = "pubsub";
-            string TOPIC_NAME = "neworder";
-            CancellationTokenSource source = new();
-            CancellationToken cancellationToken = source.Token;
-            await _daprClient.PublishEventAsync(PUBSUB_NAME, TOPIC_NAME, new { Email = "malik.masis@gmail.com" }, cancellationToken);
-            _logger.LogInformation("This example event should consume by the golang app");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Unexpectedd error: {ex.Message} \n {ex?.InnerException}");
-        }
-    }
+		var person = await _context
+		                   .Persons.Include(p => p.Contacts)
+		                   .SingleOrDefaultAsync(p => p.Id == personData.Id, cancellationToken);
 
-    [HttpGet("getperson/{id}")]
-    public IActionResult Get(long id)
-    {
-        if (id > 0)
-        {
-            return new JsonResult(new PersonDto
-            {
-                Id = 1
-            });
-        }
+		if (person is null)
+		{
+			return NoContent();
+		}
+		else
+		{
+			person
+				.SetName(personData.Name)
+				.SetSurname(personData.Surname)
+				.SetCompany(personData.Company)
+				.SetLatitude(personData.Latitude)
+				.SetLongitude(personData.Longitude);
 
-        return NoContent();
-    }
+			person.Contacts = personData.Contacts;
+
+			int result = await _context.SaveChangesAsync(cancellationToken);
+
+			if (result > 0)
+			{
+				return Ok(person.Id);
+			}
+
+			return BadRequest("Cannot update properly");
+		}
+	}
+
+	[HttpPost("create")]
+	public async Task<IActionResult> Create([FromBody] Person person, CancellationToken cancellationToken = default)
+	{
+		if (person == null)
+		{
+			await Task.CompletedTask;
+
+			throw new ArgumentNullException(nameof(person));
+		}
+
+		_context.Persons.Add(person);
+
+		int result = await _context.SaveChangesAsync(cancellationToken);
+
+		if (result > 0)
+		{
+			PersonDto personDto = new()
+			{
+				Id = person.Id
+			};
+			await _bus.Publish(personDto, cancellationToken);
+
+			return Ok(person.Id);
+		}
+
+		return BadRequest("Cannot save properly");
+	}
+
+	[HttpPost("saga")]
+	public async Task<IActionResult> SagaPatternExample(string reportId)
+	{
+		var sendToUri = new Uri($"rabbitmq://localhost/saga.service");
+		var endPoint = await _bus.GetSendEndpoint(sendToUri);
+		await endPoint.Send<IGuideRequestCommand>(new GuideRequestCommand
+		{
+			ReportId = reportId,
+			RequestTime = DateTime.UtcNow
+		});
+
+		return Ok();
+	}
+
+	[HttpGet("consumedbygo")]
+	public async Task SendEventByDapr()
+	{
+		
+			string PUBSUB_NAME = "pubsub";
+			string TOPIC_NAME = "neworder";
+			CancellationTokenSource source = new();
+			CancellationToken cancellationToken = source.Token;
+			await _daprClient.PublishEventAsync(PUBSUB_NAME, TOPIC_NAME, new { Email = "malik.masis@gmail.com" }, cancellationToken);
+			_logger.LogInformation("This example event should consume by the golang app");
+		
+	}
+
+	[HttpGet("getperson/{id}")]
+	public IActionResult Get(long id)
+	{
+		if (id > 0)
+		{
+			return new JsonResult(new PersonDto
+			{
+				Id = 1
+			});
+		}
+
+		return NoContent();
+	}
 }

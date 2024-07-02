@@ -12,6 +12,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Text;
 using HealthChecks.UI.Client;
+using TelephoneDirectory.Common.Filters;
 using TelephoneDirectory.Guide.Data;
 
 namespace TelephoneDirectory.Guide;
@@ -95,7 +96,7 @@ public class Startup
                 };
             });
 
-        services.AddControllers();
+        services.AddControllers(options => options.Filters.Add<ApiExceptionFilterAttribute>(0));
 
         services.AddHealthChecks()
             .AddNpgSql(Configuration["ConnectionStrings:DefaultConnection"]);
