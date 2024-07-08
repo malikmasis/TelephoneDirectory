@@ -38,6 +38,7 @@
 		<PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.1.0-beta.3" />
 	</ItemGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\Global\TelephoneDirectory.Common\TelephoneDirectory.Common.csproj" />
 		<ProjectReference Include="..\..\..\..\Global\TelephoneDirectory.Contracts\TelephoneDirectory.Contracts.csproj" />
 		<ProjectReference Include="..\TelephoneDirectory.Report.Entities\TelephoneDirectory.Report.Entities.csproj" />
 	</ItemGroup>

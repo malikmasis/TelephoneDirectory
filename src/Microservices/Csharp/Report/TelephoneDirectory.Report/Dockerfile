@@ -7,6 +7,7 @@ EXPOSE 443
 COPY src/Microservices/Csharp/Report/TelephoneDirectory.Report/*.csproj src/Microservices/Csharp/Report/TelephoneDirectory.Report/
 COPY src/Microservices/Csharp/Report/TelephoneDirectory.Report.Entities/*.csproj src/Microservices/Csharp/Report/TelephoneDirectory.Report.Entities/
 COPY src/Global/TelephoneDirectory.Contracts/*.csproj src/Global/TelephoneDirectory.Contracts/
+COPY src/Global/TelephoneDirectory.Common/*.csproj src/Global/TelephoneDirectory.Common/
 
 RUN dotnet restore src/Microservices/Csharp/Report/TelephoneDirectory.Report/*.csproj
 COPY . .

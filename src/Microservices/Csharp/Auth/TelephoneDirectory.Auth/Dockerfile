@@ -5,6 +5,7 @@ EXPOSE 80
 
 COPY src/Microservices/Csharp/Auth/TelephoneDirectory.Auth/*.csproj src/Microservices/Csharp/Auth/TelephoneDirectory.Auth/
 COPY src/Microservices/Csharp/Auth/TelephoneDirectory.Auth.Entities/*.csproj src/Microservices/Csharp/Auth/TelephoneDirectory.Auth.Entities/
+COPY src/Global/TelephoneDirectory.Common/*.csproj src/Global/TelephoneDirectory.Common/
 
 RUN dotnet restore src/Microservices/Csharp/Auth/TelephoneDirectory.Auth/*.csproj
 COPY . .
