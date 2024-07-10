@@ -55,6 +55,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelephoneDirectory.Report.U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelephoneDirectory.Guide.UnitTest", "src\Microservices\Csharp\Guide\TelephoneDirectory.Guide.UnitTest\TelephoneDirectory.Guide.UnitTest.csproj", "{7167D0E3-46E2-478D-945F-EE9B696A672F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelephoneDirectory.Auth.OpenIdDict", "src\Microservices\Csharp\Auth\TelephoneDirectory.Auth.OpenIdDict\TelephoneDirectory.Auth.OpenIdDict.csproj", "{0C099F52-881F-43DE-AB38-A341D980F7AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,10 @@ Global
 		{7167D0E3-46E2-478D-945F-EE9B696A672F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7167D0E3-46E2-478D-945F-EE9B696A672F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7167D0E3-46E2-478D-945F-EE9B696A672F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C099F52-881F-43DE-AB38-A341D980F7AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C099F52-881F-43DE-AB38-A341D980F7AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C099F52-881F-43DE-AB38-A341D980F7AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C099F52-881F-43DE-AB38-A341D980F7AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -143,6 +149,7 @@ Global
 		{9AC42AD3-C598-4268-921D-2CE29EC2B17D} = {2A4EB1A6-8983-49C7-87CF-B19B11755080}
 		{EA5E7D27-BFD6-4742-8C1D-A6D2D586E12A} = {2A4EB1A6-8983-49C7-87CF-B19B11755080}
 		{7167D0E3-46E2-478D-945F-EE9B696A672F} = {90E62EFE-805B-4286-8075-9109FC2A67EE}
+		{0C099F52-881F-43DE-AB38-A341D980F7AA} = {B825E947-7F01-4969-9F14-294E0C88338E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8E6515D2-E14F-4453-8213-7CD04030BCA2}
