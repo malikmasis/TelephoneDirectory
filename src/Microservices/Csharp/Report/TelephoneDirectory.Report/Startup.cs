@@ -20,6 +20,7 @@ using TelephoneDirectory.Report.Interfaces;
 using TelephoneDirectory.Report.Services;
 using Dapr;
 using Dapr.Client;
+using TelephoneDirectory.Common.Filters;
 using TelephoneDirectory.Report.Extensions;
 
 namespace TelephoneDirectory.Report
@@ -135,7 +136,7 @@ namespace TelephoneDirectory.Report
 
             services.AddEndpointsApiExplorer();
             services.AddCustomOpenTelemetry();
-            services.AddControllers().AddDapr();
+            services.AddControllers(options => options.Filters.Add<ApiExceptionFilterAttribute>(0)).AddDapr();
 
             services.AddHealthChecks()
                 .AddNpgSql(Configuration["ConnectionStrings:DefaultConnection"]);

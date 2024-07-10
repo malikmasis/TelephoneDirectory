@@ -15,7 +15,7 @@ public sealed class AuthDbContext : DbContext, IAuthDbContext
 
     public DbSet<UserAccount> UserAccounts { get; set; }
 
-    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+    public async override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
     {
         return await base.SaveChangesAsync(cancellationToken);
     }

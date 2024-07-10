@@ -1,4 +1,3 @@
-using HealthChecks.UI.Client;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -12,6 +11,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Text;
+using HealthChecks.UI.Client;
+using TelephoneDirectory.Common.Filters;
 using TelephoneDirectory.Guide.Data;
 
 namespace TelephoneDirectory.Guide;
@@ -95,7 +96,7 @@ public class Startup
                 };
             });
 
-        services.AddControllers();
+        services.AddControllers(options => options.Filters.Add<ApiExceptionFilterAttribute>(0));
 
         services.AddHealthChecks()
             .AddNpgSql(Configuration["ConnectionStrings:DefaultConnection"]);
@@ -125,7 +126,7 @@ public class Startup
             endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
             {
                 Predicate = _ => true,
-                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                ResponseWriter =  UIResponseWriter.WriteHealthCheckUIResponse
             });
         });
     }

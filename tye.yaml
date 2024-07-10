@@ -59,7 +59,7 @@ services:
 - name: authdb
   image: mcr.microsoft.com/mssql/server:2019-latest
   env:
-    - name: SA_PASSWORD
+    - name: MSSQL_SA_PASSWORD
       value: Admin!23
     - name: ACCEPT_EULA
       value: 'Y'
@@ -67,8 +67,8 @@ services:
     - name: authdb_volume
       target: /var/opt/mssql
   bindings:
-    - port: 1453
-      connectionString: Server=${host},${port};User Id=sa;Database=PhoneAuth;Password=${env:SA_PASSWORD};
+    - port: 1433
+      connectionString: Server=${host},${port};User Id=sa;Database=PhoneAuth;Password=${env:MSSQL_SA_PASSWORD};
 - name: redis
   image: redis
   bindings:

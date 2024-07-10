@@ -15,62 +15,49 @@ namespace TelephoneDirectory.Report.Controllers;
 [Route("api/[controller]")]
 public sealed class ReportController : ControllerBase
 {
-    private readonly ILogger<ReportController> _logger;
-    private readonly IMediator _mediator;
+	private readonly ILogger<ReportController> _logger;
 
-    public ReportController(ILogger<ReportController> logger, IMediator mediator)
-    {
-        _logger = logger;
-        _mediator = mediator;
-    }
+	private readonly IMediator _mediator;
 
-    [HttpGet("getall")]
-    public async Task<IActionResult> GetAll()
-    {
-        try
-        {
-            var reports = await _mediator.Send(new GetListReportOutputCommand());
-            if (reports == null)
-            {
-                return NoContent();
-            }
+	public ReportController(ILogger<ReportController> logger, IMediator mediator)
+	{
+		_logger = logger;
+		_mediator = mediator;
+	}
 
-            return Ok(reports);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Unexpectedd error: {ex.Message}");
-            return BadRequest(ex.Message);
-        }
-    }
+	[HttpGet("getall")]
+	public async Task<IActionResult> GetAll()
+	{
+		var reports = await _mediator.Send(new GetListReportOutputCommand());
 
-    [Authorize]
-    [HttpGet("get/{id}")]
-    public async Task<IActionResult> GetById(long id)
-    {
-        try
-        {
-            var report = await _mediator.Send(new GetReportOutputCommand(id));
-            if (report == null)
-            {
-                return NoContent();
-            }
-            
-            return Ok(report);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Unexpectedd error: {ex.Message}");
-            return BadRequest(ex.Message);
-        }
-    }
+		if (reports == null)
+		{
+			return NoContent();
+		}
 
-    [Topic("pubsub", "PersonDeleted")]
-    [HttpPost("PersonDeleted")]
-    public ActionResult PersonDeleted(PersonDto personDto)
-    {
-        Console.WriteLine($"Deleted Person Id: {personDto.Id}");
+		return Ok(reports);
+	}
 
-        return Ok();
-    }
+	[Authorize]
+	[HttpGet("get/{id}")]
+	public async Task<IActionResult> GetById(long id)
+	{
+		var report = await _mediator.Send(new GetReportOutputCommand(id));
+
+		if (report == null)
+		{
+			return NoContent();
+		}
+
+		return Ok(report);
+	}
+
+	[Topic("pubsub", "PersonDeleted")]
+	[HttpPost("PersonDeleted")]
+	public ActionResult PersonDeleted(PersonDto personDto)
+	{
+		Console.WriteLine($"Deleted Person Id: {personDto.Id}");
+
+		return Ok();
+	}
 }
