@@ -16,7 +16,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddDbContext<OpenIdDictDbContext>(options =>
 {
 	// Configure the context to use an in-memory store.
-	options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 
 	// Register the entity sets needed by OpenIddict.
 	options.UseOpenIddict();
