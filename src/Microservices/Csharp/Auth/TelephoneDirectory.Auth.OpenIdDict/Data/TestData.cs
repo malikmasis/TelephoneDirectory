@@ -16,7 +16,7 @@ public class TestData : IHostedService
 	{
 		using var scope = _serviceProvider.CreateScope();
 
-		var context = scope.ServiceProvider.GetRequiredService<DbContext>();
+		var context = scope.ServiceProvider.GetRequiredService<OpenIdDictDbContext>();
 		await context.Database.EnsureCreatedAsync(cancellationToken);
 
 		var manager = scope.ServiceProvider.GetRequiredService<IOpenIddictApplicationManager>();

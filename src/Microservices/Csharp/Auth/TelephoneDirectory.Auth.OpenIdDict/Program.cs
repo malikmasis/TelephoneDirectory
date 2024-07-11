@@ -4,6 +4,7 @@ using TelephoneDirectory.Auth.OpenIdDict.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddMvc();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -28,7 +29,7 @@ builder.Services.AddOpenIddict()
         {
 	        // Configure OpenIddict to use the EF Core stores/models.
 	        options.UseEntityFrameworkCore()
-	               .UseDbContext<DbContext>();
+	               .UseDbContext<OpenIdDictDbContext>();
         })
 
         // Register the OpenIddict server components.
